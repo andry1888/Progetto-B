@@ -8,4 +8,4 @@ Funzionalità di progetto
 · Possibilità di ricerca di un utente (attraverso ID o figurina posseduta)<br/>
 · Portale per apertura nuovo scambio<br/>
 · Gestione dello scambio<br/>
-· (negozio figurane/ compra vendita)<br/>
+· (negozio figurine/ compra vendita)<br/>
