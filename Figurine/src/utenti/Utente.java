@@ -10,10 +10,11 @@ public class Utente implements Figurina_Interface {
 	//dati dell'utente
 	//implementare file precompilati per figurine
 	private String Nome,Cognome,User,Password,Mail,Indirizzo;
-	private int Età,Feedback;
+	private int Età;
+	public int FeedBack;
 	private double Credito;
 	private boolean Online;
-	private ArrayList<Figurina> Figurine; 
+	private ArrayList<Figurina> Figurine,OffertaFigurine; 
 	
 	//Overload su costruttore
 	public Utente(String nom,String cogn,String indir,int e,double inicre){
@@ -24,7 +25,7 @@ public class Utente implements Figurina_Interface {
 		this.Indirizzo=indir;
 		this.Età=e;
 		this.Credito=inicre;
-		this.Feedback=0;        //feedback iniziale 0
+		this.FeedBack=0;        //feedback iniziale 0
 		this.User="User";
 		this.Password="Password";         //credenziali di default
 		this.Mail="User@Mydomain.com";
@@ -41,7 +42,7 @@ public Utente(String nom,String cogn,String indir,int e,double inicre,String u,S
 		this.Indirizzo=indir;
 		this.Età=e;
 		this.Credito=inicre;
-		this.Feedback=0;        //feedback iniziale 0
+		this.FeedBack=0;        //feedback iniziale 0
 		this.User=u;
 		this.Password=pass;
 		this.Mail=m;
@@ -72,7 +73,7 @@ public int getEtà(){
 public int getFeedback(){
 	
 	
-	return this.Feedback;
+	return this.FeedBack;
 }
 
 public String getIndirizzo(){
@@ -113,6 +114,11 @@ public boolean getWebState(){
 public ArrayList<Figurina> getCollezione(){
 	
 	return Figurine;
+}
+
+public ArrayList<Figurina> getOffertaFigurine(){
+	
+	return this.OffertaFigurine;
 }
 
 //metodi Setter (User,Password,Mail,Credito,Web State)
@@ -163,7 +169,7 @@ protected boolean logout(){
 
 @Override
 public boolean addFigurina(String n, int i, int r) {
-	// TODO Auto-generated method stub
+
 	return false;
 }
 
@@ -181,13 +187,13 @@ public int countFigurina() {
 
 @Override
 public void sortAlfa() {
-	// TODO Auto-generated method stub
+
 	
 }
 
 @Override
 public void sortRar() {
-	// TODO Auto-generated method stub
+
 	
 }
 
@@ -197,9 +203,10 @@ public boolean addFigurina(Figurina f) {
 	return false;
 }
 
-@Override
+//Ritorna una figurina della collezione dato l'id
 public Figurina getFigurinabyId(int i) {
-	// TODO Auto-generated method stub
+
+	
 	return null;
 }
 

@@ -76,7 +76,7 @@ public class Portale {
 	//Ritorna l'insieme di utenti aventi figurine con l'id inserito
 	public ArrayList<Utente> getUsersByFigurinaId(int id){
 		
-		ArrayList<Utente> ufin=new ArrayList<>;
+		ArrayList<Utente> ufin=new ArrayList<>();
 		Utente utemp;
 		
 		for(int i=0;i<Utente.size();i++){
@@ -90,10 +90,11 @@ public class Portale {
 				}
 				
 			}
+		
 			
 			
 		}
-		
+		return ufin;
 		
 	}
 	
