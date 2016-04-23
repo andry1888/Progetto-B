@@ -1,5 +1,4 @@
-# Progetto-B
-Scambio di figurine
+# Scambio Figurine - Progetto-B
 
 Funzionalità di progetto
 
@@ -9,3 +8,20 @@ Funzionalità di progetto
 · Portale per apertura nuovo scambio<br/>
 · Gestione dello scambio<br/>
 · (negozio figurine/ compra vendita)<br/>
+
+## Indice
+1. Casi d'uso<br/>
+• [Accesso e registrazione](https://github.com/claudio-unipv/Progetto-B/wiki/1.1-Accesso-e-registrazione)<br/>
+• [Esposizione collezione](https://github.com/claudio-unipv/Progetto-B/wiki/1.2-Esposizione-collezione)<br/>
+• [Scambio figurine](https://github.com/claudio-unipv/Progetto-B/wiki/1.3-Scambio-figurine)<br/>
+
+2. UML<br/>
+• [UML delle classi](https://github.com/claudio-unipv/Progetto-B/wiki/2.1-UML-delle-classi)<br/>
+• [UML dei casi d'uso](https://github.com/claudio-unipv/Progetto-B/wiki/2.2-UML-dei-casi-d'uso)<br/>
+
+3. [Diagramma delle sequenze](https://github.com/claudio-unipv/Progetto-B/wiki/3-Diagramma-delle-sequenze)
+
+4. GUI<br/>
+• [Accesso e registrazione](https://github.com/claudio-unipv/Progetto-B/wiki/4.1-GUI-Accesso-e-registrazione)<br/>
+• [Esposizione collezione](https://github.com/claudio-unipv/Progetto-B/wiki/4.2-GUI-Esposizione-collezione)<br/>
+• [Scambio figurine](https://github.com/claudio-unipv/Progetto-B/wiki/4.3-GUI-Scambio-figurine)<br/>
