@@ -18,10 +18,10 @@ Funzionalità di progetto
 2. UML<br/>
 • [UML delle classi](https://github.com/claudio-unipv/Progetto-B/wiki/2.1-UML-delle-classi)<br/>
 • [UML dei casi d'uso](https://github.com/claudio-unipv/Progetto-B/wiki/2.2-UML-dei-casi-d'uso)<br/>
+•[UML delle sequenze] (https://github.com/claudio-unipv/Progetto-B/wiki/2.3-UML-delle-sequenze) <br/>
 
-3. [Diagramma delle sequenze](https://github.com/claudio-unipv/Progetto-B/wiki/3-Diagramma-delle-sequenze)
 
-4. GUI<br/>
+3. GUI<br/>
 • [Accesso e registrazione](https://github.com/claudio-unipv/Progetto-B/wiki/4.1-GUI-Accesso-e-registrazione)<br/>
 • [Esposizione collezione](https://github.com/claudio-unipv/Progetto-B/wiki/4.2-GUI-Esposizione-collezione)<br/>
 • [Scambio figurine](https://github.com/claudio-unipv/Progetto-B/wiki/4.3-GUI-Scambio-figurine)<br/>
