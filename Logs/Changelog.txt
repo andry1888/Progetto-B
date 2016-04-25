@@ -10,3 +10,8 @@ Matteo Bellati 22/4/2016
 -Inserito il metodo SetFeedBack in Scambio: inserisci i nuovi valori di feedback agli utenti se lo scambio è accettato
 -Inseriti Attributi Ok1,Ok2 boolean in Scambio: utilizzati per indicare lo stato di conferma scambio degli utenti
 
+Matteo Bellati 25/4/2016
+
+-Corretti alcuni attributi classe al sorgente e al diagramma UML
+-Aggiunto il metodo concludiScambioPositivo a Scambio e aggiunta la gestione dell'enum Scambio
+

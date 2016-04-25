@@ -8,7 +8,6 @@ import java.util.*;
 public class Scambio implements Carrello {
 	
 	private Utente Utente1,Utente2;
-	private ArrayList<Figurina> Offerta1,Offerta2;
 	public Stato s;
 	public int feed1,feed2;
 	public int Ids;                     //Identificativo dello scambio
@@ -27,7 +26,7 @@ public class Scambio implements Carrello {
 		s=Stato.NUOVO;
 		
 		//inserire gestione dell'ids
-		//Programmare l'inserimento e classificazione degli utenti dello scambio
+		//Programmare l'inserimento e classificazione degli utenti dello scambio (info varie)
 		
 	}
 	
@@ -37,16 +36,6 @@ public class Scambio implements Carrello {
 		return s;
 	}
 	
-	//Metodo d'utilità che ottiene gli utenti dello scambio, uso esclusivo di Scambio
-	
-	private Utente getUtente(int id){
-		
-		if(id==1) return Utente1;
-		if(id==2) return Utente2;
-		
-		return null;
-		
-	}
 	
 	//Metodo che inserisce e calcola i feedback lasciati, uso esclusivo di Scambio
 	private void setFeedback(){
@@ -57,6 +46,44 @@ public class Scambio implements Carrello {
 			Utente2.FeedBack+=feed1;
 			
 		}
+		
+	}
+	
+	
+	//Metodo che porta a termine lo scambio, uso esclusivo di Scambio
+	private void concludiScambioPositivo(){
+		
+		Figurina ftemp;
+		
+		if(Ok1==true && Ok2==true){
+			
+			s=Stato.ACCETTATO;
+			this.setFeedback();
+			
+			//Preleva le figurina di Utente 1 e le deposita in Utente 2
+			for(int i=0;i<this.Utente1.getOffertaFigurine().size(); i++){
+				
+				ftemp=Utente1.getOffertaFigurine().get(i);
+				Utente2.getCollezione().add(ftemp);
+				Utente1.getOffertaFigurine().remove(i);
+				
+			}
+			
+			//Preleva le figurina di Utente 2 e le deposita in Utente 1
+			
+			for(int i=0;i<Utente2.getOffertaFigurine().size();i++){
+				
+				ftemp=Utente2.getOffertaFigurine().get(i);
+				Utente1.getCollezione().add(ftemp);
+				Utente2.getOffertaFigurine().remove(i);
+				
+				
+			}
+			
+			
+			
+		}
+		
 		
 	}
 	
@@ -90,14 +117,14 @@ public class Scambio implements Carrello {
 	}
 	
 	//Ritorna l'offerta corrente del compagno di scambio
-	public ArrayList<Figurina> getOffertaGiocatore(Utente u){
+	public ArrayList<Figurina> getOffertaCompagno(Utente u){
 		
 		if(u.getUser()==Utente1.getUser()) return Utente2.getOffertaFigurine();
 		else return Utente1.getOffertaFigurine();
 	}
 	
 	//Imposta su true il valore di conferma dello scambio
-	public void ConfermaScambio(Utente u){
+	public void confermaScambio(Utente u){
 		
 		if(u.getUser()==Utente1.getUser()) Ok1=true;
 		else Ok2=true;
@@ -129,6 +156,13 @@ public class Scambio implements Carrello {
 		if(u.getUser()==Utente1.getUser()) feed2=feed;
 		else feed1=feed;
  
+		
+	}
+	
+	//Annula lo scambio attuale
+	public void annullaScambio(){
+		
+		s=Stato.RIFIUTATO;
 		
 	}
 	

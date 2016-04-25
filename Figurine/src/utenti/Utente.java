@@ -12,7 +12,7 @@ public class Utente implements Figurina_Interface {
 	private String Nome,Cognome,User,Password,Mail,Indirizzo;
 	private int Età;
 	public int FeedBack;
-	private double Credito;
+	private double Credito,OffertaCredito;
 	private boolean Online;
 	private ArrayList<Figurina> Figurine,OffertaFigurine; 
 	
@@ -119,6 +119,11 @@ public ArrayList<Figurina> getCollezione(){
 public ArrayList<Figurina> getOffertaFigurine(){
 	
 	return this.OffertaFigurine;
+}
+
+public double getOffertasCredito(){
+	
+	return this.OffertaCredito;
 }
 
 //metodi Setter (User,Password,Mail,Credito,Web State)
