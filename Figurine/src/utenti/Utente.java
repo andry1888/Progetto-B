@@ -12,7 +12,8 @@ public class Utente implements Figurina_Interface {
 	private String Nome,Cognome,User,Password,Mail,Indirizzo;
 	private int Età;
 	public int FeedBack;
-	private double Credito,OffertaCredito;
+	private double Credito;
+	public double OffertaCredito;
 	private boolean Online;
 	private ArrayList<Figurina> Figurine,OffertaFigurine; 
 	
@@ -25,6 +26,7 @@ public class Utente implements Figurina_Interface {
 		this.Indirizzo=indir;
 		this.Età=e;
 		this.Credito=inicre;
+		this.OffertaCredito=0;
 		this.FeedBack=0;        //feedback iniziale 0
 		this.User="User";
 		this.Password="Password";         //credenziali di default
@@ -42,6 +44,7 @@ public Utente(String nom,String cogn,String indir,int e,double inicre,String u,S
 		this.Indirizzo=indir;
 		this.Età=e;
 		this.Credito=inicre;
+		this.OffertaCredito=0;
 		this.FeedBack=0;        //feedback iniziale 0
 		this.User=u;
 		this.Password=pass;
@@ -121,7 +124,7 @@ public ArrayList<Figurina> getOffertaFigurine(){
 	return this.OffertaFigurine;
 }
 
-public double getOffertasCredito(){
+public double getOffertaCredito(){
 	
 	return this.OffertaCredito;
 }
@@ -213,6 +216,24 @@ public Figurina getFigurinabyId(int i) {
 
 	
 	return null;
+}
+
+//Aggiunge credito all'utente
+public boolean addCredito(double c){
+	
+	if(c<0) return false;
+	this.Credito+=c;
+	return true;
+}
+
+//Rimuove credito all'utente
+
+public boolean removeCredito(double c){
+	
+	if(c<0) return false;
+	this.Credito-=c;
+	return true;
+	
 }
 
 @Override
