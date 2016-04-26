@@ -37,8 +37,8 @@ public class Scambio implements Carrello {
 	}
 	
 	
-	//Metodo che inserisce e calcola i feedback lasciati, uso esclusivo di Scambio
-	private void setFeedback(){
+	//Metodo che inserisce e calcola i feedback lasciati, uso esclusivo di Scambio e figli
+	protected void setFeedback(){
 		
 		if(s==Stato.ACCETTATO && Ok1==true && Ok2==true){
 			
@@ -50,8 +50,8 @@ public class Scambio implements Carrello {
 	}
 	
 	
-	//Metodo che porta a termine lo scambio, uso esclusivo di Scambio
-	private void concludiScambioPositivo(){
+	//Metodo che porta a termine lo scambio, uso esclusivo di Scambio e figli
+	protected void concludiScambioPositivo(){
 		
 		Figurina ftemp;
 		
