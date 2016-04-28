@@ -158,11 +158,15 @@ public void setWebState(boolean b){
 
 //metodi Operativi
 
+
+//login utente 
 protected boolean login(String u,String p){
 	
-	
-	//...
-	if(Online==false) this.Online=true;
+	if((this.User.equals(u)) && (this.Password.equals(p)))
+	this.Online=true;
+        
+        else this.Online=false;
+        
 	return Online;
 }
 
@@ -173,6 +177,16 @@ protected boolean logout(){
 	return Online;
 	
 	
+}
+
+//reset password con controllo vecchia password
+protected boolean resetPassword(String p, String newP){
+
+    if(this.Password.equals(p)){
+    this.Password=newP;
+    return true;
+    }
+    else return false;
 }
 
 @Override
