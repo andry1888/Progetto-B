@@ -13,7 +13,7 @@ public interface Figurina_Interface {
     /*
         Edit collezione
     */
-    public boolean addFigurina(String n,UUID i,int r);
+    public boolean addFigurina(String n,int i,int r);
     public boolean addFigurina(Figurina f);
     public boolean removeFigurina(int i);
         
