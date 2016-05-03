@@ -126,6 +126,28 @@ public class Portale {
 		
 	}
 	
+	//Ritorna un utente online dato l'indice del vettore
+	private Utente getUtentebyIndex(int ind){
+		
+		return Utenti_Online.get(ind);
+	}
+	
+	
+	//Metodo che ritorna l'elenco user online
+	public ArrayList<String> getUserUtentiOnline(){
+		
+		
+		ArrayList<String> elenco=new ArrayList<>();
+		
+		for(int i=0;i<Utenti_Online.size();i++){
+			
+			elenco.add(Utenti_Online.get(i).getUser());
+			
+		}
+		
+		return elenco;
+	}
+	
 	//Ritorna la collezione di un utente dato lo user, null se non esiste lo user
 	
 	public ArrayList<Figurina> getFigurineByUser(String u){
@@ -175,6 +197,8 @@ public class Portale {
 		return ufin;
 		
 	}
+	
+	//Gestire il primo accesso dell'utente con registrazione
 	
 	
 	
