@@ -13,9 +13,11 @@ public interface Figurina_Interface {
     /*
         Edit collezione
     */
-    public boolean addFigurina(String n,int i,int r);
+    public boolean addFigurina(String n,int r);
     public boolean addFigurina(Figurina f);
-    public boolean removeFigurina(int i);
+    public boolean removeFigurinabyId(int i);
+    public boolean removeFigurina(Figurina f);
+    public boolean removeFigurinabyName(String n);
         
     public int countFigurina();
         
@@ -28,8 +30,9 @@ public interface Figurina_Interface {
     /*
         Search
     */
+    public Figurina getFigurina(Figurina f);
     public Figurina getFigurinabyId(int i);
-    public ArrayList<Figurina> getFigurinabyNome(String n);
+    public Figurina getFigurinabyNome(String n);
         
     public boolean compareFigurine(Figurina f1,Figurina f2);
         	

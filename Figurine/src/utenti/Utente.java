@@ -5,7 +5,7 @@ import java.util.*;
 import collezionabili.*;
 
 
-public class Utente implements Figurina_Interface {
+public abstract class Utente implements Figurina_Interface {
 	
 	//dati dell'utente
 	//implementare file precompilati per figurine
@@ -119,11 +119,13 @@ public ArrayList<Figurina> getCollezione(){
 	return Figurine;
 }
 
+//Ritorna l'offerta di figurine in uno scambio
 public ArrayList<Figurina> getOffertaFigurine(){
 	
 	return this.OffertaFigurine;
 }
 
+//Ritorna l'offerta di credito in uno scambio
 public double getOffertaCredito(){
 	
 	return this.OffertaCredito;
@@ -131,16 +133,11 @@ public double getOffertaCredito(){
 
 //metodi Setter (User,Password,Mail,Credito,Web State)
 
+//Cambia il nome utente
 protected void setUser(String u){
 	
 	
 	this.User=u;
-}
-
-protected void setPassword(String p){
-	
-	
-	this.Password=p;
 }
 
 protected void setMail(String m){
@@ -149,7 +146,7 @@ protected void setMail(String m){
 	this.Mail=m;
 }
 
-//L'utente in genera non utilizza questo metodo
+//L'utente in genere non utilizza questo metodo
 
 public void setWebState(boolean b){
 	
@@ -160,21 +157,29 @@ public void setWebState(boolean b){
 
 
 //login utente 
-protected boolean login(String u,String p){
+protected int login(String u,String p){
 	
-	if((this.User.equals(u)) && (this.Password.equals(p)))
-	this.Online=true;
+	if((this.User.equals(u)) && (this.Password.equals(p))&& (this.getWebState()==false)) {
+	   this.setWebState(true);
+       return 0;
+	}
+        else return 1;
         
-        else this.Online=false;
         
-	return Online;
+	
 }
 
-protected boolean logout(){
+//L'utente esegue un logout dal portale
+
+protected int logout(){
 	
-	//..
-	if(Online==true) this.Online=false;
-	return Online;
+	
+	if(this.getWebState()==true){
+		this.setWebState(false);
+		return 0;
+	}
+	
+	else return 1;
 	
 	
 }
@@ -182,6 +187,12 @@ protected boolean logout(){
 //reset password con controllo vecchia password
 protected boolean resetPassword(String p, String newP){
 
+	//Primo inserimento di password
+	if(this.Password==""){
+		this.Password=newP;
+		return true;
+	}
+	
     if(this.Password.equals(p)){
     this.Password=newP;
     return true;
@@ -189,45 +200,168 @@ protected boolean resetPassword(String p, String newP){
     else return false;
 }
 
-@Override
-public boolean addFigurina(String n, int i, int r) {
 
+public boolean addFigurina(String n, int r) {
+
+	//Eseguire i controlli di database figurine
+	
+	Figurina ftemp=new Figurina(n,r);
+	this.getCollezione().add(ftemp);
+	
+	
+	return true;
+}
+
+public boolean addFigurina(Figurina f){
+	
+	
+	//Eseguire i controlli di database figurine
+	
+	Figurina ftemp=f;
+	this.getCollezione().add(ftemp);
+	return true;
+}
+
+//Rimuove una figurina dato l'oggetto
+public boolean removeFigurina(Figurina f){
+	
+	
+	for (int i=0;i<this.getCollezione().size();i++){
+		
+		if(this.getCollezione().get(i).equals(f)){
+			
+			this.getCollezione().remove(i);
+			return true;
+		}
+	}
 	return false;
 }
 
-@Override
-public boolean removeFigurina(int i) {
-	// TODO Auto-generated method stub
+//Rimuove una figurina dato l'id figurina
+public boolean removeFigurinabyId(int id) {
+
+	for(int i=0;i<this.getCollezione().size();i++){
+		
+		if(this.getCollezione().get(i).getId()==id){
+			
+			this.getCollezione().remove(i);
+			return true;
+		}
+	}
+	
 	return false;
 }
 
-@Override
+//Rimuove una figurina dato il nome
+public boolean removeFigurinabyName(String n) {
+
+	for(int i=0;i<this.getCollezione().size();i++){
+		
+		if(this.getCollezione().get(i).getNome()==n) {
+			
+			this.getCollezione().remove(i);
+			return true;
+		}
+	}
+	return false;
+}
+
+//Ritorna il numero di figurine possedute
 public int countFigurina() {
-	// TODO Auto-generated method stub
-	return 0;
+
+	return this.getCollezione().size();
 }
 
-@Override
+//Ordina le figurine per ordine alfabetico del nome
 public void sortAlfa() {
 
+	Figurina ftemp;
+	boolean flag;
+	
+	//bubble sort,ordine crescente
+	
+	do{
+		flag=false;
+		for(int i=0;i<this.getCollezione().size();i++){
+			
+			if(this.getCollezione().get(i).getNome().compareTo(this.getCollezione().get(i+1).getNome())>0){
+				
+				ftemp=this.getCollezione().get(i+1);
+                this.getCollezione().set(i+1,this.getCollezione().get(i));
+                this.getCollezione().set(i,ftemp);
+                flag=true;
+
+			}
+			
+		}
+		
+	} while(flag);
 	
 }
 
-@Override
+//Ordina le figurine per rarità
 public void sortRar() {
 
+	Figurina ftemp;
+	boolean flag;
+	
+	//bubble sort,ordine crescente
+	
+	do{
+		flag=false;
+		for(int i=0;i<this.getCollezione().size();i++){
+			
+			if(this.getCollezione().get(i).getRarità()>this.getCollezione().get(i+1).getRarità()){
+				
+				ftemp=this.getCollezione().get(i+1);
+                this.getCollezione().set(i+1,this.getCollezione().get(i));
+                this.getCollezione().set(i,ftemp);
+                flag=true;
+
+			}
+			
+		}
+		
+	} while(flag);
 	
 }
 
-@Override
-public boolean addFigurina(Figurina f) {
-	// TODO Auto-generated method stub
-	return false;
+//Ritorna una figurina dato l'oggetto
+public Figurina getFigurina(Figurina f){
+	
+
+	for(int i=0;i<this.getCollezione().size();i++){
+		
+		if(this.getCollezione().get(i).equals(f)) return this.getCollezione().get(i);
+		
+	}
+	return null;
+	
 }
 
 //Ritorna una figurina della collezione dato l'id
-public Figurina getFigurinabyId(int i) {
+public Figurina getFigurinabyId(int id) {
 
+	
+	for(int i=0;i<this.getCollezione().size();i++){
+		
+		if(this.getCollezione().get(i).getId()==id) return this.getCollezione().get(i);
+		
+	}
+	
+	return null;
+}
+
+//Ritorna una figurina dato il nome
+public Figurina getFigurinabyNome(String n) {
+
+
+	for(int i=0;i<this.getCollezione().size();i++){
+		
+		if(this.getCollezione().get(i).getNome()==n) return this.getCollezione().get(i);
+		
+	}
+	
 	
 	return null;
 }
@@ -250,11 +384,8 @@ public boolean removeCredito(double c){
 	
 }
 
-@Override
-public ArrayList<Figurina> getFigurinabyNome(String n) {
-	// TODO Auto-generated method stub
-	return null;
-}
+
+
 
 //paragona nome e id delle figurine
 
@@ -271,6 +402,14 @@ public boolean compareFigurine(Figurina f1, Figurina f2) {
 	if(n1==n2 && i1==i2) return true;
 	else return false;
 	
+	
+	
+     }
+
+//Ritorna informazioni come stringa dell'utente
+public String toString(){
+	
+	return (String)(this.getNome()+" "+this.getCognome()+" "+this.getUser()+" "+this.getEtà()+" "+this.getCredito()+" "+this.getIndirizzo()+" "+this.getMail()+" "+this.getFeedback());
 	
 	
 }
