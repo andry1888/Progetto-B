@@ -1,0 +1,60 @@
+package gui;
+
+import utenti.*;
+import collezionabili.*;
+import mercato.*;
+
+
+import javax.swing.*;
+import java.awt.*;
+import java.io.*;
+import java.util.*;
+
+
+public class LoginGui extends JFrame {
+	
+	
+	
+	private JLabel usernameLabel,passwordLabel;
+	private JTextField usernameField;
+	private JPasswordField passwordField;
+	private JButton accessButton;
+	private LayoutManager lay;
+	
+	
+	
+	//Costruttore 
+	
+	public LoginGui(){
+		
+		initComponents("Login");
+		
+				
+		
+	}
+	
+	//Inizializza i componenti della finestra
+	private void initComponents(String t){
+		
+		this.setTitle(t);
+		this.setSize(800,600);
+		this.setResizable(false);
+		this.setVisible(true);
+		
+		this.initLayout();
+		
+	}
+	
+	//Inizializza il layout della finestra
+	private void initLayout(){
+		
+		
+		this.lay=new LayoutManager(new BorderLayout());
+		
+	}
+	
+	
+	
+	
+
+}
