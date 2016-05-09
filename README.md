@@ -3,11 +3,11 @@
 Funzionalità di progetto
 
 · Registrazione collezionista e autenticazione<br/>
-· Portale di inserimento della propria collezione + interfaccia di visualizzazione collezione<br/>
+· Portale di inserimento della propria collezione, interfaccia di visualizzazione collezione<br/>
 · Possibilità di ricerca di un utente (attraverso ID o figurina posseduta)<br/>
 · Portale per apertura nuovo scambio<br/>
 · Gestione dello scambio<br/>
-· (negozio figurine/ compra vendita)<br/>
+· Gestione di una compravendita<br/>
 
 ## Indice
 1. Casi d'uso<br/>
