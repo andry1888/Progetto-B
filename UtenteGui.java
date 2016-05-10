@@ -21,11 +21,11 @@ public class UtenteGui extends JFrame{
     JPanel p0=new JPanel(new GridLayout(2,1));
     JPanel p5=new JPanel();
     
-    JScrollBar s=new JScrollBar();
+    JScrollPane s=new JScrollPane(p1);
     
     JButton b1=new JButton("invio");
     JButton b2=new JButton("Carica Credito");
-    JButton[]b=new JButton[10];
+    JButton[]b=new JButton[100];
     JButton addf=new JButton("aggiungi figurina");
     JButton remf=new JButton("rimuovi figurina");
     JButton ordalfa=new JButton("ordine alfabetico");
@@ -50,8 +50,7 @@ public class UtenteGui extends JFrame{
         this.add(l);
         p0.setName("Collezione");
         p3.setName("Opzioni");
-        p0.add(p1,BorderLayout.NORTH);
-        p1.add(s);
+        p0.add(s,BorderLayout.NORTH);
         p0.add(p4,BorderLayout.SOUTH);
         l.add(p0);
         l.add(p3);
@@ -62,12 +61,11 @@ public class UtenteGui extends JFrame{
         p5.add(listautenti);
         
 
-        for(int i=0;i<10;i++){
+        for(int i=0;i<100;i++){
             
             b[i]=new JButton(""+(i+1));
             p1.add(b[i]);
         }
-        
         p4.add(addf);
         p4.add(remf);
         p4.add(ordalfa);
