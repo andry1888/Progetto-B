@@ -13,6 +13,7 @@ import javax.swing.*;
  * @author biagio
  */
 public class UtenteGui extends JFrame{
+	
     JTabbedPane l=new JTabbedPane();
     JPanel p1=new JPanel();
     JPanel p2=new JPanel(new GridLayout(4,1));
@@ -28,9 +29,14 @@ public class UtenteGui extends JFrame{
     JTextField t2=new JTextField("Ricerca Figurina");
 
     public UtenteGui() {
-        super("Bacheca");
+    	
+        super("Menu");
+        initComponent();
         
-        
+    }
+       
+    private void initComponent(){
+       
         t1.setHorizontalAlignment(JTextField.CENTER);
         t2.setHorizontalAlignment(JTextField.CENTER);
         p1.setPreferredSize(new Dimension(500,500));
@@ -38,7 +44,7 @@ public class UtenteGui extends JFrame{
         
         this.add(l);
         p1.setName("Collezione");
-        p3.setName("Opzioni");
+        p3.setName("Portale");
         p1.add(s,BorderLayout.EAST);
         l.add(p1);
         l.add(p3);
@@ -57,6 +63,12 @@ public class UtenteGui extends JFrame{
         pack();
         this.setVisible(true);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+    
+    private void initLayout(){
+    	
+    	
+    	//...
     }
     
     

@@ -19,7 +19,7 @@ public class LoginGui extends JFrame {
 	private JTextField usernameField;
 	private JPasswordField passwordField;
 	private JButton accessButton;
-	private JPanel loginPanel;
+	private JPanel loginPanel,upperPanel,lowerPanel,middlePanel;
 	private LayoutManager lay;
 	
 	
@@ -39,7 +39,7 @@ public class LoginGui extends JFrame {
 	private void initComponents(){
 		
 		
-		this.setSize(800,600);
+		this.setSize(640,400);
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -49,9 +49,12 @@ public class LoginGui extends JFrame {
 		this.accessButton=new JButton("Accedi");
 		this.usernameLabel=new JLabel("Username");
 		this.passwordLabel=new JLabel("Password");
-		this.usernameField=new JTextField("Inserisci nome utente");
+		this.usernameField=new JTextField();
 		this.passwordField=new JPasswordField();
 		this.loginPanel=new JPanel();
+		this.upperPanel=new JPanel();
+		this.lowerPanel=new JPanel();
+		this.middlePanel=new JPanel();
 		accessButton.setSize(400,200);
 		
 		
@@ -60,13 +63,17 @@ public class LoginGui extends JFrame {
 		
 		//Aggiunge gli oggetti
 		this.add(loginPanel);
-		loginPanel.setLayout(new FlowLayout());
-		getContentPane().add(usernameLabel);
-		getContentPane().add(usernameField);
-		getContentPane().add(passwordLabel);
-		getContentPane().add(passwordField);
-		getContentPane().add(accessButton);
-		
+		loginPanel.add(upperPanel,BorderLayout.NORTH);
+		loginPanel.add(middlePanel,BorderLayout.CENTER);
+		loginPanel.add(lowerPanel,BorderLayout.SOUTH);
+		upperPanel.add(usernameLabel);
+		upperPanel.add(usernameField);
+        middlePanel.add(passwordLabel);
+        middlePanel.add(passwordField);
+        lowerPanel.add(accessButton);
+		this.pack();
+		this.setSize(500,150);
+
 		
 		
 
@@ -79,7 +86,13 @@ public class LoginGui extends JFrame {
 		
 		//Raffinare in seguito
 		
-		this.lay=new BorderLayout();
+	
+		this.usernameLabel.setForeground(Color.RED);
+		this.passwordLabel.setForeground(Color.ORANGE);
+		this.loginPanel.setLayout(new BorderLayout());
+		this.upperPanel.setLayout(new GridLayout(2,1));
+		this.lowerPanel.setLayout(new FlowLayout());
+		this.middlePanel.setLayout(new GridLayout(2,1));
 		
 		
 	}
@@ -91,6 +104,9 @@ public class LoginGui extends JFrame {
 		
 		//Raffinare il codice
 		
+		this.usernameField.setSize(70,20);
+		this.passwordField.setBounds(10,10,30,10);
+		this.accessButton.setSize(150,50);
 		this.accessButton.setBackground(Color.GREEN);
 		
 	}
