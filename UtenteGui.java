@@ -74,7 +74,12 @@ public class UtenteGui extends JFrame{
         p3.add(p2);
         pack();
         this.setVisible(true);
+        this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        Dimension dim_schermo = Toolkit.getDefaultToolkit().getScreenSize();
+		 int posX = (int) (dim_schermo.width - this.getWidth())/2;
+		 int posY = (int) (dim_schermo.height - this.getHeight())/4;
+		 this.setLocation(posX, posY);
     }
     
     
