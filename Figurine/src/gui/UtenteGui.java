@@ -40,6 +40,8 @@ public class UtenteGui extends JFrame{
     private  JButton   remFigButton;
     private  JButton   sortAlfaButton;
     private  JButton   sortRarButton;
+    private JButton    scambioButton;
+    private JButton    compravenditaButton;
     private  JLabel    infoTextLabel;
     private JLabel     searchUserLabel;
     private JLabel     searchFigLabel;
@@ -88,6 +90,8 @@ public class UtenteGui extends JFrame{
 	   remFigButton=new JButton("Rimuovi Figurina");
 	   sortAlfaButton=new JButton("Ordine Alafabetico");
 	   sortRarButton=new JButton("Ordine Rarità");
+	   scambioButton=new JButton("Inizia Scambio");
+	   compravenditaButton=new JButton("Inizia Compravendita");
 	   
 	   searchUserText=new JTextField();
 	   searchFigText=new JTextField();
@@ -111,6 +115,7 @@ public class UtenteGui extends JFrame{
 	   this.setVisible(true);
        this.setResizable(false);
        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+       this.userList.setSize(400,300);
        
        infoTextArea.setVisible(true);
        infoTextArea.setText("prova");
@@ -129,13 +134,13 @@ public class UtenteGui extends JFrame{
 	   collectionPanel.setLayout(new GridLayout(2,1));
 	   collectionPanel.setName("Collezione");
 	   collectionPanel.setPreferredSize(new Dimension(600,100));	   
-	   portalPanel.setLayout(new GridLayout(1,2));
+	   portalPanel.setLayout(new GridLayout(1,3));
 	   portalPanel.setName("Portale");
 	   infoAndOptionPanel.setLayout(new BorderLayout());
 	   
 	   //Internal Panels
 	   portalOptionPanel.setLayout(new GridLayout(5,1));
-	   infoTextPanel.setLayout(new GridLayout(2,1));
+	   infoTextPanel.setLayout(new GridLayout(4,1));
 	   
              
        //Aggiunge i componenti
@@ -161,7 +166,9 @@ public class UtenteGui extends JFrame{
        
        infoTextPanel.add(infoTextLabel,BorderLayout.NORTH);
        infoTextPanel.add(infoTextArea,BorderLayout.CENTER);
-   
+       infoTextPanel.add(scambioButton,BorderLayout.SOUTH);
+       infoTextPanel.add(compravenditaButton,BorderLayout.SOUTH);
+         
        
        portalOptionPanel.add(searchUserLabel);
        portalOptionPanel.add(searchUserText);
@@ -179,6 +186,7 @@ public class UtenteGui extends JFrame{
        
        collectionPanel.add(scrollFig,BorderLayout.NORTH);
        collectionPanel.add(manageCollectionPanel,BorderLayout.SOUTH);
+       
        portalPanel.add(userListPanel);
        portalPanel.add(infoAndOptionPanel);
 
