@@ -31,6 +31,7 @@ public class UtenteGui extends JFrame{
 	private JPanel userListPanel;
 	private JPanel infoTextPanel;
 	private JPanel infoAndOptionPanel;
+    private JPanel manageCollectionPanel1;
 	
 	private JSeparator portalOptionSeparator;
 	private JSeparator infoTextSeparator;
@@ -51,6 +52,7 @@ public class UtenteGui extends JFrame{
     private  JLabel    infoTextLabel;
     private  JLabel     searchUserLabel;
     private  JLabel     searchFigLabel; 
+    private JLabel       vuota;  //Distanzia i textfield figurinaName e textCredito
 
     
     private JTextField searchUserText;
@@ -60,16 +62,9 @@ public class UtenteGui extends JFrame{
     private String[] provaString;
     
     private JTextField figurinaName;
-
     private JTextField textCredito;
     private JLabel labelfigurinaName;
-    private JLabel labeltextCredito;    
-    
-    private JLabel vuota;
-    private JLabel vuota1;    //Fanno spazio, sostituire con altre funzioni
-    private JLabel vuota2;
-    
-
+    private JLabel labeltextCredito;
     
     
     public UtenteGui(Utente u) {
@@ -94,12 +89,13 @@ public class UtenteGui extends JFrame{
 	   
 	   collectionPanel=new JPanel();
 	   portalPanel=new JPanel();
-	   manageCollectionPanel=new JPanel(new GridLayout(5,2));
+	   manageCollectionPanel=new JPanel();
 	   userListPanel=new JPanel();
 	   portalOptionPanel=new JPanel();
 	   figPanel=new JPanel();
 	   infoTextPanel=new JPanel();
 	   infoAndOptionPanel=new JPanel();
+       manageCollectionPanel1=new JPanel();
 	   
 	   tabPane=new JTabbedPane();
 	   scrollFig=new JScrollPane(figPanel,scrollFig.VERTICAL_SCROLLBAR_AS_NEEDED,scrollFig.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -123,11 +119,11 @@ public class UtenteGui extends JFrame{
 	   portalOptionSeparator=new JSeparator();
 	   infoTextSeparator=new JSeparator();
 	   
-           figurinaName=new JTextField("Nome Figurina");
-           textCredito=new JTextField("Credito");
-           vuota=new JLabel("    ");
-           vuota1=new JLabel("    ");
-           vuota2=new JLabel("    ");
+           figurinaName=new JTextField(5);
+           textCredito=new JTextField(5);
+	   labelfigurinaName=new JLabel("Nome Figurina");
+           labeltextCredito=new JLabel("Credito");
+           vuota=new JLabel("                                                                                                              ");
            
             //Elementi di prova
 	   
@@ -191,17 +187,18 @@ public class UtenteGui extends JFrame{
        
        //Single components
        
-       manageCollectionPanel.add(figurinaName);
-       manageCollectionPanel.add(sortAlfaButton);
        manageCollectionPanel.add(addFigButton);
-       manageCollectionPanel.add(sortRarButton);
        manageCollectionPanel.add(remFigButton);
-       manageCollectionPanel.add(vuota);
-       manageCollectionPanel.add(textCredito);
-       manageCollectionPanel.add(vuota1);
-       manageCollectionPanel.add(addCreditButton);       
-       manageCollectionPanel.add(vuota2);
+       manageCollectionPanel.add(sortAlfaButton);
+       manageCollectionPanel.add(sortRarButton);
+       manageCollectionPanel.add(addCreditButton);
+       manageCollectionPanel.add(manageCollectionPanel1,BorderLayout.SOUTH);
        
+       manageCollectionPanel1.add(labelfigurinaName);
+       manageCollectionPanel1.add(figurinaName);
+       manageCollectionPanel1.add(vuota);
+       manageCollectionPanel1.add(labeltextCredito);
+       manageCollectionPanel1.add(textCredito);
        
        
        infoTextPanel.add(infoTextLabel,BorderLayout.NORTH);
@@ -226,7 +223,6 @@ public class UtenteGui extends JFrame{
        
        collectionPanel.add(scrollFig,BorderLayout.NORTH);
        collectionPanel.add(manageCollectionPanel,BorderLayout.SOUTH);
-       
        
        portalPanel.add(userListPanel);
        portalPanel.add(infoAndOptionPanel);
