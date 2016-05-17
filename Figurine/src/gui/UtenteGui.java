@@ -52,7 +52,7 @@ public class UtenteGui extends JFrame{
     private  JLabel    infoTextLabel;
     private  JLabel     searchUserLabel;
     private  JLabel     searchFigLabel; 
-    private JLabel       vuota;  //vuota è una label che sere a distanziare gli oggetti figurinaName e labeltextCredito
+    private JLabel       vuota;  //Distanzia i textfield figurinaName e textCredito
 
     
     private JTextField searchUserText;
