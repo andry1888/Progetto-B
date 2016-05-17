@@ -1,0 +1,63 @@
+
+
+package manager;
+
+import collezionabili.*;
+import mercato.*;
+import utenti.*;
+import gui.*;
+
+import java.util.*;
+import java.io.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+//Vengono gestiti per ora solo oggetti di tipo JButton
+
+public class UtenteController implements ActionListener {
+
+	private Utente utente;
+	private UtenteGui gui;
+	
+	
+	//Ottiene i parametri di utente e interfaccia
+	
+	public UtenteController(UtenteGui g){
+		
+		//utente=u;
+		gui=g;
+		
+	}
+	
+	
+	
+	
+	
+	public void actionPerformed(ActionEvent e) {
+		
+	   JButton btemp=(JButton) e.getSource();
+	   
+	   System.out.println(btemp.getName());
+		
+	/*	switch (btemp.getName()){
+		
+		case "addCreditButton":{
+			
+			System.out.println("funziona");
+			
+			
+		}*/
+		
+		
+		
+		}
+		
+
+		
+	}
+	
+	
+	
+
+

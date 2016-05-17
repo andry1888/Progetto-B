@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename method &apos;utenti.Utente.getOffertasCredito()&apos; to &apos;getOffertaCredito&apos;&#x0A;- Original project: &apos;Figurine&apos;&#x0A;- Original element: &apos;utenti.Utente.getOffertasCredito()&apos;&#x0A;- Renamed element: &apos;utenti.Utente.getOffertaCredito()&apos;&#x0A;- Update references to refactored element" delegate="false" deprecate="false" description="Rename method &apos;getOffertasCredito&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.method" input="/src&lt;utenti{Utente.java[Utente~getOffertasCredito" name="getOffertaCredito" references="true" stamp="1461683560723" version="1.0"/>
+</session>
