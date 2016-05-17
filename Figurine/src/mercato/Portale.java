@@ -19,7 +19,10 @@ public class Portale {
 	private static ArrayList<Utente> Utenti_Online;
 	private FileReader fr;
 	private BufferedReader br;
-	
+        private FileReader ffig;
+	private BufferedReader bfig;
+	private static ArrayList<Figurina> Figurine_reg;
+
 	
 	//implementare database user-password
 	
@@ -28,11 +31,38 @@ public class Portale {
 	public Portale() throws FileNotFoundException{
 		
 		Utenti_Online= new ArrayList<>();
-		fr = new FileReader("registro_utenti.txt");
-	    br=new BufferedReader(fr);
-		
-		
+		Figurine_reg= new ArrayList<>();
+
+                fr = new FileReader("registro_utenti.txt");
+                ffig = new FileReader("registro_figurine.txt");
+
+                br=new BufferedReader(fr);
+                bfig=new BufferedReader(ffig);
+
 	}
+        
+	public boolean caricaFigurine() throws IOException{
+		
+		String s;
+        String[] split;
+        
+        String nome;
+        Integer rar;
+    
+        while (bfig.ready()) {
+           s=bfig.readLine();
+           split=s.split(" ");
+           nome=split[0];
+           rar=Integer.parseInt(split[1]);
+           Figurina f=new Figurina(nome, rar);
+           System.out.println(f);
+           Figurine_reg.add(f);
+        }
+        
+        
+        return false;
+        
+  }
 	
 	//Login utente
 	public boolean logIn(String u,String p,Utente ut) throws IOException{
@@ -46,7 +76,6 @@ public class Portale {
            split=s.split(" ");
            user=split[0];
            psw=split[1];
-           
            if(user.equals(u) && psw.equals(p)){
            	Utenti_Online.add(ut);
            	ut.setWebState(true);
@@ -55,6 +84,7 @@ public class Portale {
            	
            }
         }
+        
         
         return false;
         
@@ -146,6 +176,15 @@ public class Portale {
 		}
 		
 		return elenco;
+	}
+        
+        
+        public ArrayList<Figurina> getRegFig(){
+		
+		
+		
+		
+		return Figurine_reg;
 	}
 	
 	//Ritorna la collezione di un utente dato lo user, null se non esiste lo user
