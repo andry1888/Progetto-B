@@ -5,8 +5,11 @@
  */
 package gui;
 
-import java.awt.*;
+import utenti.*;
+import manager.*;
 
+
+import java.awt.*;
 import javax.swing.*;
 
 
@@ -16,6 +19,9 @@ public class UtenteGui extends JFrame{
 	
 	//Componenti dell'interfaccia
 	
+	
+	private UtenteController controller;
+	private Utente utente;
 	
 	private JPanel figPanel;
 	private JPanel portalOptionPanel;
@@ -40,11 +46,11 @@ public class UtenteGui extends JFrame{
     private  JButton   remFigButton;
     private  JButton   sortAlfaButton;
     private  JButton   sortRarButton;
-    private JButton    scambioButton;
-    private JButton    compravenditaButton;
+    private  JButton    scambioButton;
+    private  JButton    compravenditaButton;
     private  JLabel    infoTextLabel;
-    private JLabel     searchUserLabel;
-    private JLabel     searchFigLabel;
+    private  JLabel     searchUserLabel;
+    private  JLabel     searchFigLabel;
     
     private JTextField searchUserText;
     private JTextField searchFigText;
@@ -53,9 +59,11 @@ public class UtenteGui extends JFrame{
     private  JButton[] provafigurine;
     private String[] provaString;
     
-    public UtenteGui() {
+    public UtenteGui(Utente u) {
     	
     	   super("User Interface");
+    	   utente=u;
+    	   
            this.initComponents();
            this.formatComponents();
        
@@ -66,6 +74,9 @@ public class UtenteGui extends JFrame{
 	   
 	
 	   //Crea gli oggetti
+	   
+	  
+	   controller=new UtenteController(this,utente);
 	   
 	   collectionPanel=new JPanel();
 	   portalPanel=new JPanel();
@@ -84,7 +95,7 @@ public class UtenteGui extends JFrame{
 	   searchUserLabel=new JLabel("Ricerca Utente");
 	   searchFigLabel=new JLabel("Ricerca Figurina");
 	   
-	   sendButton=new JButton("Invia");
+	   sendButton=new JButton("Cerca");
 	   addCreditButton=new JButton("Carica Credito");
 	   addFigButton=new JButton("Aggiungi Figurina");
 	   remFigButton=new JButton("Rimuovi Figurina");
@@ -109,7 +120,7 @@ public class UtenteGui extends JFrame{
    
    private void formatComponents(){
 	   
-	   //Layout Setup
+	   //Object Setup
 	   
 	   this.setSize(800,600);
 	   this.setVisible(true);
@@ -122,6 +133,8 @@ public class UtenteGui extends JFrame{
        searchUserText.setHorizontalAlignment(JTextField.CENTER);
        searchFigText.setHorizontalAlignment(JTextField.CENTER);
        infoTextLabel.setAlignmentX(CENTER_ALIGNMENT);
+       
+       addCreditButton.addActionListener(controller);
        
        //Inserisce la finestra al centro dello schermo
        
@@ -142,6 +155,7 @@ public class UtenteGui extends JFrame{
 	   portalOptionPanel.setLayout(new GridLayout(5,1));
 	   infoTextPanel.setLayout(new GridLayout(4,1));
 	   
+	  
              
        //Aggiunge i componenti
        
@@ -195,9 +209,24 @@ public class UtenteGui extends JFrame{
        tabPane.add(collectionPanel);
        tabPane.add(portalPanel);
       
-  
+      
       
       }
+   
+   //nasconde la finestra
+   public void nascondi(){
+	   
+	   this.setVisible(false);
+   }
+   
+   //Mostra la finestra
+   
+   public void mostra(){
+	   
+	   this.setVisible(true);
+   }
+   
+   
    
    
 }

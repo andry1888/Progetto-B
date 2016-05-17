@@ -1,15 +1,23 @@
 package test;
 
 import gui.*;
+import java.awt.*;
+import java.awt.Event;
+
+import utenti.*;
 
 public class TestGui {
 	
 	public static void main(String args[]){
 	
-	LoginGui l=new LoginGui();
-	UtenteGui g=new UtenteGui();
+	Utente c=new Collezionista("mario","rossi","via roma",30,100);	
+			
+	UtenteGui g=new UtenteGui(c);
+	
 	
 	
 	}
+	
+	
 
 }
