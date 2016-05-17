@@ -19,9 +19,9 @@ public class UtenteGui extends JFrame{
 	
 	//Componenti dell'interfaccia
 	
-	
 	private UtenteController controller;
 	private Utente utente;
+	
 	
 	private JPanel figPanel;
 	private JPanel portalOptionPanel;
@@ -31,7 +31,7 @@ public class UtenteGui extends JFrame{
 	private JPanel userListPanel;
 	private JPanel infoTextPanel;
 	private JPanel infoAndOptionPanel;
-    private JPanel manageCollectionPanel1;
+        //private JPanel manageCollectionPanel1;
 	
 	private JSeparator portalOptionSeparator;
 	private JSeparator infoTextSeparator;
@@ -47,36 +47,35 @@ public class UtenteGui extends JFrame{
     private  JButton   remFigButton;
     private  JButton   sortAlfaButton;
     private  JButton   sortRarButton;
-    private  JButton    scambioButton;
-    private  JButton    compravenditaButton;
+    private JButton    scambioButton;
+    private JButton    compravenditaButton;
     private  JLabel    infoTextLabel;
-    private  JLabel     searchUserLabel;
-    private  JLabel     searchFigLabel; 
-    private JLabel       vuota;  //Distanzia i textfield figurinaName e textCredito
-
+    private JLabel     searchUserLabel;
+    private JLabel     searchFigLabel;
     
     private JTextField searchUserText;
     private JTextField searchFigText;
     private JList userList;
+
     private  JButton[] provafigurine;
     private String[] provaString;
     
     private JTextField figurinaName;
-    private JTextField textCredito;
-    private JLabel labelfigurinaName;
-    private JLabel labeltextCredito;
+    private JTextField textCredito;    
+    private JLabel vuota;
+    private JLabel vuota1;
+    private JLabel vuota2;
     
     
     public UtenteGui(Utente u) {
-
     	
     	   super("User Interface");
     	   utente=u;
     	   
            this.initComponents();
            this.formatComponents();
-           
-           }
+       
+    }
     
     
    private void initComponents() {
@@ -84,18 +83,17 @@ public class UtenteGui extends JFrame{
 	
 	   //Crea gli oggetti
 	   
-	  
 	   controller=new UtenteController(this,utente);
 	   
 	   collectionPanel=new JPanel();
 	   portalPanel=new JPanel();
-	   manageCollectionPanel=new JPanel();
+	   manageCollectionPanel=new JPanel(new GridLayout(5,2));
 	   userListPanel=new JPanel();
 	   portalOptionPanel=new JPanel();
 	   figPanel=new JPanel();
 	   infoTextPanel=new JPanel();
 	   infoAndOptionPanel=new JPanel();
-       manageCollectionPanel1=new JPanel();
+           
 	   
 	   tabPane=new JTabbedPane();
 	   scrollFig=new JScrollPane(figPanel,scrollFig.VERTICAL_SCROLLBAR_AS_NEEDED,scrollFig.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -105,7 +103,7 @@ public class UtenteGui extends JFrame{
 	   searchUserLabel=new JLabel("Ricerca Utente");
 	   searchFigLabel=new JLabel("Ricerca Figurina");
 	   
-	   sendButton=new JButton("Cerca");
+	   sendButton=new JButton("Invia");
 	   addCreditButton=new JButton("Carica Credito");
 	   addFigButton=new JButton("Aggiungi Figurina");
 	   remFigButton=new JButton("Rimuovi Figurina");
@@ -119,11 +117,11 @@ public class UtenteGui extends JFrame{
 	   portalOptionSeparator=new JSeparator();
 	   infoTextSeparator=new JSeparator();
 	   
-           figurinaName=new JTextField(5);
-           textCredito=new JTextField(5);
-	   labelfigurinaName=new JLabel("Nome Figurina");
-           labeltextCredito=new JLabel("Credito");
-           vuota=new JLabel("                                                                                                              ");
+           figurinaName=new JTextField("Nome Figurina");
+           textCredito=new JTextField("Credito");
+           vuota=new JLabel("    ");
+           vuota1=new JLabel("    ");
+           vuota2=new JLabel("    ");
            
             //Elementi di prova
 	   
@@ -135,7 +133,7 @@ public class UtenteGui extends JFrame{
    
    private void formatComponents(){
 	   
-	   //Object Setup
+	   //Layout Setup
 	   
 	   this.setSize(800,600);
 	   this.setVisible(true);
@@ -148,8 +146,6 @@ public class UtenteGui extends JFrame{
        searchUserText.setHorizontalAlignment(JTextField.CENTER);
        searchFigText.setHorizontalAlignment(JTextField.CENTER);
        infoTextLabel.setAlignmentX(CENTER_ALIGNMENT);
-       
-       addCreditButton.addActionListener(controller);
        
        //Inserisce la finestra al centro dello schermo
        
@@ -170,7 +166,6 @@ public class UtenteGui extends JFrame{
 	   portalOptionPanel.setLayout(new GridLayout(5,1));
 	   infoTextPanel.setLayout(new GridLayout(4,1));
 	   
-	  
              
        //Aggiunge i componenti
        
@@ -187,18 +182,17 @@ public class UtenteGui extends JFrame{
        
        //Single components
        
-       manageCollectionPanel.add(addFigButton);
-       manageCollectionPanel.add(remFigButton);
+       manageCollectionPanel.add(figurinaName);
        manageCollectionPanel.add(sortAlfaButton);
+       manageCollectionPanel.add(addFigButton);
        manageCollectionPanel.add(sortRarButton);
-       manageCollectionPanel.add(addCreditButton);
-       manageCollectionPanel.add(manageCollectionPanel1,BorderLayout.SOUTH);
+       manageCollectionPanel.add(remFigButton);
+       manageCollectionPanel.add(vuota);
+       manageCollectionPanel.add(textCredito);
+       manageCollectionPanel.add(vuota1);
+       manageCollectionPanel.add(addCreditButton);       
+       manageCollectionPanel.add(vuota2);
        
-       manageCollectionPanel1.add(labelfigurinaName);
-       manageCollectionPanel1.add(figurinaName);
-       manageCollectionPanel1.add(vuota);
-       manageCollectionPanel1.add(labeltextCredito);
-       manageCollectionPanel1.add(textCredito);
        
        
        infoTextPanel.add(infoTextLabel,BorderLayout.NORTH);
@@ -224,6 +218,7 @@ public class UtenteGui extends JFrame{
        collectionPanel.add(scrollFig,BorderLayout.NORTH);
        collectionPanel.add(manageCollectionPanel,BorderLayout.SOUTH);
        
+       
        portalPanel.add(userListPanel);
        portalPanel.add(infoAndOptionPanel);
 
@@ -231,22 +226,12 @@ public class UtenteGui extends JFrame{
        //Main Tab Panels
        tabPane.add(collectionPanel);
        tabPane.add(portalPanel);
+       
+       
       }
-   
-   //nasconde la finestra
-   public void nascondi(){
-	   
-	   this.setVisible(false);
-   }
-   
-   //Mostra la finestra
-   
-   public void mostra(){
-	   
-	   this.setVisible(true);
-   }
-   
-   
    
    
 }
+
+
+
