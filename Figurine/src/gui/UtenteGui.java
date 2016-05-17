@@ -25,6 +25,7 @@ public class UtenteGui extends JFrame{
 	private JPanel userListPanel;
 	private JPanel infoTextPanel;
 	private JPanel infoAndOptionPanel;
+        private JPanel manageCollectionPanel1;
 	
 	private JSeparator portalOptionSeparator;
 	private JSeparator infoTextSeparator;
@@ -53,6 +54,13 @@ public class UtenteGui extends JFrame{
     private  JButton[] provafigurine;
     private String[] provaString;
     
+    private JTextField figurinaName;
+    private JTextField textCredito;
+    private JLabel labelfigurinaName;
+    private JLabel labeltextCredito;
+    //vuota è una label che sere a distanziare gli oggetti figurinaName e labeltextCredito
+    private JLabel vuota;
+    
     public UtenteGui() {
     	
     	   super("User Interface");
@@ -75,6 +83,7 @@ public class UtenteGui extends JFrame{
 	   figPanel=new JPanel();
 	   infoTextPanel=new JPanel();
 	   infoAndOptionPanel=new JPanel();
+           manageCollectionPanel1=new JPanel();
 	   
 	   tabPane=new JTabbedPane();
 	   scrollFig=new JScrollPane(figPanel,scrollFig.VERTICAL_SCROLLBAR_AS_NEEDED,scrollFig.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -98,8 +107,13 @@ public class UtenteGui extends JFrame{
 	   portalOptionSeparator=new JSeparator();
 	   infoTextSeparator=new JSeparator();
 	   
-	   
-	   //Elementi di prova
+           figurinaName=new JTextField(5);
+           textCredito=new JTextField(5);
+	   labelfigurinaName=new JLabel("Nome Figurina");
+           labeltextCredito=new JLabel("Credito");
+           vuota=new JLabel("                                                                                                              ");
+           
+            //Elementi di prova
 	   
 	   provaString=new String[]{"pippo","pluto","topolino","paperino"};
 	   provafigurine=new JButton[100];
@@ -163,6 +177,14 @@ public class UtenteGui extends JFrame{
        manageCollectionPanel.add(sortAlfaButton);
        manageCollectionPanel.add(sortRarButton);
        manageCollectionPanel.add(addCreditButton);
+       manageCollectionPanel.add(manageCollectionPanel1,BorderLayout.SOUTH);
+       
+       manageCollectionPanel1.add(labelfigurinaName);
+       manageCollectionPanel1.add(figurinaName);
+       manageCollectionPanel1.add(vuota);
+       manageCollectionPanel1.add(labeltextCredito);
+       manageCollectionPanel1.add(textCredito);
+       
        
        infoTextPanel.add(infoTextLabel,BorderLayout.NORTH);
        infoTextPanel.add(infoTextArea,BorderLayout.CENTER);
@@ -194,9 +216,8 @@ public class UtenteGui extends JFrame{
        //Main Tab Panels
        tabPane.add(collectionPanel);
        tabPane.add(portalPanel);
-      
-  
-      
+       
+       
       }
    
    
