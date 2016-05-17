@@ -22,6 +22,8 @@ public class TestSoft {
 		try{
 			
 		Portale port=new Portale();
+                
+                   
 		Utente u1=new Collezionista("pippo","rossi","aaa",20,100,"user1","password1","mail1");
 		Utente u2=new Collezionista("pluto","verdi","aaa",20,100,"user2","password2","mail2");
 		
@@ -35,6 +37,30 @@ public class TestSoft {
 		System.out.println(u1.toString());
 		System.out.println(u2.toString());
 		
+                
+                port.caricaFigurine();
+                /*System.out.println("qui"+port.getRegFig().size());                
+                
+                for (int i=0; i<port.getRegFig().size(); i++){
+                    System.out.println("qui"+port.getRegFig().get(i));
+                }*/
+                u1.addFigurina(port.getRegFig().get(1));
+                u1.addFigurina(port.getRegFig().get(0));
+                u2.addFigurina(port.getRegFig().get(1));
+                u2.addFigurina(port.getRegFig().get(2));
+
+                
+                Scambio sc=new Scambio(u1,u2);
+                System.out.println("SCAMBIO PROVA STATO="+sc.getStatoScambio());
+                
+                Figurina f=new Figurina("m",100);
+                sc.addFigurina(u2, f);
+                sc.addFigurina(u2, port.getRegFig().get(0));
+
+                sc.addFigurina(u1, port.getRegFig().get(1));
+
+                System.out.println("SCAMBIO PROVA STATO="+sc.getStatoScambio());
+
 		}
 		
 		catch (FileNotFoundException e){
