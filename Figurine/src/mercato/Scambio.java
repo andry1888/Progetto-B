@@ -103,10 +103,10 @@ public class Scambio implements Carrello {
                 }
                 else{
 		//aggiunta della figurina all'offerta
+                	
         u.getOffertaFigurine().add(f);
         if(s==Stato.NUOVO) {
             s=Stato.IN_CORSO;
-            System.out.println("qui");
         }
 		return true;
 	}}
