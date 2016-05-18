@@ -6,20 +6,19 @@ import utenti.*;
 
 
 public class Figurina {
-    /*
-        Autoincremento id figurina
-    */
-        private static int count;
+
 
 	private final String Nome;
 	private final int Id;
-        private int Rarità;
+    private int Rarità;
 	
         
-	public Figurina(String n,int r){
+	public Figurina(int i,String n,int r){
+		
+		this.Id=i;
 		this.Nome=n;
 		this.Rarità=r;
-                this.Id=++count;
+
 	}
 	
 

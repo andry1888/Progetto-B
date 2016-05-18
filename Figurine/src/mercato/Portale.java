@@ -19,20 +19,55 @@ public class Portale {
 	private static ArrayList<Utente> Utenti_Online;
 	private FileReader fr;
 	private BufferedReader br;
-	
+        private FileReader ffig;
+	private BufferedReader bfig;
+	private static ArrayList<Figurina> Figurine_reg;
+
 	
 	//implementare database user-password
 	
 	//imporre la staticità delle componenti della classe
 	
-	public Portale() throws FileNotFoundException{
+	public Portale() throws IOException{
 		
 		Utenti_Online= new ArrayList<>();
-		fr = new FileReader("registro_utenti.txt");
-	    br=new BufferedReader(fr);
-		
-		
+		Figurine_reg= new ArrayList<>();
+
+                fr = new FileReader("registro_utenti.txt");
+                ffig = new FileReader("registro_figurine.txt");
+
+                br=new BufferedReader(fr);
+                bfig=new BufferedReader(ffig);
+                
+                this.caricaFigurine();
+
 	}
+        
+	//Carica le figurine dal registro
+	private void caricaFigurine() throws IOException{
+		
+		String s;
+        String[] split;
+        
+        String nome;
+        Integer rar;
+        Integer Id;
+    
+        //Data parsing
+        while (bfig.ready()) {
+        	
+           s=bfig.readLine();
+           split=s.split(" ");
+           
+           Id=Integer.parseInt(split[0]);
+           nome=split[1];
+           rar=Integer.parseInt(split[2]);
+           Figurina f=new Figurina(Id,nome, rar);
+           Figurine_reg.add(f);
+        }
+        
+        
+  }
 	
 	//Login utente
 	public boolean logIn(String u,String p,Utente ut) throws IOException{
@@ -46,7 +81,6 @@ public class Portale {
            split=s.split(" ");
            user=split[0];
            psw=split[1];
-           
            if(user.equals(u) && psw.equals(p)){
            	Utenti_Online.add(ut);
            	ut.setWebState(true);
@@ -55,6 +89,7 @@ public class Portale {
            	
            }
         }
+        
         
         return false;
         
@@ -147,6 +182,27 @@ public class Portale {
 		
 		return elenco;
 	}
+        
+        
+	//Ritorna il registro figurine
+        public ArrayList<Figurina> getRegFig(){
+		
+		return Figurine_reg;
+	}
+        
+        //Ritorna il registro figurine come stringa
+        public String getStringRegFig(){
+        	
+        	String res="";
+        	
+        	for(int i=0;i<this.Figurine_reg.size();i++){
+        		
+        		res=res+this.Figurine_reg.get(i).toString()+"\n";
+        	}
+        	
+        	return res;
+        	
+        }
 	
 	//Ritorna la collezione di un utente dato lo user, null se non esiste lo user
 	

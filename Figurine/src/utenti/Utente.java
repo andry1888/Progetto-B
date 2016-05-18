@@ -207,9 +207,12 @@ public boolean addFigurina(String n, int r) {
 
 	//Eseguire i controlli di database figurine
 	
-	Figurina ftemp=new Figurina(n,r);
-	this.getCollezione().add(ftemp);
+	int id=10;
 	
+	Figurina ftemp=new Figurina(id,n,r);
+        
+	this.getCollezione().add(ftemp);
+        
 	
 	return true;
 }
@@ -220,7 +223,11 @@ public boolean addFigurina(Figurina f){
 	//Eseguire i controlli di database figurine
 	
 	Figurina ftemp=f;
+	
 	this.getCollezione().add(ftemp);
+        String s="figurina aggiunta a "+User+" ";
+        s += ftemp.toString();
+        System.out.println(s);
 	return true;
 }
 

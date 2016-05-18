@@ -91,18 +91,25 @@ public class Scambio implements Carrello {
 	
 	//Un utente aggiunge una figurina alla sua offerta
 	public boolean addFigurina(Utente u,Figurina f) {
-		
+
 		Figurina ftemp;
-		
+
 		//Verifica sulla possessione della figurina
 		ftemp=u.getFigurinabyId(f.getId());
-		if(ftemp==null) return false;
-		
+
+		if(ftemp==null) {
+                    System.out.println("figurina non presente in utente");
+                    return false;
+                }
+                else{
 		//aggiunta della figurina all'offerta
         u.getOffertaFigurine().add(f);
-        if(s==Stato.NUOVO) s=Stato.IN_CORSO;
+        if(s==Stato.NUOVO) {
+            s=Stato.IN_CORSO;
+            System.out.println("qui");
+        }
 		return true;
-	}
+	}}
 	
 	//Un utente rimuove una figurina dalla sua offerta
 	public boolean removeFigurina(Utente u,int i) {
