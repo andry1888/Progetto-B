@@ -33,6 +33,7 @@ public abstract class Utente implements Figurina_Interface {
 		this.Mail="User@Mydomain.com";
 		this.Online=false;
 		this.Figurine=new ArrayList<>();
+		this.OffertaFigurine=new ArrayList<>();
 		
 	}
 	
@@ -51,6 +52,7 @@ public Utente(String nom,String cogn,String indir,int e,double inicre,String u,S
 		this.Mail=m;
 		this.Online=false;
 		this.Figurine=new ArrayList<>();
+		this.OffertaFigurine=new ArrayList<>();
 		
 		}
 
