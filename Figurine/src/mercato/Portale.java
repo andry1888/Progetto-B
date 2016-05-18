@@ -28,7 +28,7 @@ public class Portale {
 	
 	//imporre la staticità delle componenti della classe
 	
-	public Portale() throws IOException{
+	public Portale() throws IOException,NumberFormatException{
 		
 		Utenti_Online= new ArrayList<>();
 		Figurine_reg= new ArrayList<>();

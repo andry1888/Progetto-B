@@ -72,6 +72,10 @@ public class TestSoft {
 			System.out.println("Lettura voce file fallita");
 			
 		}
+		catch (NumberFormatException e){
+			
+			System.out.println("Formato file non corretto");
+		}
 		
 		
 		
