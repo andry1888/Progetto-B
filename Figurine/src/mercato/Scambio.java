@@ -107,6 +107,10 @@ public class Scambio implements Carrello {
         u.getOffertaFigurine().add(f);
         if(s==Stato.NUOVO) {
             s=Stato.IN_CORSO;
+<<<<<<< HEAD
+=======
+            System.out.println("qui");
+>>>>>>> origin/master
         }
 		return true;
 	}}
