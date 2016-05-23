@@ -207,13 +207,10 @@ public boolean addFigurina(String n, int r) {
 
 	//Eseguire i controlli di database figurine
 	
-<<<<<<< HEAD
+
 	int id=10;
-	
-	Figurina ftemp=new Figurina(id,n,r);
-=======
-	Figurina ftemp=new Figurina(n,r);
->>>>>>> origin/master
+		Figurina ftemp=new Figurina(id,n,r);
+
         
 	this.getCollezione().add(ftemp);
         
