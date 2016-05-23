@@ -34,19 +34,40 @@ public class UtenteController implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		
+       String tmp;		
 	   String s=e.getActionCommand();
 	   
 	   //Trova il nome dell'elemento chiamante
 
 		switch (s){
 		
+		//da testare
 		
 		case "Carica Credito":{
 			
-			     //Inserire il valore ottenuto dalla text field
-			       utente.addCredito(100);
+			     tmp=gui.getCreditValue();
+			     utente.addCredito(Double.parseDouble(tmp));
+			     gui.clearCreditValue();
+			     break;
 			
 			}
+		
+		case "Ordine Alfabetico":{
+			
+			utente.sortAlfa();
+			break;
+			
+			//Update vista gui
+			
+		}
+		
+		case "Ordine Rarità":{
+			
+			utente.sortRar();
+			//Update vista gui
+			break;
+			
+		}
 		
 		
 		

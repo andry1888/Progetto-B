@@ -107,7 +107,7 @@ public class UtenteGui extends JFrame{
 	   addCreditButton=new JButton("Carica Credito");
 	   addFigButton=new JButton("Aggiungi Figurina");
 	   remFigButton=new JButton("Rimuovi Figurina");
-	   sortAlfaButton=new JButton("Ordine Alafabetico");
+	   sortAlfaButton=new JButton("Ordine Alfabetico");
 	   sortRarButton=new JButton("Ordine Rarità");
 	   scambioButton=new JButton("Inizia Scambio");
 	   compravenditaButton=new JButton("Inizia Compravendita");
@@ -229,6 +229,37 @@ public class UtenteGui extends JFrame{
        
        
       }
+   
+   //Metodi Getter e utilità
+   
+   public String getCreditValue(){
+	   
+	   return this.textCredito.getText();
+	   
+	   
+	   
+   }
+   
+   public String getFigurinaValue(){
+	   
+	   //Da sviluppare per ottenere tutti i campi della figurina
+	   
+	   
+	   return this.figurinaName.getText();
+	   
+   }
+   
+   public void clearCreditValue(){
+	   
+	   
+	   this.textCredito.setText("");
+   }
+   
+   
+   public void clearFigurinaValue(){
+	   
+	   this.figurinaName.setText("");
+   }
    
    
 }
