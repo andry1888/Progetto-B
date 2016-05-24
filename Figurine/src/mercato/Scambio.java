@@ -66,6 +66,7 @@ public class Scambio implements Carrello {
 				ftemp=Utente1.getOffertaFigurine().get(i);
 				Utente2.getCollezione().add(ftemp);
 				Utente1.getOffertaFigurine().remove(i);
+				Utente1.getCollezione().remove(i);
 				
 			}
 			
@@ -76,6 +77,7 @@ public class Scambio implements Carrello {
 				ftemp=Utente2.getOffertaFigurine().get(i);
 				Utente1.getCollezione().add(ftemp);
 				Utente2.getOffertaFigurine().remove(i);
+				Utente2.getCollezione().remove(i);
 				
 				
 			}
@@ -170,6 +172,8 @@ public class Scambio implements Carrello {
 	public void annullaScambio(){
 		
 		s=Stato.RIFIUTATO;
+		Utente1.getOffertaFigurine().removeAll(Utente1.getOffertaFigurine());
+		Utente2.getOffertaFigurine().removeAll(Utente2.getOffertaFigurine());
 		
 	}
 	
