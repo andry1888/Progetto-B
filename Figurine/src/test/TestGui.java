@@ -1,6 +1,8 @@
 package test;
 
 import gui.*;
+import mercato.*;
+
 import java.awt.*;
 import java.awt.Event;
 

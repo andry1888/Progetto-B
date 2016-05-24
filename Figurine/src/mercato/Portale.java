@@ -28,7 +28,7 @@ public class Portale {
 	
 	//imporre la staticità delle componenti della classe
 	
-	public Portale() throws IOException,NumberFormatException,FileNotFoundException{
+	public Portale() throws IOException,NumberFormatException{
 		
 		Utenti_Online= new ArrayList<>();
 		Figurine_reg= new ArrayList<>();
@@ -38,8 +38,6 @@ public class Portale {
 
                 br=new BufferedReader(fr);
                 bfig=new BufferedReader(ffig);
-
-                
                 this.caricaFigurine();
 
 	}
@@ -66,11 +64,10 @@ public class Portale {
            nome=split[1];
            rar=Integer.parseInt(split[2]);
            Figurina f=new Figurina(Id,nome, rar);
-           this.Figurine_reg.add(f);
+           Figurine_reg.add(f);
         }
         
-
-        return false;       
+  return false;      
   }
 	
 	//Login utente

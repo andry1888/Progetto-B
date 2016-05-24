@@ -11,14 +11,16 @@ import java.util.*;
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 
 //Vengono gestiti per ora solo oggetti di tipo JButton
 
 public class UtenteController implements ActionListener {
 
-	private Utente utente;
-	private UtenteGui gui;
+	private Utente utente;   //utente di riferimento
+	private UtenteGui gui;   //gui di riferimento
+	private Portale port;    //istanza del portale
 	
 	
 	//Ottiene i parametri di utente e interfaccia
@@ -26,7 +28,7 @@ public class UtenteController implements ActionListener {
 	public UtenteController(UtenteGui g,Utente u){
 		
 		utente=u;
-		gui=g;
+		gui=g;	
 		
 	}
 	
@@ -78,9 +80,10 @@ public class UtenteController implements ActionListener {
 		
 		case "Aggiungi Figurina": {
 			
-			//Modificare per avere consistenza sul registro figurine
+		
 			
 			tmp=gui.getFigurinaValue();
+			//Modificare per avere consistenza sul registro figurine
 			ftmp=new Figurina(1,tmp,10);
 			utente.addFigurina(ftmp);
 			gui.updateCollezione();
@@ -96,6 +99,7 @@ public class UtenteController implements ActionListener {
 			f=utente.removeFigurinabyName(tmp);
 			if(f==true) gui.updateCollezione();
 			else System.out.println("Figurina non esistente");
+			gui.clearFigurinaValue();
 			break;
 			
 			

@@ -62,7 +62,7 @@ public class UtenteGui extends JFrame{
     private JTextField figurinaName;
     private JTextField textCredito;    
     private JLabel vuota;
-    private JLabel vuota1;
+    private JLabel feedbackLabel;
     private JLabel creditLabel;
     
     
@@ -120,7 +120,7 @@ public class UtenteGui extends JFrame{
            figurinaName=new JTextField("Nome Figurina");
            textCredito=new JTextField("Credito");
            vuota=new JLabel("    ");
-           vuota1=new JLabel("    ");
+           feedbackLabel=new JLabel("    ");
            creditLabel=new JLabel("  ");
            
             //Elementi di prova
@@ -142,6 +142,7 @@ public class UtenteGui extends JFrame{
        
        updateCreditValue();
        updateCollezione();
+       updateFeedbackvalue();
        
        infoTextArea.setVisible(true);
        infoTextArea.setText("prova");
@@ -184,7 +185,7 @@ public class UtenteGui extends JFrame{
        manageCollectionPanel.add(remFigButton);
        manageCollectionPanel.add(vuota);
        manageCollectionPanel.add(textCredito);
-       manageCollectionPanel.add(vuota1);
+       manageCollectionPanel.add(feedbackLabel);
        manageCollectionPanel.add(addCreditButton);       
        manageCollectionPanel.add(creditLabel);
        
@@ -274,6 +275,14 @@ public class UtenteGui extends JFrame{
 	   
 	   
    }
+   
+   public void updateFeedbackvalue(){
+	   
+	   
+	   this.feedbackLabel.setText("Feedback attuale: "+String.valueOf(utente.getFeedback()));
+	   
+	   
+	   }
    
    //Aggiorna la visuale figurine in base alla collezione dell'utente
    

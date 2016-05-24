@@ -205,13 +205,10 @@ protected boolean resetPassword(String p, String newP){
 
 public boolean addFigurina(String n, int r) {
 
-	//Eseguire i controlli di database figurine
 	
 
-	int id=10;
-		Figurina ftemp=new Figurina(id,n,r);
-
-        
+	int id=10;	
+	Figurina ftemp=new Figurina(id,n,r);       
 	this.getCollezione().add(ftemp);
         
 	
