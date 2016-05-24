@@ -39,7 +39,16 @@ public class TestSoft {
 		System.out.println("Registro figurine \n");
 		System.out.println(port.getStringRegFig());
 		
-
+<<<<<<< HEAD
+=======
+                
+                port.caricaFigurine();
+                /*System.out.println("qui"+port.getRegFig().size());                
+                
+                for (int i=0; i<port.getRegFig().size(); i++){
+                    System.out.println("qui"+port.getRegFig().get(i));
+                }*/
+>>>>>>> origin/master
                 u1.addFigurina(port.getRegFig().get(1));
                 u1.addFigurina(port.getRegFig().get(0));
                 u2.addFigurina(port.getRegFig().get(1));
@@ -47,9 +56,19 @@ public class TestSoft {
 
                 
                 Scambio sc=new Scambio(u1,u2);
+                System.out.println("SCAMBIO PROVA STATO="+sc.getStatoScambio());
                 
-                System.out.println("SCAMBIO PROVA STATO="+sc.getStatoScambio());    
+<<<<<<< HEAD
                 sc.addFigurina(u1,u1.getCollezione().get(0));
+                sc.addFigurina(u2,u2.getCollezione().get(0));
+=======
+                Figurina f=new Figurina("m",100);
+                sc.addFigurina(u2, f);
+                sc.addFigurina(u2, port.getRegFig().get(0));
+
+                sc.addFigurina(u1, port.getRegFig().get(1));
+>>>>>>> origin/master
+
                 System.out.println("SCAMBIO PROVA STATO="+sc.getStatoScambio());
 
 		}

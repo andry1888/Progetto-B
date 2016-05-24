@@ -28,7 +28,7 @@ public class Portale {
 	
 	//imporre la staticità delle componenti della classe
 	
-	public Portale() throws IOException,NumberFormatException,FileNotFoundException{
+	public Portale() throws IOException,NumberFormatException{
 		
 		Utenti_Online= new ArrayList<>();
 		Figurine_reg= new ArrayList<>();
@@ -38,22 +38,27 @@ public class Portale {
 
                 br=new BufferedReader(fr);
                 bfig=new BufferedReader(ffig);
-
+<<<<<<< HEAD
                 
                 this.caricaFigurine();
 
 	}
         
 	//Carica le figurine dal registro
+	private void caricaFigurine() throws IOException{
+=======
 
+	}
+        
 	public boolean caricaFigurine() throws IOException{
-
+>>>>>>> origin/master
 		
 		String s;
         String[] split;
         
         String nome;
         Integer rar;
+<<<<<<< HEAD
         Integer Id;
     
         //Data parsing
@@ -66,11 +71,25 @@ public class Portale {
            nome=split[1];
            rar=Integer.parseInt(split[2]);
            Figurina f=new Figurina(Id,nome, rar);
-           this.Figurine_reg.add(f);
+=======
+    
+        while (bfig.ready()) {
+           s=bfig.readLine();
+           split=s.split(" ");
+           nome=split[0];
+           rar=Integer.parseInt(split[1]);
+           Figurina f=new Figurina(nome, rar);
+           System.out.println(f);
+>>>>>>> origin/master
+           Figurine_reg.add(f);
         }
         
-
-        return false;       
+        
+<<<<<<< HEAD
+=======
+        return false;
+        
+>>>>>>> origin/master
   }
 	
 	//Login utente
@@ -188,7 +207,7 @@ public class Portale {
 	}
         
         
-
+<<<<<<< HEAD
 	//Ritorna il registro figurine
         public ArrayList<Figurina> getRegFig(){
 		
@@ -208,6 +227,15 @@ public class Portale {
         	return res;
         	
         }
+=======
+        public ArrayList<Figurina> getRegFig(){
+		
+		
+		
+		
+		return Figurine_reg;
+	}
+>>>>>>> origin/master
 	
 	//Ritorna la collezione di un utente dato lo user, null se non esiste lo user
 	
