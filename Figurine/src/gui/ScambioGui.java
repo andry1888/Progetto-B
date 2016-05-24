@@ -59,6 +59,7 @@ public class ScambioGui extends JFrame{
     private JButton    compravenditaButton;
     private  JLabel    infoTextLabel;
     private  JLabel    infoDest;
+    private  JLabel    infoIO;
 
     
     private JLabel     searchUserLabel;
@@ -115,7 +116,9 @@ public class ScambioGui extends JFrame{
            scrollMess=new JScrollPane(infoTextPanel,scrollMess.VERTICAL_SCROLLBAR_ALWAYS,scrollMess.HORIZONTAL_SCROLLBAR_NEVER);
 	   infoTextArea=new JTextArea();
 	   infoTextLabel=new JLabel("Messaggi di sistema");
-	   infoDest=new JLabel("Destinatario");
+	   infoDest=new JLabel("Destinatario ");
+	   infoIO=new JLabel("La tua esposizione ");
+            
 
            
            searchUserLabel=new JLabel("Ricerca Utente");
@@ -153,7 +156,7 @@ public class ScambioGui extends JFrame{
 	   
 	   //Layout Setup
 	   
-	   this.setSize(800,600);
+	   this.setSize(800,650);
 	   this.setVisible(true);
        this.setResizable(false);
        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -165,6 +168,7 @@ public class ScambioGui extends JFrame{
        searchFigText.setHorizontalAlignment(JTextField.CENTER);
        infoTextLabel.setAlignmentX(CENTER_ALIGNMENT);
        infoDest.setAlignmentX(CENTER_ALIGNMENT);
+       infoIO.setAlignmentX(CENTER_ALIGNMENT);
 
        
        //Inserisce la finestra al centro dello schermo
@@ -175,7 +179,7 @@ public class ScambioGui extends JFrame{
 		 this.setLocation(posX, posY);
    
 	   //Tabbed panels
-	   collectionPanel.setLayout(new GridLayout(4,1));
+	   collectionPanel.setLayout(new GridLayout(5,1));
 	   collectionPanel.setName("Scambio");
 	   collectionPanel.setPreferredSize(new Dimension(600,100));	   
 	   portalPanel.setLayout(new GridLayout(1,3));
@@ -183,7 +187,7 @@ public class ScambioGui extends JFrame{
 	   infoAndOptionPanel.setLayout(new BorderLayout());
 	   
 	   //Internal Panels
-	   portalOptionPanel.setLayout(new GridLayout(5,1));
+	   portalOptionPanel.setLayout(new GridLayout(4,1));
 	   infoTextPanel.setLayout(new GridLayout(4,1));
 	   
              
@@ -231,7 +235,7 @@ public class ScambioGui extends JFrame{
        portalOptionPanel.add(searchFigLabel);
        portalOptionPanel.add(searchFigText);
        portalOptionPanel.add(sendButton);
-     //  portalOptionPanel.add(portalOptionSeparator);
+       portalOptionPanel.add(portalOptionSeparator);
        userListPanel.add(userList);
        
        //Tab View Panels
@@ -242,6 +246,8 @@ public class ScambioGui extends JFrame{
        collectionPanel.add(infoDest,BorderLayout.NORTH);
 
        collectionPanel.add(scrollFig,BorderLayout.NORTH);
+       collectionPanel.add(infoIO,BorderLayout.NORTH);
+
        collectionPanel.add(scrollFigDEST,BorderLayout.NORTH);
 
        
