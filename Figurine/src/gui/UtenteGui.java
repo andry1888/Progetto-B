@@ -57,14 +57,13 @@ public class UtenteGui extends JFrame{
     private JTextField searchFigText;
     private JList userList;
 
-    private  JButton[] provafigurine;
     private String[] provaString;
     
     private JTextField figurinaName;
     private JTextField textCredito;    
     private JLabel vuota;
     private JLabel vuota1;
-    private JLabel vuota2;
+    private JLabel creditLabel;
     
     
     public UtenteGui(Utente u) {
@@ -74,6 +73,7 @@ public class UtenteGui extends JFrame{
     	   
            this.initComponents();
            this.formatComponents();
+           this.actionComponents();
        
     }
     
@@ -87,7 +87,7 @@ public class UtenteGui extends JFrame{
 	   
 	   collectionPanel=new JPanel();
 	   portalPanel=new JPanel();
-	   manageCollectionPanel=new JPanel(new GridLayout(5,2));
+	   manageCollectionPanel=new JPanel();
 	   userListPanel=new JPanel();
 	   portalOptionPanel=new JPanel();
 	   figPanel=new JPanel();
@@ -96,7 +96,7 @@ public class UtenteGui extends JFrame{
            
 	   
 	   tabPane=new JTabbedPane();
-	   scrollFig=new JScrollPane(figPanel,scrollFig.VERTICAL_SCROLLBAR_AS_NEEDED,scrollFig.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	   scrollFig=new JScrollPane(figPanel,scrollFig.VERTICAL_SCROLLBAR_ALWAYS,scrollFig.HORIZONTAL_SCROLLBAR_ALWAYS);
 	   scrollMess=new JScrollPane(infoTextPanel,scrollMess.VERTICAL_SCROLLBAR_ALWAYS,scrollMess.HORIZONTAL_SCROLLBAR_NEVER);
 	   infoTextArea=new JTextArea();
 	   infoTextLabel=new JLabel("Messaggi di sistema");
@@ -121,12 +121,11 @@ public class UtenteGui extends JFrame{
            textCredito=new JTextField("Credito");
            vuota=new JLabel("    ");
            vuota1=new JLabel("    ");
-           vuota2=new JLabel("    ");
+           creditLabel=new JLabel("  ");
            
             //Elementi di prova
 	   
 	   provaString=new String[]{"pippo","pluto","topolino","paperino"};
-	   provafigurine=new JButton[100];
 	   
 	   userList=new JList(provaString);
    }
@@ -140,6 +139,9 @@ public class UtenteGui extends JFrame{
        this.setResizable(false);
        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
        this.userList.setSize(400,300);
+       
+       updateCreditValue();
+       updateCollezione();
        
        infoTextArea.setVisible(true);
        infoTextArea.setText("prova");
@@ -161,6 +163,7 @@ public class UtenteGui extends JFrame{
 	   portalPanel.setLayout(new GridLayout(1,3));
 	   portalPanel.setName("Portale");
 	   infoAndOptionPanel.setLayout(new BorderLayout());
+	   manageCollectionPanel.setLayout(new GridLayout(5,2));
 	   
 	   //Internal Panels
 	   portalOptionPanel.setLayout(new GridLayout(5,1));
@@ -170,15 +173,7 @@ public class UtenteGui extends JFrame{
        //Aggiunge i componenti
        
        this.add(tabPane);
-       
-       
-       
-       
-       for(int i=0;i<100;i++){
-           
-           provafigurine[i]=new JButton(""+(i+1));
-           figPanel.add(provafigurine[i]);
-       }     
+      
        
        //Single components
        
@@ -191,7 +186,7 @@ public class UtenteGui extends JFrame{
        manageCollectionPanel.add(textCredito);
        manageCollectionPanel.add(vuota1);
        manageCollectionPanel.add(addCreditButton);       
-       manageCollectionPanel.add(vuota2);
+       manageCollectionPanel.add(creditLabel);
        
        
        
@@ -230,6 +225,18 @@ public class UtenteGui extends JFrame{
        
       }
    
+   //Aggiunge action listener ai componenti
+   private void actionComponents(){
+	   
+	   
+	   this.addCreditButton.addActionListener(controller);
+	   this.addFigButton.addActionListener(controller);
+	   this.remFigButton.addActionListener(controller);
+	   this.sortAlfaButton.addActionListener(controller);
+	   
+	   
+   }
+   
    //Metodi Getter e utilità
    
    public String getCreditValue(){
@@ -259,6 +266,31 @@ public class UtenteGui extends JFrame{
    public void clearFigurinaValue(){
 	   
 	   this.figurinaName.setText("");
+   }
+   
+   public void updateCreditValue(){
+	   
+	   this.creditLabel.setText("Credito attuale: "+String.valueOf(utente.getCredito()));
+	   
+	   
+   }
+   
+   //Aggiorna la visuale figurine in base alla collezione dell'utente
+   
+   public void updateCollezione(){
+	   
+	   JButton btmp;
+	   
+	   this.figPanel.removeAll();
+	   
+	   for (int i=0;i<utente.getCollezione().size();i++){
+		   
+		   btmp=new JButton(utente.getCollezione().get(i).getNome()+" "+String.valueOf(utente.getCollezione().get(i).getRarità()));
+		   figPanel.add(btmp);
+		   
+	   }
+      scrollFig.updateUI();
+	   
    }
    
    

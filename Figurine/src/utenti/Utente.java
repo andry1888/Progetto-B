@@ -267,7 +267,7 @@ public boolean removeFigurinabyName(String n) {
 
 	for(int i=0;i<this.getCollezione().size();i++){
 		
-		if(this.getCollezione().get(i).getNome()==n) {
+		if(this.getCollezione().get(i).getNome().equals(n)) {
 			
 			this.getCollezione().remove(i);
 			return true;
@@ -290,12 +290,13 @@ public void sortAlfa() {
 	
 	//bubble sort,ordine crescente
 	
+	
 	do{
 		flag=false;
-		for(int i=0;i<this.getCollezione().size();i++){
+		for(int i=0;i<this.getCollezione().size()-1;i++){
 			
 			if(this.getCollezione().get(i).getNome().compareTo(this.getCollezione().get(i+1).getNome())>0){
-				
+							
 				ftemp=this.getCollezione().get(i+1);
                 this.getCollezione().set(i+1,this.getCollezione().get(i));
                 this.getCollezione().set(i,ftemp);
@@ -319,7 +320,7 @@ public void sortRar() {
 	
 	do{
 		flag=false;
-		for(int i=0;i<this.getCollezione().size();i++){
+		for(int i=0;i<this.getCollezione().size()-1;i++){
 			
 			if(this.getCollezione().get(i).getRarità()>this.getCollezione().get(i+1).getRarità()){
 				

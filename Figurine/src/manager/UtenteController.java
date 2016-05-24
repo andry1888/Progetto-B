@@ -34,10 +34,16 @@ public class UtenteController implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		
-       String tmp;		
+		//Trova il nome dell'elemento chiamante
+		
+		
+       String tmp;
+       Figurina ftmp;
+       boolean f;
 	   String s=e.getActionCommand();
+	   System.out.println(s);
 	   
-	   //Trova il nome dell'elemento chiamante
+	   
 
 		switch (s){
 		
@@ -47,6 +53,7 @@ public class UtenteController implements ActionListener {
 			
 			     tmp=gui.getCreditValue();
 			     utente.addCredito(Double.parseDouble(tmp));
+			     gui.updateCreditValue();
 			     gui.clearCreditValue();
 			     break;
 			
@@ -55,20 +62,45 @@ public class UtenteController implements ActionListener {
 		case "Ordine Alfabetico":{
 			
 			utente.sortAlfa();
+			gui.updateCollezione();
 			break;
 			
-			//Update vista gui
 			
 		}
 		
 		case "Ordine Rarità":{
 			
 			utente.sortRar();
-			//Update vista gui
+			gui.updateCollezione();
 			break;
 			
 		}
 		
+		case "Aggiungi Figurina": {
+			
+			//Modificare per avere consistenza sul registro figurine
+			
+			tmp=gui.getFigurinaValue();
+			ftmp=new Figurina(1,tmp,10);
+			utente.addFigurina(ftmp);
+			gui.updateCollezione();
+			gui.clearFigurinaValue();
+			break;
+			
+			
+		}
+		
+		case "Rimuovi Figurina":{
+			
+			tmp=gui.getFigurinaValue();
+			f=utente.removeFigurinabyName(tmp);
+			if(f==true) gui.updateCollezione();
+			else System.out.println("Figurina non esistente");
+			break;
+			
+			
+			
+		}
 		
 		
 		}
