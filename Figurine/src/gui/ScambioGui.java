@@ -21,293 +21,116 @@ public class ScambioGui extends JFrame{
 	
 	//Componenti dell'interfaccia
 	
-	private UtenteController controller;
-	private Utente utente;
+
+	private Utente utente1,utente2;
 	
+	private JPanel figPanel1,figPanel2,offertaPanel1,offertaPanel2;
+	private JPanel scambioPanel;
+	private JPanel utente1Panel,utente2Panel;
+	private JPanel infoPanel;
 	
-	private JPanel figPanelIO;
-	private JPanel figPanelDEST;
-	private JPanel figPanelIO2;
-	private JPanel figPanelDEST2;
+	private JTextField userText1,userText2;
+	private JTextArea chat;
 
-        private JPanel portalOptionPanel;
-	private JPanel portalPanel;
-	private JPanel manageCollectionPanel;
-	private JPanel manageOffertPanel;
-	private JPanel collectionPanel;
-	private JPanel offertPanel;
-	private JPanel userListPanel;
-	private JPanel infoTextPanel;
-	private JPanel infoAndOptionPanel;
-        //private JPanel manageCollectionPanel1;
+	private JScrollPane scrollFig1,scrollFig2;
+	private JScrollPane scrollOfferta1,scrollOfferta2;
+
 	
-	private JSeparator portalOptionSeparator;
-	private JSeparator infoTextSeparator;
-    
-	private JScrollPane scrollFig,scrollFig2;
-	private JScrollPane scrollFigDEST,scrollFigDEST2;
-
-        
-        private JScrollPane scrollMess;
-	private JTabbedPane tabPane;
-	private JTextArea   infoTextArea;
-	
-    private  JButton   sendButton;
-    private  JButton   addFigButton;
-    private  JButton   remFigButton;
-    private  JButton   sortAlfaButton;
-    private  JButton   sortRarButton;
-    private JButton    scambioButton;
-    private JButton    inviaScambio;
-
-    private JButton    compravenditaButton;
-    private  JLabel    infoTextLabel;
-    private  JLabel    infoDest,infoDest2;
-    private  JLabel    infoIO,infoIO2;
-
-    
-    private JLabel     searchUserLabel;
-    private JLabel     searchFigLabel;
-    
-    private JTextField searchUserText;
-    private JTextField searchFigText;
-    private JList userList;
-
-    private  JButton[] provafigurine;
-    private String[] provaString;
-    
-    private JTextField figurinaName;
-    private JLabel vuota;
-    private JLabel vuota1;
-    private JLabel vuota2;
+    private  JButton   addFigButton1,addFigButton2;
+    private  JButton   remFigButton1,remFigButton2;
+    private  JButton   confermaButton1,confermaButton2;
     
     
-    public ScambioGui(Utente u) {
+    
+    
+    public ScambioGui(Utente u1,Utente u2) {
     	
-    	   super("Scambio Interface");
-    	   utente=u;
+    	   super(u1.getUser()+" scambia con "+u2.getUser());
     	   
-           this.initComponents();
+    	   utente1=u1;
+    	   utente2=u2;    	   
+    	   this.initComponents();
            this.formatComponents();
-       
-    }
+           this.initCollezione();
+           
+           //Disabilita le gui utente
+           
+           utente1.disableUtente();
+           utente2.disableUtente();
+           
+        }
     
     
    private void initComponents() {
 	   
 	
 	   //Crea gli oggetti
-	   
-	   //controller=new UtenteController(this,utente);
-	   
-	   collectionPanel=new JPanel();
-	   offertPanel=new JPanel();
-	   portalPanel=new JPanel();
-	   manageCollectionPanel=new JPanel(new GridLayout(5,2));
-	   manageOffertPanel=new JPanel(new GridLayout(5,2));
-	   userListPanel=new JPanel();
-	   portalOptionPanel=new JPanel();
-	   figPanelIO=new JPanel();
-	   figPanelDEST=new JPanel();
-	   figPanelIO2=new JPanel();
-	   figPanelDEST2=new JPanel();
-           infoTextPanel=new JPanel();
-	   infoAndOptionPanel=new JPanel();
-           
-	   
-	   tabPane=new JTabbedPane();
-	   scrollFig=new JScrollPane(figPanelIO,scrollFig.VERTICAL_SCROLLBAR_AS_NEEDED,scrollFig.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-	   scrollFigDEST=new JScrollPane(figPanelDEST,scrollFigDEST.VERTICAL_SCROLLBAR_AS_NEEDED,scrollFigDEST.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-	   scrollFig2=new JScrollPane(figPanelIO2,scrollFig2.VERTICAL_SCROLLBAR_AS_NEEDED,scrollFig2.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-	   scrollFigDEST2=new JScrollPane(figPanelDEST2,scrollFigDEST2.VERTICAL_SCROLLBAR_AS_NEEDED,scrollFigDEST2.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	  	   
 
-           
-           scrollMess=new JScrollPane(infoTextPanel,scrollMess.VERTICAL_SCROLLBAR_ALWAYS,scrollMess.HORIZONTAL_SCROLLBAR_NEVER);
-	   infoTextArea=new JTextArea();
-	   infoTextLabel=new JLabel("Messaggi di sistema");
-	   infoDest=new JLabel("Destinatario ");
-	   infoDest2=new JLabel("Destinatario ");
-	   infoIO=new JLabel("La tua esposizione ");
-	   infoIO2=new JLabel("La tua esposizione ");
-            
+	   scambioPanel=new JPanel();	
+	   utente1Panel=new JPanel();
+	   utente2Panel=new JPanel();
+	   figPanel1=new JPanel();
+	   figPanel2=new JPanel();
+	   offertaPanel1=new JPanel();
+	   offertaPanel2=new JPanel();
+	   infoPanel=new JPanel();
 
-           
-           searchUserLabel=new JLabel("Ricerca Utente");
-	   searchFigLabel=new JLabel("Ricerca Figurina");
+       userText1=new JTextField("Messagi chat utente 1");  
+       userText2=new JTextField("Messaggi chat utente 2");
 	   
-	   sendButton=new JButton("Invia");
-	   addFigButton=new JButton("Aggiungi Figurina allo scambio");
-	   remFigButton=new JButton("Rimuovi Figurina allo scambio");
-	   sortAlfaButton=new JButton("Ordine Alfabetico");
-	   inviaScambio=new JButton("INVIA");
+	   scrollFig1=new JScrollPane(figPanel1,scrollFig1.VERTICAL_SCROLLBAR_AS_NEEDED,scrollFig1.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	   scrollFig2=new JScrollPane(figPanel2,scrollFig2.VERTICAL_SCROLLBAR_AS_NEEDED,scrollFig2.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	   scrollOfferta1=new JScrollPane(offertaPanel2,scrollOfferta2.VERTICAL_SCROLLBAR_AS_NEEDED,scrollOfferta2.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	   scrollOfferta1=new JScrollPane(offertaPanel2,scrollOfferta2.VERTICAL_SCROLLBAR_AS_NEEDED,scrollOfferta2.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-           sortRarButton=new JButton("Ordine Rarità");
-	   scambioButton=new JButton("Inizia Scambio");
-	   compravenditaButton=new JButton("Inizia Compravendita");
+
+
+	   addFigButton1=new JButton("Aggiungi Figurina all'offerta di "+utente1.getUser());
+	   remFigButton1=new JButton("Rimuovi Figurina dall'offerta di "+utente1.getUser());
+	   addFigButton2=new JButton("Aggiungi Figurina all'offerta di "+utente2.getUser());
+	   remFigButton2=new JButton("Rimuovi Figurina dall'offerta di "+utente2.getUser());
+	   confermaButton1=new JButton("Conferma scelte di "+utente1.getUser());
+	   confermaButton2=new JButton("Conferma scelte di "+utente2.getUser());
 	   
-	   searchUserText=new JTextField();
-	   searchFigText=new JTextField();
-	   portalOptionSeparator=new JSeparator();
-	   infoTextSeparator=new JSeparator();
-	   
-           figurinaName=new JTextField("Nome Figurina");
-           vuota=new JLabel("    ");
-           vuota1=new JLabel("    ");
-           vuota2=new JLabel("    ");
-           
-            //Elementi di prova
-	   
-	   provaString=new String[]{"pippo","pluto","topolino","paperino"};
-	   provafigurine=new JButton[100];
-	   
-	   userList=new JList(provaString);
    }
    
    private void formatComponents(){
 	   
-	   //Layout Setup
+	   //Property and Layout Setup
 	   
 	   this.setSize(800,650);
 	   this.setVisible(true);
        this.setResizable(false);
        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-       this.userList.setSize(400,300);
        
-       infoTextArea.setVisible(true);
-       infoTextArea.setText("prova");
-       searchUserText.setHorizontalAlignment(JTextField.CENTER);
-       searchFigText.setHorizontalAlignment(JTextField.CENTER);
-       infoTextLabel.setAlignmentX(CENTER_ALIGNMENT);
-       infoDest.setAlignmentX(CENTER_ALIGNMENT);
-       infoDest2.setAlignmentX(CENTER_ALIGNMENT);
-
-       infoIO.setAlignmentX(CENTER_ALIGNMENT);
-       infoIO2.setAlignmentX(CENTER_ALIGNMENT);
-
+       scambioPanel.setLayout(new GridLayout(3,1));
        
-       //Inserisce la finestra al centro dello schermo
-       
-       Dimension dim_schermo = Toolkit.getDefaultToolkit().getScreenSize();
-		 int posX = (int) (dim_schermo.width - this.getWidth())/2;
-		 int posY = (int) (dim_schermo.height - this.getHeight())/4;
-		 this.setLocation(posX, posY);
-   
-	   //Tabbed panels
-	   collectionPanel.setLayout(new GridLayout(5,1));
-	   collectionPanel.setName("Scambio");
-	   collectionPanel.setPreferredSize(new Dimension(600,100));
-	   offertPanel.setLayout(new GridLayout(5,1));
-	   offertPanel.setName("Offerta");
-	   offertPanel.setPreferredSize(new Dimension(600,100));
-	   portalPanel.setLayout(new GridLayout(1,3));
-	   portalPanel.setName("Portale");
-	   infoAndOptionPanel.setLayout(new BorderLayout());
-	   
-	   //Internal Panels
-	   portalOptionPanel.setLayout(new GridLayout(4,1));
-	   infoTextPanel.setLayout(new GridLayout(4,1));
-	   
-             
-       //Aggiunge i componenti
-       
-       this.add(tabPane);
-       
-       
-       
-       
-       for(int i=0;i<100;i++){
-           
-           provafigurine[i]=new JButton(""+(i+1));
-           figPanelIO.add(provafigurine[i]);
-       }  
-       
-       for(int i=0;i<100;i++){
-           
-           provafigurine[i]=new JButton(""+(i+1));
-           figPanelDEST.add(provafigurine[i]);
-       }   
-       
-for(int i=0;i<100;i++){
-           
-           provafigurine[i]=new JButton(""+(i+1));
-           figPanelIO2.add(provafigurine[i]);
-       }  
-       
-       for(int i=0;i<100;i++){
-           
-           provafigurine[i]=new JButton(""+(i+1));
-           figPanelDEST2.add(provafigurine[i]);
-       }
-       
-       //Single components
-       
-       manageCollectionPanel.add(figurinaName);
-       
-
-       manageCollectionPanel.add(addFigButton);
-       manageCollectionPanel.add(remFigButton);
-       manageCollectionPanel.add(vuota);
-       manageCollectionPanel.add(vuota1);
-       manageCollectionPanel.add(inviaScambio);
-       
-       
-       manageOffertPanel.add(vuota);
-       manageOffertPanel.add(vuota1);
-       manageOffertPanel.add(inviaScambio);
-       
-       
-      
-       
-       
-       infoTextPanel.add(infoTextLabel,BorderLayout.NORTH);
-       infoTextPanel.add(infoTextArea,BorderLayout.CENTER);
-       infoTextPanel.add(scambioButton,BorderLayout.SOUTH);
-       infoTextPanel.add(compravenditaButton,BorderLayout.SOUTH);
-         
-       
-       portalOptionPanel.add(searchUserLabel);
-       portalOptionPanel.add(searchUserText);
-       portalOptionPanel.add(searchFigLabel);
-       portalOptionPanel.add(searchFigText);
-       portalOptionPanel.add(sendButton);
-       portalOptionPanel.add(portalOptionSeparator);
-       userListPanel.add(userList);
-       
-       //Tab View Panels
-      infoAndOptionPanel.add(portalOptionPanel,BorderLayout.NORTH);
-       infoAndOptionPanel.add(infoTextPanel,BorderLayout.CENTER);
-       
-       
-       collectionPanel.add(infoDest,BorderLayout.NORTH);
-
-       collectionPanel.add(scrollFig,BorderLayout.NORTH);
-       collectionPanel.add(infoIO,BorderLayout.NORTH);
-
-       collectionPanel.add(scrollFigDEST,BorderLayout.NORTH);
-
-       
-       collectionPanel.add(manageCollectionPanel,BorderLayout.SOUTH);
-       
-       offertPanel.add(infoDest2,BorderLayout.NORTH);
-
-       offertPanel.add(scrollFig2,BorderLayout.NORTH);
-       offertPanel.add(infoIO2,BorderLayout.NORTH);
-
-       offertPanel.add(scrollFigDEST2,BorderLayout.NORTH);
-       offertPanel.add(manageOffertPanel,BorderLayout.SOUTH);
-       
-       
-       portalPanel.add(userListPanel);
-       portalPanel.add(infoAndOptionPanel);
-
-       
-       //Main Tab Panels
-       tabPane.add(collectionPanel);
-       tabPane.add(portalPanel);
-       tabPane.add(offertPanel);
-       
+    
        
       }
+   
+   //inizializza le collezione degli utenti
+   
+   private void initCollezione(){
+	   
+	   
+	   int i;
+	   JButton btmp;
+	   
+	   for(i=0;i<utente1.getCollezione().size();i++){
+		   
+		   btmp=new JButton(utente1.getCollezione().get(i).getNome());
+		   figPanel1.add(btmp);
+		   
+	   }
+	   
+	   for(i=0;i<utente1.getCollezione().size();i++){
+		   
+		   btmp=new JButton(utente2.getCollezione().get(i).getNome());
+		   figPanel2.add(btmp);
+	   }
+   }
    
    
    

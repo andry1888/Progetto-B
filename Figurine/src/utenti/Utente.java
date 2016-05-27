@@ -1,14 +1,16 @@
 package utenti;
 
 import java.util.*;
-
 import collezionabili.*;
+import gui.*;
 
 
 public abstract class Utente implements Figurina_Interface {
 	
 	//dati dell'utente
 	//implementare file precompilati per figurine
+	
+	private UtenteGui gui;
 	private String Nome,Cognome,User,Password,Mail,Indirizzo;
 	private int Età;
 	public int FeedBack;
@@ -19,6 +21,8 @@ public abstract class Utente implements Figurina_Interface {
 	
 	//Overload su costruttore
 	public Utente(String nom,String cogn,String indir,int e,double inicre){
+		
+		
 		
 		
 		this.Nome=nom;
@@ -35,11 +39,14 @@ public abstract class Utente implements Figurina_Interface {
 		this.Figurine=new ArrayList<>();
 		this.OffertaFigurine=new ArrayList<>();
 		
+		gui=new UtenteGui(this);
+		
 	}
 	
 public Utente(String nom,String cogn,String indir,int e,double inicre,String u,String pass,String m){
 		
 		
+	
 		this.Nome=nom;
 		this.Cognome=cogn;
 		this.Indirizzo=indir;
@@ -53,6 +60,8 @@ public Utente(String nom,String cogn,String indir,int e,double inicre,String u,S
 		this.Online=false;
 		this.Figurine=new ArrayList<>();
 		this.OffertaFigurine=new ArrayList<>();
+		
+		gui=new UtenteGui(this);
 		
 		}
 
@@ -419,6 +428,21 @@ public String toString(){
 	
 	return (String)(this.getNome()+" "+this.getCognome()+" "+this.getUser()+" "+this.getEtà()+" "+this.getCredito()+" "+this.getIndirizzo()+" "+this.getMail()+" "+this.getFeedback());
 	
+	
+}
+
+//Abilita-Disabilita l'interfaccia dell'utente
+
+public void disableUtente(){
+	
+	
+	gui.setEnabled(false);
+	
+}
+
+public void enableUtente(){
+	
+	gui.setEnabled(true);
 	
 }
 
