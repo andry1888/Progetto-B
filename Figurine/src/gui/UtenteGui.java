@@ -7,9 +7,10 @@ package gui;
 
 import utenti.*;
 import manager.*;
-
+import mercato.*;
 
 import java.awt.*;
+import java.util.ArrayList;
 import javax.swing.*;
 
 
@@ -31,7 +32,8 @@ public class UtenteGui extends JFrame{
 	private JPanel userListPanel;
 	private JPanel infoTextPanel;
 	private JPanel infoAndOptionPanel;
-        //private JPanel manageCollectionPanel1;
+	private JPanel infoPanel;
+
 	
 	private JSeparator portalOptionSeparator;
 	private JSeparator infoTextSeparator;
@@ -52,25 +54,31 @@ public class UtenteGui extends JFrame{
     private  JLabel    infoTextLabel;
     private JLabel     searchUserLabel;
     private JLabel     searchFigLabel;
+    private JLabel    userListLabel;
     
     private JTextField searchUserText;
     private JTextField searchFigText;
-    private JList userList;
-
-    private String[] provaString;
+    private JTextArea userList;
+    
     
     private JTextField figurinaName;
     private JTextField textCredito;    
     private JLabel vuota;
     private JLabel feedbackLabel;
+    private JLabel nameLabel;
+    private JLabel surnameLabel;
+    private JLabel userLabel;
+    private JLabel ageLabel;
+    private JLabel mailLabel;
+    private JLabel addressLabel;
     private JLabel creditLabel;
     
     
     public UtenteGui(Utente u) {
     	
-    	   super("User Interface");
-    	   utente=u;
+       	   super(u.getUser()+" User Interface");
     	   
+    	   utente=u;
            this.initComponents();
            this.formatComponents();
            this.actionComponents();
@@ -93,6 +101,7 @@ public class UtenteGui extends JFrame{
 	   figPanel=new JPanel();
 	   infoTextPanel=new JPanel();
 	   infoAndOptionPanel=new JPanel();
+	   infoPanel=new JPanel();
            
 	   
 	   tabPane=new JTabbedPane();
@@ -102,6 +111,13 @@ public class UtenteGui extends JFrame{
 	   infoTextLabel=new JLabel("Messaggi di sistema");
 	   searchUserLabel=new JLabel("Ricerca Utente");
 	   searchFigLabel=new JLabel("Ricerca Figurina");
+	   userListLabel=new JLabel("Lista utenti");
+	   nameLabel=new JLabel("Nome: "+utente.getNome());
+	   surnameLabel=new JLabel("Cognome: "+utente.getCognome());
+	   ageLabel=new JLabel("Età: "+String.valueOf(utente.getEtà()));
+	   userLabel=new JLabel("Username: "+utente.getUser());
+	   mailLabel=new JLabel("Mail: "+utente.getMail());
+	   addressLabel=new JLabel("Indirizzo: "+utente.getIndirizzo());
 	   
 	   sendButton=new JButton("Invia");
 	   addCreditButton=new JButton("Carica Credito");
@@ -111,6 +127,7 @@ public class UtenteGui extends JFrame{
 	   sortRarButton=new JButton("Ordine Rarità");
 	   scambioButton=new JButton("Inizia Scambio");
 	   compravenditaButton=new JButton("Inizia Compravendita");
+	   userList=new JTextArea();
 	   
 	   searchUserText=new JTextField();
 	   searchFigText=new JTextField();
@@ -125,20 +142,20 @@ public class UtenteGui extends JFrame{
            
             //Elementi di prova
 	   
-	   provaString=new String[]{"pippo","pluto","topolino","paperino"};
 	   
-	   userList=new JList(provaString);
+
    }
    
    private void formatComponents(){
 	   
-	   //Layout Setup
+	   //Property and Layout Setup
 	   
 	   this.setSize(800,600);
 	   this.setVisible(true);
        this.setResizable(false);
        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
        this.userList.setSize(400,300);
+       this.userList.setEditable(false);
        
        updateCreditValue();
        updateCollezione();
@@ -164,13 +181,15 @@ public class UtenteGui extends JFrame{
 	   portalPanel.setLayout(new GridLayout(1,3));
 	   portalPanel.setName("Portale");
 	   infoAndOptionPanel.setLayout(new BorderLayout());
-	   manageCollectionPanel.setLayout(new GridLayout(5,2));
+	   infoPanel.setName("Info");
+	   infoPanel.setLayout(new GridLayout(7,1));
 	   
 	   //Internal Panels
 	   portalOptionPanel.setLayout(new GridLayout(5,1));
 	   infoTextPanel.setLayout(new GridLayout(4,1));
+	   manageCollectionPanel.setLayout(new GridLayout(5,2));
+	   userListPanel.setLayout(new BorderLayout());
 	   
-             
        //Aggiunge i componenti
        
        this.add(tabPane);
@@ -203,11 +222,12 @@ public class UtenteGui extends JFrame{
        portalOptionPanel.add(searchFigText);
        portalOptionPanel.add(sendButton);
      //  portalOptionPanel.add(portalOptionSeparator);
-       userListPanel.add(userList);
+       userListPanel.add(userListLabel,BorderLayout.NORTH);
+       userListPanel.add(userList,BorderLayout.CENTER);
        
        //Tab View Panels
       infoAndOptionPanel.add(portalOptionPanel,BorderLayout.NORTH);
-       infoAndOptionPanel.add(infoTextPanel,BorderLayout.CENTER);
+      infoAndOptionPanel.add(infoTextPanel,BorderLayout.CENTER);
        
        
        
@@ -217,11 +237,20 @@ public class UtenteGui extends JFrame{
        
        portalPanel.add(userListPanel);
        portalPanel.add(infoAndOptionPanel);
+       
+       infoPanel.add(nameLabel);
+       infoPanel.add(surnameLabel);
+       infoPanel.add(ageLabel);
+       infoPanel.add(userLabel);
+       infoPanel.add(mailLabel);
+       infoPanel.add(addressLabel);
+       infoPanel.add(feedbackLabel);
 
        
        //Main Tab Panels
        tabPane.add(collectionPanel);
        tabPane.add(portalPanel);
+       tabPane.add(infoPanel);
        
        
       }
@@ -301,6 +330,24 @@ public class UtenteGui extends JFrame{
       scrollFig.updateUI();
 	   
    }
+   
+   //Aggiorna la lista utenti dell'utente
+   public void updateUserList(Portale p){
+	   
+	   ArrayList<String> u=p.getUserUtentiOnline();
+	   String s="";
+	   
+	     this.userList.setText("");
+	     
+	     for(int i=0;i<u.size();i++){
+	    	 
+	    	 
+	    	 s+=u.get(i);
+	     }
+	     
+	     this.userList.setText(s);
+	     
+	       }
    
    
 }
