@@ -24,10 +24,11 @@ public class ScambioGui extends JFrame{
 
 	private Utente utente1,utente2;
 	
-	private JPanel figPanel1,figPanel2,offertaPanel1,offertaPanel2;
-	private JPanel scambioPanel;
-	private JPanel utente1Panel,utente2Panel;
+	private JPanel figPanel1,figPanel2,offertaPanel1,offertaPanel2,commandPanel1,commandPanel2;     //Sotto-pannelli utente 
+	private JPanel scambioPanel;                                       //Pannello principale
+	private JPanel utente1Panel,utente2Panel,userPanel;                          //Pannelli utente principali
 	private JPanel infoPanel;
+	private JPanel chatPanel;
 	
 	private JTextField userText1,userText2;
 	private JTextArea chat;
@@ -39,6 +40,7 @@ public class ScambioGui extends JFrame{
     private  JButton   addFigButton1,addFigButton2;
     private  JButton   remFigButton1,remFigButton2;
     private  JButton   confermaButton1,confermaButton2;
+    private  JButton   messageButton1,messageButton2;
     
     
     
@@ -51,7 +53,6 @@ public class ScambioGui extends JFrame{
     	   utente2=u2;    	   
     	   this.initComponents();
            this.formatComponents();
-           this.initCollezione();
            
            //Disabilita le gui utente
            
@@ -75,9 +76,14 @@ public class ScambioGui extends JFrame{
 	   offertaPanel1=new JPanel();
 	   offertaPanel2=new JPanel();
 	   infoPanel=new JPanel();
+	   userPanel=new JPanel();
+	   commandPanel1=new JPanel();
+	   commandPanel2=new JPanel();
+	   chatPanel=new JPanel();
 
        userText1=new JTextField("Messagi chat utente 1");  
        userText2=new JTextField("Messaggi chat utente 2");
+       chat=new JTextArea();
 	   
 	   scrollFig1=new JScrollPane(figPanel1,scrollFig1.VERTICAL_SCROLLBAR_AS_NEEDED,scrollFig1.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	   scrollFig2=new JScrollPane(figPanel2,scrollFig2.VERTICAL_SCROLLBAR_AS_NEEDED,scrollFig2.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -92,6 +98,8 @@ public class ScambioGui extends JFrame{
 	   remFigButton2=new JButton("Rimuovi Figurina dall'offerta di "+utente2.getUser());
 	   confermaButton1=new JButton("Conferma scelte di "+utente1.getUser());
 	   confermaButton2=new JButton("Conferma scelte di "+utente2.getUser());
+	   messageButton1=new JButton("Invia messaggio");
+	   messageButton2=new JButton("Invia messaggio");
 	   
    }
    
@@ -104,13 +112,71 @@ public class ScambioGui extends JFrame{
        this.setResizable(false);
        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
        
-       scambioPanel.setLayout(new GridLayout(3,1));
+       this.chat.setEditable(false);
        
-    
+       scambioPanel.setLayout(new GridLayout(3,1));
+       utente1Panel.setLayout(new BorderLayout());
+       utente2Panel.setLayout(new BorderLayout());
+       commandPanel1.setLayout(new GridLayout(5,1));
+       commandPanel2.setLayout(new GridLayout(5,1));
+       infoPanel.setLayout(new BorderLayout());
+       userPanel.setLayout(new GridLayout(2,2));
+        
+       
+       //Decidere il metodo di inserimento dell'offerta
+       
+       initUserInfo();
+       initCollezione();
+       
+       
+       //Aggiunge i componenti
+             
+       
+       //Pannelli utente e sotto-pannelli
+                  
+       utente1Panel.add(figPanel1,BorderLayout.WEST);
+       utente1Panel.add(offertaPanel1,BorderLayout.EAST);
+       utente2Panel.add(figPanel2,BorderLayout.WEST);
+       utente2Panel.add(offertaPanel2,BorderLayout.EAST);
+       commandPanel1.add(addFigButton1);
+       commandPanel1.add(remFigButton1);
+       commandPanel1.add(userText1);
+       commandPanel1.add(messageButton1);
+       commandPanel1.add(confermaButton1);
+       commandPanel2.add(addFigButton2);
+       commandPanel2.add(remFigButton2); 
+       commandPanel2.add(userText2);
+       commandPanel2.add(messageButton2);
+       commandPanel2.add(confermaButton2);
+       chatPanel.add(chat,BorderLayout.CENTER);
+       
+       //Pannneli della frame
+       
+       userPanel.add(utente1Panel);
+       userPanel.add(utente2Panel);
+       userPanel.add(commandPanel1);
+       userPanel.add(commandPanel2);
+       
+       scambioPanel.add(infoPanel);
+       scambioPanel.add(userPanel);
+       scambioPanel.add(chatPanel);
+       
+       
+       this.add(scambioPanel);
        
       }
    
-   //inizializza le collezione degli utenti
+   
+   //Inizializza le informazioni degli utenti
+   
+   public void initUserInfo(){
+	   
+	   infoPanel.add(utente1.getUserInfoPanel(),BorderLayout.WEST);
+	   infoPanel.add(utente2.getUserInfoPanel(),BorderLayout.EAST);
+	   
+   }
+   
+   //inizializza le collezioni degli utenti
    
    private void initCollezione(){
 	   
@@ -120,14 +186,14 @@ public class ScambioGui extends JFrame{
 	   
 	   for(i=0;i<utente1.getCollezione().size();i++){
 		   
-		   btmp=new JButton(utente1.getCollezione().get(i).getNome());
+		   btmp=new JButton(utente1.getCollezione().get(i).getNome()+" "+utente1.getCollezione().get(i).getRarità());
 		   figPanel1.add(btmp);
 		   
 	   }
 	   
 	   for(i=0;i<utente1.getCollezione().size();i++){
 		   
-		   btmp=new JButton(utente2.getCollezione().get(i).getNome());
+		   btmp=new JButton(utente2.getCollezione().get(i).getNome()+" "+utente2.getCollezione().get(i).getRarità());
 		   figPanel2.add(btmp);
 	   }
    }

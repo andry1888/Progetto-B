@@ -1,6 +1,8 @@
 package utenti;
 
 import java.util.*;
+import javax.swing.*;
+
 import collezionabili.*;
 import gui.*;
 
@@ -444,6 +446,22 @@ public void enableUtente(){
 	
 	gui.setEnabled(true);
 	
+}
+
+
+//Ritorna il pannello informazioni dell'utente, uso per lo scambio
+
+public JPanel getUserInfoPanel(){
+	
+	return gui.getuserInfoPanel();
+	
+}
+
+//Aggiorna la vista della collezione
+
+public void updateCollezioneView(){
+	
+	this.gui.updateCollezione();
 }
 
 

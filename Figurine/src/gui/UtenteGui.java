@@ -63,7 +63,7 @@ public class UtenteGui extends JFrame{
     
     private JTextField figurinaName;
     private JTextField textCredito;    
-    private JLabel vuota;
+    private JLabel figurineCountLabel;
     private JLabel feedbackLabel;
     private JLabel nameLabel;
     private JLabel surnameLabel;
@@ -134,13 +134,12 @@ public class UtenteGui extends JFrame{
 	   portalOptionSeparator=new JSeparator();
 	   infoTextSeparator=new JSeparator();
 	   
-           figurinaName=new JTextField("Nome Figurina");
-           textCredito=new JTextField("Credito");
-           vuota=new JLabel("    ");
-           feedbackLabel=new JLabel("    ");
-           creditLabel=new JLabel("  ");
+       figurinaName=new JTextField("Nome Figurina");
+       textCredito=new JTextField("Credito");
+       figurineCountLabel=new JLabel("Figurine attuali: "+String.valueOf(utente.countFigurina()));
+       feedbackLabel=new JLabel("    ");
+       creditLabel=new JLabel("  ");
            
-            //Elementi di prova
 	   
 	   
 
@@ -202,7 +201,7 @@ public class UtenteGui extends JFrame{
        manageCollectionPanel.add(addFigButton);
        manageCollectionPanel.add(sortRarButton);
        manageCollectionPanel.add(remFigButton);
-       manageCollectionPanel.add(vuota);
+       manageCollectionPanel.add(figurineCountLabel);
        manageCollectionPanel.add(textCredito);
        manageCollectionPanel.add(feedbackLabel);
        manageCollectionPanel.add(addCreditButton);       
@@ -263,6 +262,7 @@ public class UtenteGui extends JFrame{
 	   this.addFigButton.addActionListener(controller);
 	   this.remFigButton.addActionListener(controller);
 	   this.sortAlfaButton.addActionListener(controller);
+	   this.sortRarButton.addActionListener(controller);
 	   
 	   
    }
@@ -327,6 +327,8 @@ public class UtenteGui extends JFrame{
 		   figPanel.add(btmp);
 		   
 	   }
+	   
+	  this.figurineCountLabel.setText("Figurine attuali: "+String.valueOf(utente.countFigurina()));
       scrollFig.updateUI();
 	   
    }
@@ -348,6 +350,25 @@ public class UtenteGui extends JFrame{
 	     this.userList.setText(s);
 	     
 	       }
+   
+   //Aggiorna solamente il numero figurine
+   
+   public void updateFigurineCount(){
+	   
+	   String tmp;
+	   
+	   tmp=String.valueOf(utente.countFigurina());
+	   this.figurineCountLabel.setText("Figurine attuali: "+tmp);
+   }
+   
+   //Ritorna il pannello informazioni dell'utente
+   
+   public JPanel getuserInfoPanel(){
+	   
+	   return this.infoPanel;
+	   
+	   
+   }
    
 }
 
