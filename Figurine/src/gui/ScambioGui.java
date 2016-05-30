@@ -10,9 +10,8 @@ import manager.*;
 
 
 import java.awt.*;
-import static java.awt.Component.CENTER_ALIGNMENT;
 import javax.swing.*;
-import static javax.swing.JFrame.EXIT_ON_CLOSE;
+
 
 
 
@@ -20,7 +19,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 public class ScambioGui extends JFrame{
 	
 	//Componenti dell'interfaccia
-	
+
 
 	private Utente utente1,utente2;
 	
@@ -29,15 +28,17 @@ public class ScambioGui extends JFrame{
 	private JPanel utente1Panel,utente2Panel,userPanel;                          //Pannelli utente principali
 	private JPanel infoPanel;
 	private JPanel chatPanel;
+
 	
 	private JTextField userText1,userText2;
 	private JTextArea chat;
 
+
 	private JScrollPane scrollFig1,scrollFig2;
 	private JScrollPane scrollOfferta1,scrollOfferta2;
 
-	
-    private  JButton   addFigButton1,addFigButton2;
+
+   private  JButton   addFigButton1,addFigButton2;
     private  JButton   remFigButton1,remFigButton2;
     private  JButton   confermaButton1,confermaButton2;
     private  JButton   messageButton1,messageButton2;
@@ -85,11 +86,11 @@ public class ScambioGui extends JFrame{
        userText2=new JTextField("Messaggi chat utente 2");
        chat=new JTextArea();
 	   
+
 	   scrollFig1=new JScrollPane(figPanel1,scrollFig1.VERTICAL_SCROLLBAR_AS_NEEDED,scrollFig1.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	   scrollFig2=new JScrollPane(figPanel2,scrollFig2.VERTICAL_SCROLLBAR_AS_NEEDED,scrollFig2.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	   scrollOfferta1=new JScrollPane(offertaPanel2,scrollOfferta2.VERTICAL_SCROLLBAR_AS_NEEDED,scrollOfferta2.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	   scrollOfferta1=new JScrollPane(offertaPanel2,scrollOfferta2.VERTICAL_SCROLLBAR_AS_NEEDED,scrollOfferta2.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
 
 
 	   addFigButton1=new JButton("Aggiungi Figurina all'offerta di "+utente1.getUser());
@@ -111,6 +112,7 @@ public class ScambioGui extends JFrame{
 	   this.setVisible(true);
        this.setResizable(false);
        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
        
        this.chat.setEditable(false);
        
@@ -122,15 +124,16 @@ public class ScambioGui extends JFrame{
        infoPanel.setLayout(new BorderLayout());
        userPanel.setLayout(new GridLayout(2,2));
         
-       
        //Decidere il metodo di inserimento dell'offerta
        
        initUserInfo();
        initCollezione();
+  
        
        
+
        //Aggiunge i componenti
-             
+
        
        //Pannelli utente e sotto-pannelli
                   
