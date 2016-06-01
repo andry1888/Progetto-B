@@ -19,6 +19,7 @@ import javax.swing.*;
 public class ScambioGui extends JFrame{
 	
 	//Componenti dell'interfaccia
+	private ScambioController controller;
 
 
 	private Utente utente1,utente2;
@@ -54,6 +55,8 @@ public class ScambioGui extends JFrame{
     	   utente2=u2;    	   
     	   this.initComponents();
            this.formatComponents();
+           this.actionComponents();
+
            
            //Disabilita le gui utente
            
@@ -67,7 +70,8 @@ public class ScambioGui extends JFrame{
 	   
 	
 	   //Crea gli oggetti
-	  	   
+	   controller=new ScambioController(this,utente1,utente2);
+   
 
 	   scambioPanel=new JPanel();	
 	   utente1Panel=new JPanel();
@@ -82,8 +86,8 @@ public class ScambioGui extends JFrame{
 	   commandPanel2=new JPanel();
 	   chatPanel=new JPanel();
 
-       userText1=new JTextField("Messagi chat utente 1");  
-       userText2=new JTextField("Messaggi chat utente 2");
+       userText1=new JTextField("Invia un messaggio a "+utente2.getUser());  
+       userText2=new JTextField("Invia un messaggio a "+utente1.getUser());
        chat=new JTextArea();
 	   
 
@@ -171,7 +175,19 @@ public class ScambioGui extends JFrame{
    
    
    //Inizializza le informazioni degli utenti
-   
+   private void actionComponents(){
+	   
+	   
+	   this.addFigButton1.addActionListener(controller);
+	   this.addFigButton2.addActionListener(controller);
+	   this.remFigButton1.addActionListener(controller);
+	   this.remFigButton2.addActionListener(controller);
+	   this.confermaButton1.addActionListener(controller);
+	   this.confermaButton2.addActionListener(controller);
+	   this.messageButton1.addActionListener(controller);
+	   this.messageButton2.addActionListener(controller);	   
+	   
+   }
    public void initUserInfo(){
 	   
 	   infoPanel.add(utente1.getUserInfoPanel(),BorderLayout.WEST);
@@ -201,7 +217,39 @@ public class ScambioGui extends JFrame{
 	   }
    }
    
+   public JButton getMessage(){
+	   
+	   return this.messageButton1;
+	   
+	   
+   } 
    
+   public String getMessageUt1(){
+	   
+	   return this.userText1.getText();
+	   
+	   
+   } 
+   public String getMessageUt2(){
+	   
+	   return this.userText2.getText();
+	   
+	   
+   } 
+   
+   public String getChat(){
+	   
+	   return this.chat.getText();
+	   
+	   
+   }
+   
+   public void setChat(String n){
+	   
+	   chat.setText(n);;
+	   
+	   
+   }
    
    
 }
