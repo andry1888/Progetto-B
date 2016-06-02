@@ -11,13 +11,13 @@ public class FigurineController implements ActionListener {
 	
 	private Utente utente;  	   
 	private String[] nomef; 
-	private int i;
+	private int i=0;
 	
 	public FigurineController(Utente u){
 		
 			utente=u;	
 			nomef=new String[utente.getCollezione().size()];
-			i=0;
+	
 		}
 	
 	
@@ -29,7 +29,6 @@ public class FigurineController implements ActionListener {
 			i++;
 		}
 		for(int j=0;j<i;j++) System.out.println(nomef[j]);
-		coloraFig(e.getSource());
 		
 		}
 	
@@ -41,11 +40,4 @@ public class FigurineController implements ActionListener {
 		}
 	
 	
-	//coloro nome figurina di verde
-	public void coloraFig(Object fig){
-		
-		JButton f=(JButton)fig;
-		f.setBackground(Color.GREEN);
-		
-	}
 }
