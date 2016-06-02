@@ -19,9 +19,7 @@ import javax.swing.*;
 public class ScambioGui extends JFrame{
 	
 	//Componenti dell'interfaccia
-	private ScambioController controller;
-
-
+	
 	private Utente utente1,utente2;
 	
 	private JPanel figPanel1,figPanel2,offertaPanel1,offertaPanel2,commandPanel1,commandPanel2;     //Sotto-pannelli utente 
@@ -44,7 +42,8 @@ public class ScambioGui extends JFrame{
     private  JButton   confermaButton1,confermaButton2;
     private  JButton   messageButton1,messageButton2;
     
-    
+    private FigurineController controller1;
+    private FigurineController controller2;
     
     
     public ScambioGui(Utente u1,Utente u2) {
@@ -55,8 +54,6 @@ public class ScambioGui extends JFrame{
     	   utente2=u2;    	   
     	   this.initComponents();
            this.formatComponents();
-           this.actionComponents();
-
            
            //Disabilita le gui utente
            
@@ -70,8 +67,7 @@ public class ScambioGui extends JFrame{
 	   
 	
 	   //Crea gli oggetti
-	   controller=new ScambioController(this,utente1,utente2);
-   
+	  	   
 
 	   scambioPanel=new JPanel();	
 	   utente1Panel=new JPanel();
@@ -86,8 +82,8 @@ public class ScambioGui extends JFrame{
 	   commandPanel2=new JPanel();
 	   chatPanel=new JPanel();
 
-       userText1=new JTextField("Invia un messaggio a "+utente2.getUser());  
-       userText2=new JTextField("Invia un messaggio a "+utente1.getUser());
+       userText1=new JTextField("Messagi chat utente 1");  
+       userText2=new JTextField("Messaggi chat utente 2");
        chat=new JTextArea();
 	   
 
@@ -106,6 +102,8 @@ public class ScambioGui extends JFrame{
 	   messageButton1=new JButton("Invia messaggio");
 	   messageButton2=new JButton("Invia messaggio");
 	   
+	   controller1=new FigurineController(utente1);
+	   controller2=new FigurineController(utente2);
    }
    
    private void formatComponents(){
@@ -175,19 +173,7 @@ public class ScambioGui extends JFrame{
    
    
    //Inizializza le informazioni degli utenti
-   private void actionComponents(){
-	   
-	   
-	   this.addFigButton1.addActionListener(controller);
-	   this.addFigButton2.addActionListener(controller);
-	   this.remFigButton1.addActionListener(controller);
-	   this.remFigButton2.addActionListener(controller);
-	   this.confermaButton1.addActionListener(controller);
-	   this.confermaButton2.addActionListener(controller);
-	   this.messageButton1.addActionListener(controller);
-	   this.messageButton2.addActionListener(controller);	   
-	   
-   }
+   
    public void initUserInfo(){
 	   
 	   infoPanel.add(utente1.getUserInfoPanel(),BorderLayout.WEST);
@@ -207,49 +193,19 @@ public class ScambioGui extends JFrame{
 		   
 		   btmp=new JButton(utente1.getCollezione().get(i).getNome()+" "+utente1.getCollezione().get(i).getRarità());
 		   figPanel1.add(btmp);
+		   btmp.addActionListener(controller1);
 		   
 	   }
 	   
-	   for(i=0;i<utente1.getCollezione().size();i++){
+	   for(i=0;i<utente2.getCollezione().size();i++){
 		   
 		   btmp=new JButton(utente2.getCollezione().get(i).getNome()+" "+utente2.getCollezione().get(i).getRarità());
 		   figPanel2.add(btmp);
+		   btmp.addActionListener(controller2);
 	   }
    }
    
-   public JButton getMessage(){
-	   
-	   return this.messageButton1;
-	   
-	   
-   } 
    
-   public String getMessageUt1(){
-	   
-	   return this.userText1.getText();
-	   
-	   
-   } 
-   public String getMessageUt2(){
-	   
-	   return this.userText2.getText();
-	   
-	   
-   } 
-   
-   public String getChat(){
-	   
-	   return this.chat.getText();
-	   
-	   
-   }
-   
-   public void setChat(String n){
-	   
-	   chat.setText(n);;
-	   
-	   
-   }
    
    
 }
