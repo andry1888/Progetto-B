@@ -8,7 +8,7 @@ import java.util.*;
 public class Collezionista extends Utente {
 	
 	private ArrayList<Utente> PropScambio;
-	public Portale port;
+
 	
 	//Overload Costruttore
 	

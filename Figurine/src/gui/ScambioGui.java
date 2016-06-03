@@ -205,6 +205,7 @@ public class ScambioGui extends JFrame{
    private void actionComponents(){
 	   
 	   this.messageButton1.addActionListener(controller);
+	   this.messageButton2.addActionListener(controller);
 	   
 	   
    }
