@@ -19,8 +19,7 @@ import javax.swing.*;
 public class ScambioGui extends JFrame{
 	
 	//Componenti dell'interfaccia
-
-
+	
 	private Utente utente1,utente2;
 	
 	private JPanel figPanel1,figPanel2,offertaPanel1,offertaPanel2,commandPanel1,commandPanel2;     //Sotto-pannelli utente 
@@ -43,7 +42,8 @@ public class ScambioGui extends JFrame{
     private  JButton   confermaButton1,confermaButton2;
     private  JButton   messageButton1,messageButton2;
     
-    
+    private FigurineController controller1;
+    private FigurineController controller2;
     
     
     public ScambioGui(Utente u1,Utente u2) {
@@ -99,9 +99,11 @@ public class ScambioGui extends JFrame{
 	   remFigButton2=new JButton("Rimuovi Figurina dall'offerta di "+utente2.getUser());
 	   confermaButton1=new JButton("Conferma scelte di "+utente1.getUser());
 	   confermaButton2=new JButton("Conferma scelte di "+utente2.getUser());
-	   messageButton1=new JButton("Invia messaggio");
-	   messageButton2=new JButton("Invia messaggio");
+	   messageButton1=new JButton(utente1.getUser()+" invia messaggio");
+	   messageButton2=new JButton(utente2.getUser()+" invia messaggio");
 	   
+	   controller1=new FigurineController(utente1);
+	   controller2=new FigurineController(utente2);
    }
    
    private void formatComponents(){
@@ -123,6 +125,8 @@ public class ScambioGui extends JFrame{
        commandPanel2.setLayout(new GridLayout(5,1));
        infoPanel.setLayout(new BorderLayout());
        userPanel.setLayout(new GridLayout(2,2));
+       
+       
         
        //Decidere il metodo di inserimento dell'offerta
        
@@ -139,8 +143,8 @@ public class ScambioGui extends JFrame{
                   
        utente1Panel.add(figPanel1,BorderLayout.WEST);
        utente1Panel.add(offertaPanel1,BorderLayout.EAST);
-       utente2Panel.add(figPanel2,BorderLayout.WEST);
-       utente2Panel.add(offertaPanel2,BorderLayout.EAST);
+       utente2Panel.add(figPanel2,BorderLayout.EAST);
+       utente2Panel.add(offertaPanel2,BorderLayout.WEST);
        commandPanel1.add(addFigButton1);
        commandPanel1.add(remFigButton1);
        commandPanel1.add(userText1);
@@ -191,15 +195,66 @@ public class ScambioGui extends JFrame{
 		   
 		   btmp=new JButton(utente1.getCollezione().get(i).getNome()+" "+utente1.getCollezione().get(i).getRarità());
 		   figPanel1.add(btmp);
+		   btmp.addActionListener(controller1);
 		   
 	   }
 	   
-	   for(i=0;i<utente1.getCollezione().size();i++){
+	   for(i=0;i<utente2.getCollezione().size();i++){
 		   
 		   btmp=new JButton(utente2.getCollezione().get(i).getNome()+" "+utente2.getCollezione().get(i).getRarità());
 		   figPanel2.add(btmp);
+		   btmp.addActionListener(controller2);
 	   }
    }
+   
+   
+   
+   
+   
+   
+   //Metodi interattivi
+   
+   public JTextArea getChat(){
+	   
+	   
+	   return this.chat;
+   }
+   
+   public String getChatText(){
+	   
+	   
+	   return this.chat.getText();
+   }
+   
+   public void clearChat(){
+	   
+	   
+	   this.chat.setText("");
+   }
+   
+   public void clearUser1Message(){
+	   
+	   this.userText1.setText("");
+   }
+   
+   public void clearUser2Message(){
+	   
+	   this.userText2.setText("");
+   }
+   
+   public String getUser1Message(){
+	   
+	   
+	   return this.userText1.getText();
+   }
+   
+   public String getUser2Message(){
+	   
+	   return this.userText2.getText();
+	   
+   }
+   
+   
    
    
    
