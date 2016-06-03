@@ -24,13 +24,13 @@ public class FigurineController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		aggiungiFig(e.getActionCommand(),e.getSource().toString());
+		aggiungiFig(e.getActionCommand());
 		}
 	
 	
 	//aggiungo il nome della figurina all'array nomef
-	public void aggiungiFig(String nome,String val){
-		while(i<utente.getCollezione().size() && !val.equals(nomef[i])){
+	public void aggiungiFig(String nome){
+		while(i<utente.getCollezione().size()){
 			nomef[i]=nome;
 			i++;
 		}
