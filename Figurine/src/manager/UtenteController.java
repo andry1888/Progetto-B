@@ -25,8 +25,9 @@ public class UtenteController implements ActionListener {
 	
 	//Ottiene i parametri di utente e interfaccia
 	
-	public UtenteController(UtenteGui g,Utente u){
+	public UtenteController(Portale p,UtenteGui g,Utente u){
 		
+		port=p;
 		utente=u;
 		gui=g;	
 		
@@ -41,6 +42,8 @@ public class UtenteController implements ActionListener {
 		
        String tmp;
        Figurina ftmp;
+       String infotmp;
+       String[] split;
        boolean f;
 	   String s=e.getActionCommand();
 	   System.out.println(s);
@@ -83,8 +86,12 @@ public class UtenteController implements ActionListener {
 		
 			
 			tmp=gui.getFigurinaValue();
-			//Modificare per avere consistenza sul registro figurine
-			ftmp=new Figurina(1,tmp,10);
+			
+			//Inserire la verifica di esistenza
+			
+			infotmp=port.verifyFigurinaByName(tmp);
+			split=infotmp.split(" ");
+			ftmp=new Figurina(Integer.parseInt(split[0]),split[1],Integer.parseInt(split[2]));		
 			utente.addFigurina(ftmp);
 			gui.updateCollezione();
 			gui.clearFigurinaValue();

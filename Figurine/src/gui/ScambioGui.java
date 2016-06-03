@@ -24,10 +24,11 @@ public class ScambioGui extends JFrame{
 	private Utente utente1,utente2;
 	
 	private JPanel figPanel1,figPanel2,offertaPanel1,offertaPanel2,commandPanel1,commandPanel2;     //Sotto-pannelli utente 
-	private JPanel scambioPanel;                                       //Pannello principale
+	private JPanel scambioPanel;                 //Pannello principale
 	private JPanel utente1Panel,utente2Panel,userPanel;                          //Pannelli utente principali
 	private JPanel infoPanel;
 	private JPanel chatPanel;
+	private JPanel infoPanel1,infoPanel2;
 
 	
 	private JTextField userText1,userText2;
@@ -81,6 +82,8 @@ public class ScambioGui extends JFrame{
 	   commandPanel1=new JPanel();
 	   commandPanel2=new JPanel();
 	   chatPanel=new JPanel();
+	   infoPanel1=new JPanel();
+	   infoPanel2=new JPanel();
 
        userText1=new JTextField("Messagi chat utente 1");  
        userText2=new JTextField("Messaggi chat utente 2");
@@ -174,8 +177,11 @@ public class ScambioGui extends JFrame{
    
    public void initUserInfo(){
 	   
-	   infoPanel.add(utente1.getUserInfoPanel(),BorderLayout.WEST);
-	   infoPanel.add(utente2.getUserInfoPanel(),BorderLayout.EAST);
+	   infoPanel1=utente1.getUserInfoPanel();
+	   infoPanel2=utente2.getUserInfoPanel();
+	   
+	   infoPanel.add(infoPanel1,BorderLayout.WEST);
+	   infoPanel.add(infoPanel2,BorderLayout.EAST);
 	   
    }
    

@@ -259,6 +259,28 @@ public class Portale {
 	//Gestire il primo accesso dell'utente con registrazione
 	
 	
+	//Ritorna i campi di una figurina inserita nell'elenco dato il nome
+	
+	public String verifyFigurinaByName(String name){
+		
+		
+		int i;
+		
+		for(i=0;i<this.Figurine_reg.size();i++){
+			
+			if(Figurine_reg.get(i).getNome().equals(name)){
+				return (String.valueOf(Figurine_reg.get(i).getId())+" "+Figurine_reg.get(i).getNome()+" "+String.valueOf(Figurine_reg.get(i).getRarità()));
+				
+			}
+			
+			
+		}
+		
+		return "null";
+		
+		
+		
+	}
 	
 	
 	
