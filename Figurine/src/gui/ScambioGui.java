@@ -8,8 +8,9 @@ package gui;
 import utenti.*;
 import manager.*;
 
-
 import java.awt.*;
+import java.util.*;
+
 import javax.swing.*;
 
 
@@ -20,7 +21,9 @@ public class ScambioGui extends JFrame{
 	
 	//Componenti dell'interfaccia
 	
-	private Utente utente1,utente2;
+	private Utente utente1,utente2;                        //Utenti di riferimento
+	private ScambioController controller;
+	
 	
 	private JPanel figPanel1,figPanel2,offertaPanel1,offertaPanel2,commandPanel1,commandPanel2;     //Sotto-pannelli utente 
 	private JPanel scambioPanel;                                       //Pannello principale
@@ -37,14 +40,14 @@ public class ScambioGui extends JFrame{
 	private JScrollPane scrollOfferta1,scrollOfferta2;
 
 
-   private  JButton   addFigButton1,addFigButton2;
+    private  JButton   addFigButton1,addFigButton2;
     private  JButton   remFigButton1,remFigButton2;
     private  JButton   confermaButton1,confermaButton2;
     private  JButton   messageButton1,messageButton2;
     
     private FigurineController controller1;
     private FigurineController controller2;
-    
+    public  HashMap<JComponent,Integer> componentMap;                       //Hashmap dei componenti
     
     public ScambioGui(Utente u1,Utente u2) {
     	
@@ -54,6 +57,8 @@ public class ScambioGui extends JFrame{
     	   utente2=u2;    	   
     	   this.initComponents();
            this.formatComponents();
+           this.mapComponents();
+           this.actionComponents();
            
            //Disabilita le gui utente
            
@@ -67,7 +72,8 @@ public class ScambioGui extends JFrame{
 	   
 	
 	   //Crea gli oggetti
-	  	   
+	  	  
+	   controller=new ScambioController(this,utente1,utente2);
 
 	   scambioPanel=new JPanel();	
 	   utente1Panel=new JPanel();
@@ -104,6 +110,7 @@ public class ScambioGui extends JFrame{
 	   
 	   controller1=new FigurineController(utente1);
 	   controller2=new FigurineController(utente2);
+	   componentMap=new HashMap<JComponent,Integer>();
    }
    
    private void formatComponents(){
@@ -172,6 +179,32 @@ public class ScambioGui extends JFrame{
        this.add(scambioPanel);
        
       }
+   
+   //Mappa i componenti su una hashmap
+   
+   private void mapComponents(){
+	   
+	   componentMap.put(this.addFigButton1,1);
+	   componentMap.put(this.remFigButton1,2);
+	   componentMap.put(this.messageButton1,3);
+	   componentMap.put(this.confermaButton1,4);
+	   componentMap.put(this.addFigButton2,5);
+	   componentMap.put(this.remFigButton2,6);
+	   componentMap.put(this.messageButton2,7);
+	   componentMap.put(this.confermaButton2,8);
+	   
+	   
+	   
+   }
+   
+   //Aggiunge actionListener ai componenti
+   
+   private void actionComponents(){
+	   
+	   this.messageButton1.addActionListener(controller);
+	   
+	   
+   }
    
    
    //Inizializza le informazioni degli utenti

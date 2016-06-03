@@ -91,7 +91,7 @@ public class UtenteGui extends JFrame{
 	
 	   //Crea gli oggetti
 	   
-	   controller=new UtenteController(this,utente);
+	   controller=new UtenteController(utente.port,this,utente);
 	   
 	   collectionPanel=new JPanel();
 	   portalPanel=new JPanel();
@@ -323,7 +323,7 @@ public class UtenteGui extends JFrame{
 	   
 	   for (int i=0;i<utente.getCollezione().size();i++){
 		   
-		   btmp=new JButton(utente.getCollezione().get(i).getNome()+" "+String.valueOf(utente.getCollezione().get(i).getRarità()));
+		   btmp=new JButton(utente.getCollezione().get(i).toString());
 		   figPanel.add(btmp);
 		   
 	   }
