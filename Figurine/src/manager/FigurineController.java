@@ -12,9 +12,9 @@ public class FigurineController implements ActionListener {
 	private Utente utente;  	   
 	private String[] nomef; 
 	private int i=0;
-	
+
 	public FigurineController(Utente u){
-		
+
 			utente=u;	
 			nomef=new String[utente.getCollezione().size()];
 	
@@ -24,26 +24,17 @@ public class FigurineController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		aggiungiFig(e.getActionCommand());
-		
-		colora();
-		
-		
+		aggiungiFig(e.getActionCommand(),e.getSource().toString());
 		}
 	
 	
 	//aggiungo il nome della figurina all'array nomef
-	public void aggiungiFig(String nome){
-		while(i<utente.getCollezione().size()){
+	public void aggiungiFig(String nome,String val){
+		while(i<utente.getCollezione().size() && !val.equals(nomef[i])){
 			nomef[i]=nome;
 			i++;
 		}
 		for(int j=0;j<i;j++) System.out.println(nomef[j]);
-		}
-	
-	
-	public void colora(){
-		
-	}
+		}		
 	
 }
