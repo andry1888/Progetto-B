@@ -55,11 +55,19 @@ public class UtenteGui extends JFrame{
     private  JLabel    infoTextLabel;
     private JLabel     searchUserLabel;
     private JLabel     searchFigLabel;
-    private JLabel    userListLabel;
+    private JLabel     userListLabel;
     
     private JTextField searchUserText;
     private JTextField searchFigText;
     private JTextArea userList;
+    
+    private JButton changeNameButton;
+    private JButton changeSurnameButton;
+    private JButton changeAgeButton;
+    private JButton changeUsernameButton;
+    private JButton changeMailButton;
+    private JButton changeAddressButton;
+    
     
     
     private JTextField figurinaName;
@@ -132,6 +140,13 @@ public class UtenteGui extends JFrame{
 	   compravenditaButton=new JButton("Inizia Compravendita");
 	   userList=new JTextArea();
 	   
+	   changeNameButton=new JButton("Cambia");
+	   changeSurnameButton=new JButton("Cambia");
+	   changeAgeButton=new JButton("Cambia");
+	   changeUsernameButton=new JButton("Cambia");
+	   changeMailButton=new JButton("Cambia");
+	   changeAddressButton=new JButton("Cambia");
+	   
 	   searchUserText=new JTextField();
 	   searchFigText=new JTextField();
 	   portalOptionSeparator=new JSeparator();
@@ -184,7 +199,7 @@ public class UtenteGui extends JFrame{
 	   portalPanel.setName("Portale");
 	   infoAndOptionPanel.setLayout(new BorderLayout());
 	   infoPanel.setName("Info");
-	   infoPanel.setLayout(new GridLayout(7,1));
+	   infoPanel.setLayout(new GridLayout(7,2));
 	   
 	   //Internal Panels
 	   portalOptionPanel.setLayout(new GridLayout(5,1));
@@ -241,11 +256,17 @@ public class UtenteGui extends JFrame{
        portalPanel.add(infoAndOptionPanel);
        
        infoPanel.add(nameLabel);
+       infoPanel.add(changeNameButton);
        infoPanel.add(surnameLabel);
+       infoPanel.add(changeSurnameButton);
        infoPanel.add(ageLabel);
+       infoPanel.add(changeAgeButton);
        infoPanel.add(userLabel);
+       infoPanel.add(changeUsernameButton);
        infoPanel.add(mailLabel);
+       infoPanel.add(changeMailButton);
        infoPanel.add(addressLabel);
+       infoPanel.add(changeAddressButton);
        infoPanel.add(feedbackLabel);
 
        
@@ -266,6 +287,15 @@ public class UtenteGui extends JFrame{
 	   componentMap.put(this.sortAlfaButton,3);
 	   componentMap.put(this.sortRarButton,4);
 	   componentMap.put(this.addCreditButton,5);
+	   
+	   //Inserire un JDialog per cambiare i valori dell'utente
+	   componentMap.put(this.changeNameButton,6);
+	   componentMap.put(this.changeSurnameButton,7);
+	   componentMap.put(this.changeAgeButton,8);
+	   componentMap.put(this.changeUsernameButton,9);
+	   componentMap.put(this.changeMailButton,10);
+	   componentMap.put(this.changeAddressButton,11);
+	   
 	   
 	   
    }
@@ -385,6 +415,19 @@ public class UtenteGui extends JFrame{
 	   
 	   
    }
+   
+   //Aggiorna i dati dell'utente
+   
+   public void updateUserInfo(){
+	   
+	   this.setTitle(utente.getUser()+" User Interface");
+	   this.nameLabel.setText("Nome: "+utente.getNome());
+	   this.surnameLabel.setText("Cognome: "+utente.getCognome());
+       this.ageLabel.setText("Età: "+String.valueOf(utente.getEtà()));
+       this.userLabel.setText("Username: "+utente.getUser());
+       this.mailLabel.setText("Mail: "+utente.getMail());
+       this.addressLabel.setText("Indirizzo: "+utente.getIndirizzo());
+  }
    
 }
 
