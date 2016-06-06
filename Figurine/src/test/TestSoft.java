@@ -24,8 +24,8 @@ public class TestSoft {
 		Portale port=new Portale();
                 
                    
-		Utente u1=new Collezionista("pippo","rossi","aaa",20,100,"user1","password1","mail1");
-		Utente u2=new Collezionista("pluto","verdi","aaa",20,100,"user2","password2","mail2");
+		Utente u1=new Collezionista("pippo","rossi","aaa",20,100,port,"user1","password1","mail1");
+		Utente u2=new Collezionista("pluto","verdi","aaa",20,100,port,"user2","password2","mail2");
 		
 		
 		b1=port.logIn("user1","password1",u1);

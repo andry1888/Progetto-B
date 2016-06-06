@@ -10,7 +10,7 @@ import manager.*;
 import mercato.*;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 import javax.swing.*;
 
 
@@ -22,6 +22,7 @@ public class UtenteGui extends JFrame{
 	
 	private UtenteController controller;
 	private Utente utente;
+	public HashMap<JComponent,Integer> componentMap;
 	
 	
 	private JPanel figPanel;
@@ -81,6 +82,7 @@ public class UtenteGui extends JFrame{
     	   utente=u;
            this.initComponents();
            this.formatComponents();
+           this.mapComponents();
            this.actionComponents();
        
     }
@@ -92,6 +94,7 @@ public class UtenteGui extends JFrame{
 	   //Crea gli oggetti
 	   
 	   controller=new UtenteController(this,utente);
+	   componentMap=new HashMap<JComponent,Integer>();
 	   
 	   collectionPanel=new JPanel();
 	   portalPanel=new JPanel();
@@ -253,6 +256,19 @@ public class UtenteGui extends JFrame{
        
        
       }
+   
+   //Mappa i componenti sulla Hashmap
+   
+   private void mapComponents(){
+	   
+	   componentMap.put(this.addFigButton,1);
+	   componentMap.put(this.remFigButton,2);
+	   componentMap.put(this.sortAlfaButton,3);
+	   componentMap.put(this.sortRarButton,4);
+	   componentMap.put(this.addCreditButton,5);
+	   
+	   
+   }
    
    //Aggiunge action listener ai componenti
    private void actionComponents(){

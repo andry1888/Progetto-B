@@ -51,8 +51,8 @@ public class Portale {
         String[] split;
         
         String nome;
-        Integer rar;
-        Integer Id;
+        int rar;
+        int Id;
     
         //Data parsing
         while (bfig.ready()) {
@@ -60,7 +60,8 @@ public class Portale {
            s=bfig.readLine();
            split=s.split(" ");
            
-           Id=Integer.parseInt(split[0]);
+           System.out.println(split[0]);
+           Id=Integer.parseInt(split[0]);          
            nome=split[1];
            rar=Integer.parseInt(split[2]);
            Figurina f=new Figurina(Id,nome, rar);
