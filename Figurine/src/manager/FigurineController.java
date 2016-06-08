@@ -9,25 +9,28 @@ import utenti.*;
 
 public class FigurineController implements ActionListener {
 	
-	private Utente utente;  	   
-	private String[] nomef; 
-	private int i=0;
+	private Utente utente;  	    
 	
 	public FigurineController(Utente u){
 		
 			utente=u;	
-			nomef=new String[utente.getCollezione().size()];
 	
 		}
 	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		JButton tmp=(JButton) e.getSource();
 		
-
-		aggiungiFig(e.getActionCommand());
-		
-		toString();
+		if(!tmp.getForeground().equals(Color.green)){
+			aggiungiFig(e.getActionCommand());
+			tmp.setForeground(Color.green);
+		}
+		else{
+			rimuoviFig(e.getActionCommand());
+			tmp.setForeground(Color.black);
+		}
+			
 		
 		}
 	
@@ -35,25 +38,25 @@ public class FigurineController implements ActionListener {
 	//aggiungo il nome della figurina all'array nomef
 	public void aggiungiFig(String nome){
 
-		while(i<utente.getCollezione().size() && !presente(nome)){
-			nomef[i]=nome;
-			i++;
+			for(int i=0;i<utente.getCollezione().size();i++){
+			if(nome.equals(utente.getCollezione().get(i).toString())){
+			utente.getOffertaFigurine().add(utente.getCollezione().get(i));			
+			break;
+			}
 			}	
+			System.out.println(utente.getOffertaFigurine().toString());
 		}
 	
-	//esce vero se è presente
-	public boolean presente(String nome){
-		boolean f=false;
-		for(int j=0;j<utente.getCollezione().size();j++){
-			if(nome.equals(nomef[j]))  f=true;
+	public void rimuoviFig(String nome){
+
+		for(int i=0;i<utente.getCollezione().size();i++){
+		if(nome.equals(utente.getOffertaFigurine().get(i).toString())){
+		utente.getOffertaFigurine().remove(i);	
+		break;
 		}
-		return f;
-	}
-	
-	public String toString(){
-		
-		return nomef.toString();
-	}
+		}	
+		System.out.println(utente.getOffertaFigurine().toString());
+		}
 
 	
 }
