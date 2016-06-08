@@ -1,14 +1,20 @@
 package utenti;
 
 import java.util.*;
+import javax.swing.*;
 
 import collezionabili.*;
+import gui.*;
+import mercato.*;
 
 
 public abstract class Utente implements Figurina_Interface {
 	
 	//dati dell'utente
 	//implementare file precompilati per figurine
+	
+	private UtenteGui gui;                                          //Gui di riferimento
+	public Portale port;                                            //Riferimento al portale
 	private String Nome,Cognome,User,Password,Mail,Indirizzo;
 	private int Età;
 	public int FeedBack;
@@ -18,7 +24,9 @@ public abstract class Utente implements Figurina_Interface {
 	private ArrayList<Figurina> Figurine,OffertaFigurine; 
 	
 	//Overload su costruttore
-	public Utente(String nom,String cogn,String indir,int e,double inicre){
+	public Utente(String nom,String cogn,String indir,int e,double inicre,Portale p){
+		
+		
 		
 		
 		this.Nome=nom;
@@ -35,11 +43,15 @@ public abstract class Utente implements Figurina_Interface {
 		this.Figurine=new ArrayList<>();
 		this.OffertaFigurine=new ArrayList<>();
 		
+		gui=new UtenteGui(this);
+		port=p;
+		
 	}
 	
-public Utente(String nom,String cogn,String indir,int e,double inicre,String u,String pass,String m){
+public Utente(String nom,String cogn,String indir,int e,double inicre,Portale p,String u,String pass,String m){
 		
 		
+	
 		this.Nome=nom;
 		this.Cognome=cogn;
 		this.Indirizzo=indir;
@@ -53,6 +65,9 @@ public Utente(String nom,String cogn,String indir,int e,double inicre,String u,S
 		this.Online=false;
 		this.Figurine=new ArrayList<>();
 		this.OffertaFigurine=new ArrayList<>();
+		
+		gui=new UtenteGui(this);
+		port=p;
 		
 		}
 
@@ -420,6 +435,37 @@ public String toString(){
 	return (String)(this.getNome()+" "+this.getCognome()+" "+this.getUser()+" "+this.getEtà()+" "+this.getCredito()+" "+this.getIndirizzo()+" "+this.getMail()+" "+this.getFeedback());
 	
 	
+}
+
+//Abilita-Disabilita l'interfaccia dell'utente
+
+public void disableUtente(){
+	
+	
+	gui.setEnabled(false);
+	
+}
+
+public void enableUtente(){
+	
+	gui.setEnabled(true);
+	
+}
+
+
+//Ritorna il pannello informazioni dell'utente, uso per lo scambio
+
+public JPanel getUserInfoPanel(){
+	
+	return gui.getuserInfoPanel();
+	
+}
+
+//Aggiorna la vista della collezione
+
+public void updateCollezioneView(){
+	
+	this.gui.updateCollezione();
 }
 
 

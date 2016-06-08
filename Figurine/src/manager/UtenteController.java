@@ -20,13 +20,14 @@ public class UtenteController implements ActionListener {
 
 	private Utente utente;   //utente di riferimento
 	private UtenteGui gui;   //gui di riferimento
-	private Portale port;    //istanza del portale
+
 	
 	
 	//Ottiene i parametri di utente e interfaccia
 	
 	public UtenteController(UtenteGui g,Utente u){
 		
+
 		utente=u;
 		gui=g;	
 		
@@ -39,19 +40,26 @@ public class UtenteController implements ActionListener {
 		//Trova il nome dell'elemento chiamante
 		
 		
-       String tmp;
-       Figurina ftmp;
+       String tmp;       
+       String infotmp;
+       String[] split;
+       
        boolean f;
-	   String s=e.getActionCommand();
-	   System.out.println(s);
+       int map;
+       Figurina ftmp;
+       map=gui.componentMap.get(e.getSource());
+       
+	   
+	   System.out.println(map);
 	   
 	   
 
-		switch (s){
+		switch (map){
 		
-		//da testare
+	
+		//Aggiunge del credito
 		
-		case "Carica Credito":{
+		case 5:{
 			
 			     tmp=gui.getCreditValue();
 			     utente.addCredito(Double.parseDouble(tmp));
@@ -61,7 +69,9 @@ public class UtenteController implements ActionListener {
 			
 			}
 		
-		case "Ordine Alfabetico":{
+		//Esegue riordino alfabetico
+		
+		case 4:{
 			
 			utente.sortAlfa();
 			gui.updateCollezione();
@@ -70,7 +80,9 @@ public class UtenteController implements ActionListener {
 			
 		}
 		
-		case "Ordine Rarità":{
+		//Esegue riordino per rarità
+		
+		case 3:{
 			
 			utente.sortRar();
 			gui.updateCollezione();
@@ -78,13 +90,24 @@ public class UtenteController implements ActionListener {
 			
 		}
 		
-		case "Aggiungi Figurina": {
+		//Aggiunge una figurina
+		
+		case 1: {
 			
 		
 			
 			tmp=gui.getFigurinaValue();
-			//Modificare per avere consistenza sul registro figurine
-			ftmp=new Figurina(1,tmp,10);
+			
+
+			
+			infotmp=utente.port.verifyFigurinaByName(tmp);
+			if(infotmp.equals("null")){
+				System.out.println("Figurina non esistente, vedi registro figurine");
+				break;
+			}
+			
+			split=infotmp.split(" ");
+			ftmp=new Figurina(Integer.parseInt(split[0]),split[1],Integer.parseInt(split[2]));		
 			utente.addFigurina(ftmp);
 			gui.updateCollezione();
 			gui.clearFigurinaValue();
@@ -93,13 +116,17 @@ public class UtenteController implements ActionListener {
 			
 		}
 		
-		case "Rimuovi Figurina":{
+		//Rimuove una figurina
+		
+		case 2:{
 			
 			tmp=gui.getFigurinaValue();
 			f=utente.removeFigurinabyName(tmp);
-			if(f==true) gui.updateCollezione();
-			else System.out.println("Figurina non esistente");
+			
+			if(f==true) gui.updateCollezione();			
+			else System.out.println("Figurina non esistente nella collezione");
 			gui.clearFigurinaValue();
+			
 			break;
 			
 			

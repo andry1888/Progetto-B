@@ -51,8 +51,8 @@ public class Portale {
         String[] split;
         
         String nome;
-        Integer rar;
-        Integer Id;
+        int rar;
+        int Id;
     
         //Data parsing
         while (bfig.ready()) {
@@ -60,7 +60,8 @@ public class Portale {
            s=bfig.readLine();
            split=s.split(" ");
            
-           Id=Integer.parseInt(split[0]);
+           System.out.println(split[0]);
+           Id=Integer.parseInt(split[0]);          
            nome=split[1];
            rar=Integer.parseInt(split[2]);
            Figurina f=new Figurina(Id,nome, rar);
@@ -259,6 +260,28 @@ public class Portale {
 	//Gestire il primo accesso dell'utente con registrazione
 	
 	
+	//Ritorna i campi di una figurina inserita nell'elenco dato il nome
+	
+	public String verifyFigurinaByName(String name){
+		
+		
+		int i;
+		
+		for(i=0;i<this.Figurine_reg.size();i++){
+			
+			if(Figurine_reg.get(i).getNome().equals(name)){
+				return (String.valueOf(Figurine_reg.get(i).getId())+" "+Figurine_reg.get(i).getNome()+" "+String.valueOf(Figurine_reg.get(i).getRarità()));
+				
+			}
+			
+			
+		}
+		
+		return "null";
+		
+		
+		
+	}
 	
 	
 	

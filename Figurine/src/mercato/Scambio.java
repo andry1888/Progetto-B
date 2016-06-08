@@ -2,12 +2,14 @@ package mercato;
 
 import collezionabili.*;
 import utenti.*;
+import gui.*;
 
 import java.util.*;
 
 public class Scambio implements Carrello {
 	
 	private Utente Utente1,Utente2;
+	private ScambioGui gui;
 	public Stato s;
 	public int feed1,feed2;
 	public int Ids;                     //Identificativo dello scambio
@@ -19,6 +21,9 @@ public class Scambio implements Carrello {
 		
 		Utente1=u1;
 		Utente2=u2;
+		
+		gui=new ScambioGui(u1,u2);
+		
 		feed1=0;
 		feed2=0;
 		Ok1=false;
@@ -66,6 +71,7 @@ public class Scambio implements Carrello {
 				ftemp=Utente1.getOffertaFigurine().get(i);
 				Utente2.getCollezione().add(ftemp);
 				Utente1.getOffertaFigurine().remove(i);
+				Utente1.getCollezione().remove(i);
 				
 			}
 			
@@ -76,6 +82,7 @@ public class Scambio implements Carrello {
 				ftemp=Utente2.getOffertaFigurine().get(i);
 				Utente1.getCollezione().add(ftemp);
 				Utente2.getOffertaFigurine().remove(i);
+				Utente2.getCollezione().remove(i);
 				
 				
 			}
@@ -170,6 +177,8 @@ public class Scambio implements Carrello {
 	public void annullaScambio(){
 		
 		s=Stato.RIFIUTATO;
+		Utente1.getOffertaFigurine().removeAll(Utente1.getOffertaFigurine());
+		Utente2.getOffertaFigurine().removeAll(Utente2.getOffertaFigurine());
 		
 	}
 	
