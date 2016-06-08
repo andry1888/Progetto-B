@@ -2,12 +2,14 @@ package mercato;
 
 import collezionabili.*;
 import utenti.*;
+import gui.*;
 
 import java.util.*;
 
 public class Scambio implements Carrello {
 	
 	private Utente Utente1,Utente2;
+	private ScambioGui gui;
 	public Stato s;
 	public int feed1,feed2;
 	public int Ids;                     //Identificativo dello scambio
@@ -19,6 +21,9 @@ public class Scambio implements Carrello {
 		
 		Utente1=u1;
 		Utente2=u2;
+		
+		gui=new ScambioGui(u1,u2);
+		
 		feed1=0;
 		feed2=0;
 		Ok1=false;
