@@ -235,25 +235,26 @@ public class ScambioGui extends JFrame{
 	   
 	   int i;
 	 
+	   //aggiunge figurine all'utente1
 	   
 	   for(i=0;i<utente1.getCollezione().size();i++){
 		   
 		   visualOfferta1.add(new JButton(utente1.getCollezione().get(i).toString()));
 		   visualOfferta1.get(i).addActionListener(controllerFig1);
 		   figPanel1.add(visualOfferta1.get(i));
-		   
-
-		   
-	   }
+    }
 	   
+	   scrollFig1.updateUI();
+	   
+	   //Aggiunge figurine all'utente 2
 	   for(i=0;i<utente2.getCollezione().size();i++){
 		   
 		   visualOfferta2.add(new JButton(utente2.getCollezione().get(i).toString()));
 		   visualOfferta2.get(i).addActionListener(controllerFig2);
 		   figPanel2.add(visualOfferta2.get(i));
-		  
-		   
-	   }
+    }
+	   
+	   scrollFig2.updateUI();
    }
    
      //Metodi interattivi
