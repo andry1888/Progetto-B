@@ -7,6 +7,7 @@ package gui;
 
 import utenti.*;
 import manager.*;
+import mercato.*;
 
 import java.awt.*;
 import java.util.*;
@@ -21,16 +22,16 @@ public class ScambioGui extends JFrame{
 	
 	//Componenti dell'interfaccia
 	
-	private Utente utente1,utente2;                        //Utenti di riferimento
+	private Utente utente1,utente2;                                                        //Utenti di riferimento
 	private ScambioController controller;
 	private FigurineController controllerFig1,controllerFig2;
 
 	private ArrayList<JButton> visualOfferta1;
 	private ArrayList<JButton> visualOfferta2;
 	
-	private JPanel figPanel1,figPanel2,offertaPanel1,offertaPanel2,commandPanel1,commandPanel2;     //Sotto-pannelli utente 
-	private JPanel scambioPanel;                 //Pannello principale
-	private JPanel utente1Panel,utente2Panel,userPanel;                          //Pannelli utente principali
+	private JPanel figPanel1,figPanel2,commandPanel1,commandPanel2;     //Sotto-pannelli utente 
+	private JPanel scambioPanel;                                                                    //Pannello principale
+	private JPanel utente1Panel,utente2Panel,userPanel;                                            //Pannelli utente principali
 	private JPanel infoPanel;
 	private JPanel chatPanel;
 	private JPanel infoPanel1,infoPanel2;
@@ -41,11 +42,8 @@ public class ScambioGui extends JFrame{
 
 
 	private JScrollPane scrollFig1,scrollFig2;
-	private JScrollPane scrollOfferta1,scrollOfferta2;
 
 
-    private  JButton   addFigButton1,addFigButton2;
-    private  JButton   remFigButton1,remFigButton2;
     private  JButton   confermaButton1,confermaButton2;
     private  JButton   messageButton1,messageButton2;
     
@@ -56,12 +54,14 @@ public class ScambioGui extends JFrame{
     
     public  HashMap<JComponent,Integer> componentMap;                       //Hashmap dei componenti
     
-    public ScambioGui(Utente u1,Utente u2) {
+    public ScambioGui(Scambio s,Utente u1,Utente u2) {
     	
     	   super(u1.getUser()+" scambia con "+u2.getUser());
     	   
     	   utente1=u1;
-    	   utente2=u2;    	   
+    	   utente2=u2;  
+    	   controller=new ScambioController(this,s,utente1,utente2);
+    	   
     	   this.initComponents();
            this.formatComponents();
            this.mapComponents();
@@ -80,7 +80,7 @@ public class ScambioGui extends JFrame{
 	
 	   //Crea gli oggetti
 	  	  
-	   controller=new ScambioController(this,utente1,utente2);
+	  
 	   controllerFig1=new FigurineController(utente1);
 	   controllerFig2=new FigurineController(utente2);
 	   
@@ -93,8 +93,6 @@ public class ScambioGui extends JFrame{
 	   utente2Panel=new JPanel();
 	   figPanel1=new JPanel();
 	   figPanel2=new JPanel();
-	   offertaPanel1=new JPanel();
-	   offertaPanel2=new JPanel();
 	   infoPanel=new JPanel();
 	   userPanel=new JPanel();
 	   commandPanel1=new JPanel();
@@ -120,16 +118,9 @@ public class ScambioGui extends JFrame{
 
 	   scrollFig1=new JScrollPane(figPanel1,scrollFig1.VERTICAL_SCROLLBAR_AS_NEEDED,scrollFig1.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	   scrollFig2=new JScrollPane(figPanel2,scrollFig2.VERTICAL_SCROLLBAR_AS_NEEDED,scrollFig2.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-	   scrollOfferta1=new JScrollPane(offertaPanel2,scrollOfferta2.VERTICAL_SCROLLBAR_AS_NEEDED,scrollOfferta2.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-	   scrollOfferta1=new JScrollPane(offertaPanel2,scrollOfferta2.VERTICAL_SCROLLBAR_AS_NEEDED,scrollOfferta2.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
-
-	   addFigButton1=new JButton("Aggiungi Figurina all'offerta di "+utente1.getUser());
-	   remFigButton1=new JButton("Rimuovi Figurina dall'offerta di "+utente1.getUser());
-	   addFigButton2=new JButton("Aggiungi Figurina all'offerta di "+utente2.getUser());
-	   remFigButton2=new JButton("Rimuovi Figurina dall'offerta di "+utente2.getUser());
-	   confermaButton1=new JButton("Conferma scelte di "+utente1.getUser());
-	   confermaButton2=new JButton("Conferma scelte di "+utente2.getUser());
+	   confermaButton1=new JButton("In attesa di conferma da "+utente1.getUser());
+	   confermaButton2=new JButton("In attesa di conferma da "+utente2.getUser());
 	   messageButton1=new JButton(utente1.getUser()+" invia messaggio");
 	   messageButton2=new JButton(utente2.getUser()+" invia messaggio");
 
@@ -143,6 +134,10 @@ public class ScambioGui extends JFrame{
 	   this.setSize(800,650);
 	   this.setVisible(true);
        this.setResizable(false);
+       this.confermaButton1.setBackground(Color.RED);
+       this.confermaButton2.setBackground(Color.RED);
+       this.utente1Panel.setSize(400,400);
+       this.utente2Panel.setSize(400,400);
        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
        
@@ -151,8 +146,8 @@ public class ScambioGui extends JFrame{
        scambioPanel.setLayout(new GridLayout(3,1));
        utente1Panel.setLayout(new BorderLayout());
        utente2Panel.setLayout(new BorderLayout());
-       commandPanel1.setLayout(new GridLayout(5,1));
-       commandPanel2.setLayout(new GridLayout(5,1));
+       commandPanel1.setLayout(new GridLayout(3,1));
+       commandPanel2.setLayout(new GridLayout(3,1));
        infoPanel.setLayout(new BorderLayout());
        infoPanel1.setLayout(new GridLayout(4,1));
        infoPanel2.setLayout(new GridLayout(4,1));       
@@ -167,17 +162,12 @@ public class ScambioGui extends JFrame{
 
        //Pannelli utente e sotto-pannelli
                   
-       utente1Panel.add(figPanel1,BorderLayout.WEST);
-       utente1Panel.add(offertaPanel1,BorderLayout.EAST);
-       utente2Panel.add(figPanel2,BorderLayout.EAST);
-       utente2Panel.add(offertaPanel2,BorderLayout.WEST);
-       commandPanel1.add(addFigButton1);
-       commandPanel1.add(remFigButton1);
+       utente1Panel.add(figPanel1,BorderLayout.CENTER);
+       utente2Panel.add(figPanel2,BorderLayout.CENTER);
+
        commandPanel1.add(userText1);
        commandPanel1.add(messageButton1);
-       commandPanel1.add(confermaButton1);
-       commandPanel2.add(addFigButton2);
-       commandPanel2.add(remFigButton2); 
+       commandPanel1.add(confermaButton1); 
        commandPanel2.add(userText2);
        commandPanel2.add(messageButton2);
        commandPanel2.add(confermaButton2);
@@ -216,14 +206,11 @@ public class ScambioGui extends JFrame{
    
    private void mapComponents(){
 	   
-	   componentMap.put(this.addFigButton1,1);
-	   componentMap.put(this.remFigButton1,2);
-	   componentMap.put(this.messageButton1,3);
-	   componentMap.put(this.confermaButton1,4);
-	   componentMap.put(this.addFigButton2,5);
-	   componentMap.put(this.remFigButton2,6);
-	   componentMap.put(this.messageButton2,7);
-	   componentMap.put(this.confermaButton2,8);
+
+	   componentMap.put(this.messageButton1,1);
+	   componentMap.put(this.confermaButton1,2);
+	   componentMap.put(this.messageButton2,3);
+	   componentMap.put(this.confermaButton2,4);
 	   
 	   
 	   
@@ -235,6 +222,8 @@ public class ScambioGui extends JFrame{
 	   
 	   this.messageButton1.addActionListener(controller);
 	   this.messageButton2.addActionListener(controller);
+	   this.confermaButton1.addActionListener(controller);
+	   this.confermaButton2.addActionListener(controller);
 	   
 	   
    }
@@ -309,6 +298,15 @@ public class ScambioGui extends JFrame{
 	   
    }
    
+   public JButton getConfermaButton1(){
+	   
+	   return this.confermaButton1;
+   }
+   
+   public JButton getConfermaButton2(){
+	   
+	   return this.confermaButton2;
+   }
    
    
    

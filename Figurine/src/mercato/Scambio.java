@@ -22,7 +22,7 @@ public class Scambio implements Carrello {
 		Utente1=u1;
 		Utente2=u2;
 		
-		gui=new ScambioGui(u1,u2);
+		gui=new ScambioGui(this,u1,u2);
 		
 		feed1=0;
 		feed2=0;
