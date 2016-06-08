@@ -23,7 +23,10 @@ public class ScambioGui extends JFrame{
 	
 	private Utente utente1,utente2;                        //Utenti di riferimento
 	private ScambioController controller;
-	
+	private FigurineController controllerFig1,controllerFig2;
+
+	private ArrayList<JButton> visualOfferta1;
+	private ArrayList<JButton> visualOfferta2;
 	
 	private JPanel figPanel1,figPanel2,offertaPanel1,offertaPanel2,commandPanel1,commandPanel2;     //Sotto-pannelli utente 
 	private JPanel scambioPanel;                 //Pannello principale
@@ -51,8 +54,6 @@ public class ScambioGui extends JFrame{
     private  JLabel usernameLabel1,usernameLabel2;
     private  JLabel feedbackLabel1,feedbackLabel2;  
     
-    private FigurineController controller1;
-    private FigurineController controller2;
     public  HashMap<JComponent,Integer> componentMap;                       //Hashmap dei componenti
     
     public ScambioGui(Utente u1,Utente u2) {
@@ -80,6 +81,12 @@ public class ScambioGui extends JFrame{
 	   //Crea gli oggetti
 	  	  
 	   controller=new ScambioController(this,utente1,utente2);
+	   controllerFig1=new FigurineController(utente1);
+	   controllerFig2=new FigurineController(utente2);
+	   
+	   visualOfferta1=new ArrayList<JButton>();
+	   visualOfferta2=new ArrayList<JButton>();
+
 
 	   scambioPanel=new JPanel();	
 	   utente1Panel=new JPanel();
@@ -95,6 +102,7 @@ public class ScambioGui extends JFrame{
 	   chatPanel=new JPanel();
 	   infoPanel1=new JPanel();
 	   infoPanel2=new JPanel();
+
 	   
 	   nameLabel1=new JLabel("Nome: "+utente1.getNome());
 	   nameLabel2=new JLabel("Nome:"+utente2.getNome());
@@ -124,11 +132,7 @@ public class ScambioGui extends JFrame{
 	   confermaButton2=new JButton("Conferma scelte di "+utente2.getUser());
 	   messageButton1=new JButton(utente1.getUser()+" invia messaggio");
 	   messageButton2=new JButton(utente2.getUser()+" invia messaggio");
-	   
-	   
-	   
-	   controller1=new FigurineController(utente1);
-	   controller2=new FigurineController(utente2);
+
 	   componentMap=new HashMap<JComponent,Integer>();
    }
    
@@ -241,30 +245,29 @@ public class ScambioGui extends JFrame{
 	   
 	   
 	   int i;
-	   JButton btmp;
+	 
 	   
 	   for(i=0;i<utente1.getCollezione().size();i++){
 		   
-		   btmp=new JButton(utente1.getCollezione().get(i).getNome()+" "+utente1.getCollezione().get(i).getRarità());
-		   figPanel1.add(btmp);
-		   btmp.addActionListener(controller1);
+		   visualOfferta1.add(new JButton(utente1.getCollezione().get(i).toString()));
+		   visualOfferta1.get(i).addActionListener(controllerFig1);
+		   figPanel1.add(visualOfferta1.get(i));
+		   
+
 		   
 	   }
 	   
 	   for(i=0;i<utente2.getCollezione().size();i++){
 		   
-		   btmp=new JButton(utente2.getCollezione().get(i).getNome()+" "+utente2.getCollezione().get(i).getRarità());
-		   figPanel2.add(btmp);
-		   btmp.addActionListener(controller2);
+		   visualOfferta2.add(new JButton(utente2.getCollezione().get(i).toString()));
+		   visualOfferta2.get(i).addActionListener(controllerFig2);
+		   figPanel2.add(visualOfferta2.get(i));
+		  
+		   
 	   }
    }
    
-   
-   
-   
-   
-   
-   //Metodi interattivi
+     //Metodi interattivi
    
    public JTextArea getChat(){
 	   

@@ -14,10 +14,9 @@ import java.awt.event.*;
 import javax.swing.*;
 
 public class ScambioController implements ActionListener {
-	
-	private Utente utente1, utente2;    //utente di riferimento
-	private ScambioGui gui;               //gui di riferimento
-	private final String user1,user2;            //Username utenti
+
+	private Utente utente1, utente2;   //utente di riferimento
+	private ScambioGui gui;   //gui di riferimento
 
 
 public ScambioController(ScambioGui g, Utente u1, Utente u2){
@@ -25,8 +24,6 @@ public ScambioController(ScambioGui g, Utente u1, Utente u2){
 		gui=g;	
 		utente1=u1;
 		utente2=u2;
-		user1=utente1.getUser();
-		user2=utente2.getUser();
 
 	}
 
@@ -75,4 +72,5 @@ public void actionPerformed(ActionEvent e) {
 	}
   } 
 }
+
 

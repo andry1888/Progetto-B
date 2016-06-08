@@ -24,20 +24,36 @@ public class FigurineController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		while(i<utente.getCollezione().size()){
-			aggiungiFig(e.getActionCommand());
-			i++;
-		}
-		for(int j=0;j<i;j++) System.out.println(nomef[j]);
+
+		aggiungiFig(e.getActionCommand());
+		
+		toString();
 		
 		}
 	
 	
 	//aggiungo il nome della figurina all'array nomef
 	public void aggiungiFig(String nome){
-				
+
+		while(i<utente.getCollezione().size() && !presente(nome)){
 			nomef[i]=nome;
+			i++;
+			}	
 		}
 	
+	//esce vero se è presente
+	public boolean presente(String nome){
+		boolean f=false;
+		for(int j=0;j<utente.getCollezione().size();j++){
+			if(nome.equals(nomef[j]))  f=true;
+		}
+		return f;
+	}
+	
+	public String toString(){
+		
+		return nomef.toString();
+	}
+
 	
 }

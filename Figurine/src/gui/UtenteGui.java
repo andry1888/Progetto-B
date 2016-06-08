@@ -23,6 +23,8 @@ public class UtenteGui extends JFrame{
 	private UtenteController controller;
 	private Utente utente;
 	public HashMap<JComponent,Integer> componentMap;
+	private ArrayList<JButton> visualFigurineList;
+
 	
 	
 	private JPanel figPanel;
@@ -103,6 +105,9 @@ public class UtenteGui extends JFrame{
 	   
 	   controller=new UtenteController(this,utente);
 	   componentMap=new HashMap<JComponent,Integer>();
+
+	   visualFigurineList=new ArrayList<JButton>();
+
 	   
 	   collectionPanel=new JPanel();
 	   portalPanel=new JPanel();
@@ -363,14 +368,14 @@ public class UtenteGui extends JFrame{
    
    public void updateCollezione(){
 	   
-	   JButton btmp;
-	   
 	   this.figPanel.removeAll();
+	   visualFigurineList.removeAll(visualFigurineList);
 	   
 	   for (int i=0;i<utente.getCollezione().size();i++){
 		   
-		   btmp=new JButton(utente.getCollezione().get(i).toString());
-		   figPanel.add(btmp);
+
+		   visualFigurineList.add(new JButton(utente.getCollezione().get(i).toString()));
+		   figPanel.add(visualFigurineList.get(i));
 		   
 	   }
 	   
