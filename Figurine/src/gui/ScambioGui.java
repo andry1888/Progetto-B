@@ -46,6 +46,11 @@ public class ScambioGui extends JFrame{
     private  JButton   confermaButton1,confermaButton2;
     private  JButton   messageButton1,messageButton2;
     
+    private  JLabel nameLabel1,nameLabel2;
+    private  JLabel surnameLabel1,surnameLabel2;
+    private  JLabel usernameLabel1,usernameLabel2;
+    private  JLabel feedbackLabel1,feedbackLabel2;  
+    
     private FigurineController controller1;
     private FigurineController controller2;
     public  HashMap<JComponent,Integer> componentMap;                       //Hashmap dei componenti
@@ -90,7 +95,16 @@ public class ScambioGui extends JFrame{
 	   chatPanel=new JPanel();
 	   infoPanel1=new JPanel();
 	   infoPanel2=new JPanel();
-
+	   
+	   nameLabel1=new JLabel("Nome: "+utente1.getNome());
+	   nameLabel2=new JLabel("Nome:"+utente2.getNome());
+	   surnameLabel1=new JLabel("Cognome: "+utente1.getCognome());
+	   surnameLabel2=new JLabel("Cognome: "+utente2.getCognome());
+	   usernameLabel1=new JLabel("Username: "+utente1.getUser());
+	   usernameLabel2=new JLabel("Username: "+utente2.getUser());
+	   feedbackLabel1=new JLabel("Feedback: "+String.valueOf(utente1.getFeedback()));
+	   feedbackLabel2=new JLabel("Feedback: "+String.valueOf(utente2.getFeedback()));
+	   
        userText1=new JTextField("Messagi chat utente 1");  
        userText2=new JTextField("Messaggi chat utente 2");
        chat=new JTextArea();
@@ -110,6 +124,8 @@ public class ScambioGui extends JFrame{
 	   confermaButton2=new JButton("Conferma scelte di "+utente2.getUser());
 	   messageButton1=new JButton(utente1.getUser()+" invia messaggio");
 	   messageButton2=new JButton(utente2.getUser()+" invia messaggio");
+	   
+	   
 	   
 	   controller1=new FigurineController(utente1);
 	   controller2=new FigurineController(utente2);
@@ -134,21 +150,17 @@ public class ScambioGui extends JFrame{
        commandPanel1.setLayout(new GridLayout(5,1));
        commandPanel2.setLayout(new GridLayout(5,1));
        infoPanel.setLayout(new BorderLayout());
+       infoPanel1.setLayout(new GridLayout(4,1));
+       infoPanel2.setLayout(new GridLayout(4,1));       
        userPanel.setLayout(new GridLayout(2,2));
        
        
-        
-       //Decidere il metodo di inserimento dell'offerta
+         //Inizializza la collezione utenti
        
-       initUserInfo();
        initCollezione();
   
-       
-       
-
        //Aggiunge i componenti
 
-       
        //Pannelli utente e sotto-pannelli
                   
        utente1Panel.add(figPanel1,BorderLayout.WEST);
@@ -165,7 +177,20 @@ public class ScambioGui extends JFrame{
        commandPanel2.add(userText2);
        commandPanel2.add(messageButton2);
        commandPanel2.add(confermaButton2);
+       
+       infoPanel1.add(nameLabel1);
+       infoPanel1.add(surnameLabel1);
+       infoPanel1.add(usernameLabel1);
+       infoPanel1.add(feedbackLabel1);
+       
+       infoPanel2.add(nameLabel2);
+       infoPanel2.add(surnameLabel2);
+       infoPanel2.add(usernameLabel2);
+       infoPanel2.add(feedbackLabel2);
+       
        chatPanel.add(chat,BorderLayout.CENTER);
+       infoPanel.add(infoPanel1,BorderLayout.WEST);
+	   infoPanel.add(infoPanel2,BorderLayout.EAST);
        
        //Pannneli della frame
        
@@ -207,19 +232,6 @@ public class ScambioGui extends JFrame{
 	   this.messageButton1.addActionListener(controller);
 	   this.messageButton2.addActionListener(controller);
 	   
-	   
-   }
-   
-   
-   //Inizializza le informazioni degli utenti
-   
-   public void initUserInfo(){
-	   
-	   infoPanel1=utente1.getUserInfoPanel();
-	   infoPanel2=utente2.getUserInfoPanel();
-	   
-	   infoPanel.add(infoPanel1,BorderLayout.WEST);
-	   infoPanel.add(infoPanel2,BorderLayout.EAST);
 	   
    }
    

@@ -21,7 +21,7 @@ public class TestGui {
 		Utente c2=new Collezionista("luigi","verdi","via del corso",28,150,port,"thunderbolt","pecorino","hotmail@libero.com");	
 		
 		
-		//ScambioGui s=new ScambioGui(c1,c2);
+		ScambioGui s=new ScambioGui(c1,c2);
 		
 		
 	} catch (NumberFormatException | IOException e) {
