@@ -41,11 +41,12 @@ public class ScambioGui extends JFrame{
 	private JTextArea chat;
 
 
-	private JScrollPane scrollFig1,scrollFig2;
+	private JScrollPane scrollFig1,scrollFig2,scrollChat;
 
 
     private  JButton   confermaButton1,confermaButton2;
     private  JButton   messageButton1,messageButton2;
+    private  JButton   eseguiScambioButton;
     
     private  JLabel nameLabel1,nameLabel2;
     private  JLabel surnameLabel1,surnameLabel2;
@@ -118,11 +119,13 @@ public class ScambioGui extends JFrame{
 
 	   scrollFig1=new JScrollPane(figPanel1,scrollFig1.VERTICAL_SCROLLBAR_AS_NEEDED,scrollFig1.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 	   scrollFig2=new JScrollPane(figPanel2,scrollFig2.VERTICAL_SCROLLBAR_AS_NEEDED,scrollFig2.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	   scrollChat=new JScrollPane(chatPanel,scrollChat.VERTICAL_SCROLLBAR_AS_NEEDED,scrollChat.HORIZONTAL_SCROLLBAR_NEVER);
 
 	   confermaButton1=new JButton("In attesa di conferma da "+utente1.getUser());
 	   confermaButton2=new JButton("In attesa di conferma da "+utente2.getUser());
 	   messageButton1=new JButton(utente1.getUser()+" invia messaggio");
 	   messageButton2=new JButton(utente2.getUser()+" invia messaggio");
+	   eseguiScambioButton=new JButton("Concludi scambio");
 
 	   componentMap=new HashMap<JComponent,Integer>();
    }
@@ -136,6 +139,8 @@ public class ScambioGui extends JFrame{
        this.setResizable(false);
        this.confermaButton1.setBackground(Color.RED);
        this.confermaButton2.setBackground(Color.RED);
+       this.eseguiScambioButton.setEnabled(false);
+       this.eseguiScambioButton.setBackground(Color.GRAY);
        this.utente1Panel.setSize(400,400);
        this.utente2Panel.setSize(400,400);
        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -143,7 +148,7 @@ public class ScambioGui extends JFrame{
        
        this.chat.setEditable(false);
        
-       scambioPanel.setLayout(new GridLayout(3,1));
+       scambioPanel.setLayout(new GridLayout(4,1));
        utente1Panel.setLayout(new BorderLayout());
        utente2Panel.setLayout(new BorderLayout());
        commandPanel1.setLayout(new GridLayout(3,1));
@@ -162,8 +167,8 @@ public class ScambioGui extends JFrame{
 
        //Pannelli utente e sotto-pannelli
                   
-       utente1Panel.add(figPanel1,BorderLayout.CENTER);
-       utente2Panel.add(figPanel2,BorderLayout.CENTER);
+       utente1Panel.add(scrollFig1,BorderLayout.CENTER);
+       utente2Panel.add(scrollFig2,BorderLayout.CENTER);
 
        commandPanel1.add(userText1);
        commandPanel1.add(messageButton1);
@@ -195,7 +200,8 @@ public class ScambioGui extends JFrame{
        
        scambioPanel.add(infoPanel);
        scambioPanel.add(userPanel);
-       scambioPanel.add(chatPanel);
+       scambioPanel.add(scrollChat);
+       scambioPanel.add(eseguiScambioButton);
        
        
        this.add(scambioPanel);
@@ -211,6 +217,7 @@ public class ScambioGui extends JFrame{
 	   componentMap.put(this.confermaButton1,2);
 	   componentMap.put(this.messageButton2,3);
 	   componentMap.put(this.confermaButton2,4);
+	   componentMap.put(this.eseguiScambioButton,5);
 	   
 	   
 	   
@@ -224,6 +231,7 @@ public class ScambioGui extends JFrame{
 	   this.messageButton2.addActionListener(controller);
 	   this.confermaButton1.addActionListener(controller);
 	   this.confermaButton2.addActionListener(controller);
+	   this.eseguiScambioButton.addActionListener(controller);
 	   
 	   
    }
@@ -257,6 +265,20 @@ public class ScambioGui extends JFrame{
 	   scrollFig2.updateUI();
    }
    
+   //Verifica se lo scambio è pronto per essere concluso
+   
+   public void checkConcludiScambio(){
+	   
+	   if(this.confermaButton1.getBackground().equals(Color.GREEN)&& this.confermaButton2.getBackground().equals(Color.GREEN)){
+		   
+		   this.eseguiScambioButton.setEnabled(true);
+		   this.eseguiScambioButton.setBackground(Color.BLUE);
+		   
+	   }
+	   
+	   
+   }
+   
      //Metodi interattivi
    
    public JTextArea getChat(){
@@ -275,6 +297,11 @@ public class ScambioGui extends JFrame{
 	   
 	   
 	   this.chat.setText("");
+   }
+   
+   public void updateChatPane(){
+	   
+	   this.scrollChat.updateUI();
    }
    
    public void clearUser1Message(){

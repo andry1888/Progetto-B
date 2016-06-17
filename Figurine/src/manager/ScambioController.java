@@ -52,7 +52,8 @@ public void actionPerformed(ActionEvent e) {
 			tmp=gui.getUser1Message();
 			if(tmp.equals("")) break;
 		    gui.getChat().setText(gui.getChatText()+utente1.getUser()+": "+tmp+"\n");
-		    gui.clearUser1Message();		     
+		    gui.clearUser1Message();	
+		    gui.updateChatPane();
 		    break;
 		
 		}
@@ -68,7 +69,7 @@ public void actionPerformed(ActionEvent e) {
 			
 			scambio.Ok1=true;
 			
-			//Aggiungere lo scambio di figurine
+			gui.checkConcludiScambio();
 			
 			
 		}
@@ -85,6 +86,7 @@ public void actionPerformed(ActionEvent e) {
 		if(tmp.equals("")) break;
 		gui.getChat().setText(gui.getChatText()+utente2.getUser()+": "+tmp+"\n");
 		gui.clearUser2Message();
+		gui.updateChatPane();
 		break;
 		
 		
@@ -101,12 +103,27 @@ public void actionPerformed(ActionEvent e) {
 			
 			scambio.Ok2=true;
 			
-			//Aggiungere lo scambio di figurine
+		   gui.checkConcludiScambio();
 			
 			
 		}
 		
 		break;
+		
+	}
+	
+	
+	//Lo scambio viene concluso
+	
+	case 5:{
+		
+		scambio.concludiScambioPositivo();
+	    gui.setVisible(false);
+	    utente1.enableUtente();
+	    utente2.enableUtente();
+	    
+		
+		
 		
 	}
    

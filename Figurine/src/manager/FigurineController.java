@@ -17,8 +17,7 @@ public class FigurineController implements ActionListener {
 	
 		}
 	
-	
-	@Override
+
 	public void actionPerformed(ActionEvent e) {
 		JButton tmp=(JButton) e.getSource();
 		
@@ -35,7 +34,6 @@ public class FigurineController implements ActionListener {
 		}
 	
 	
-	//aggiungo il nome della figurina all'array nomef
 	public void aggiungiFig(String nome){
 
 			for(int i=0;i<utente.getCollezione().size();i++){

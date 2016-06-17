@@ -56,7 +56,7 @@ public class Scambio implements Carrello {
 	
 	
 	//Metodo che porta a termine lo scambio, uso esclusivo di Scambio e figli
-	protected void concludiScambioPositivo(){
+	public void concludiScambioPositivo(){
 		
 		Figurina ftemp;
 		

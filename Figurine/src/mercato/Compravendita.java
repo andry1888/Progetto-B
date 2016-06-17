@@ -61,7 +61,7 @@ public class Compravendita extends Scambio {
 		
 	}
 	
-	protected void concludiScambioPositivo(){
+	public void concludiScambioPositivo(){
 		
 		
 	Figurina ftemp;
