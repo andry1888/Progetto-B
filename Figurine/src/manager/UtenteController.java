@@ -59,7 +59,7 @@ public class UtenteController implements ActionListener {
 	
 		//Aggiunge del credito
 		
-		case 5:{
+		case 6:{
 			
 			     tmp=gui.getCreditValue();
 			     utente.addCredito(Double.parseDouble(tmp));
@@ -68,6 +68,15 @@ public class UtenteController implements ActionListener {
 			     break;
 			
 			}
+		
+		//Esegue il riordino per numero Id
+		
+		case 5:{
+			
+			utente.sortId();
+			gui.updateCollezione();
+			break;
+		}
 		
 		//Esegue riordino alfabetico
 		
@@ -129,6 +138,15 @@ public class UtenteController implements ActionListener {
 			
 			break;
 			
+			
+			
+		}
+		
+		//Viene aperto uno scambio
+		
+		case 12:{
+			
+			break;
 			
 			
 		}

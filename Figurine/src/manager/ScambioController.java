@@ -118,11 +118,20 @@ public void actionPerformed(ActionEvent e) {
 	case 5:{
 		
 		scambio.concludiScambioPositivo();
-	    gui.setVisible(false);
+
 	    utente1.enableUtente();
 	    utente2.enableUtente();
+	    utente1.updateCollezioneView();
+	    utente2.updateCollezioneView();
+	    utente1.updateFeedbackView();
+	    utente2.updateFeedbackView();
 	    
-		
+	    //Debug
+	    utente1.getCollezione().toString();
+	    utente2.getCollezione().toString();
+	    
+	    gui.setVisible(false);
+	    break;
 		
 		
 	}

@@ -52,6 +52,7 @@ public class UtenteGui extends JFrame{
     private  JButton   remFigButton;
     private  JButton   sortAlfaButton;
     private  JButton   sortRarButton;
+    private JButton    sortIdButton;
     private JButton    scambioButton;
     private JButton    compravenditaButton;
     private  JLabel    infoTextLabel;
@@ -141,6 +142,7 @@ public class UtenteGui extends JFrame{
 	   remFigButton=new JButton("Rimuovi Figurina");
 	   sortAlfaButton=new JButton("Ordine Alfabetico");
 	   sortRarButton=new JButton("Ordine Rarità");
+	   sortIdButton=new JButton("Ordine Numero Id");
 	   scambioButton=new JButton("Inizia Scambio");
 	   compravenditaButton=new JButton("Inizia Compravendita");
 	   userList=new JTextArea();
@@ -224,11 +226,12 @@ public class UtenteGui extends JFrame{
        manageCollectionPanel.add(addFigButton);
        manageCollectionPanel.add(sortRarButton);
        manageCollectionPanel.add(remFigButton);
-       manageCollectionPanel.add(figurineCountLabel);
+       manageCollectionPanel.add(sortIdButton);     
        manageCollectionPanel.add(textCredito);
-       manageCollectionPanel.add(feedbackLabel);
+       manageCollectionPanel.add(feedbackLabel);     
        manageCollectionPanel.add(addCreditButton);       
        manageCollectionPanel.add(creditLabel);
+       manageCollectionPanel.add(figurineCountLabel);
        
        
        
@@ -291,15 +294,17 @@ public class UtenteGui extends JFrame{
 	   componentMap.put(this.remFigButton,2);
 	   componentMap.put(this.sortAlfaButton,3);
 	   componentMap.put(this.sortRarButton,4);
-	   componentMap.put(this.addCreditButton,5);
+	   componentMap.put(this.sortIdButton,5);
+	   componentMap.put(this.addCreditButton,6);
+	   componentMap.put(scambioButton,12);
 	   
 	   //Inserire un JDialog per cambiare i valori dell'utente
-	   componentMap.put(this.changeNameButton,6);
+	/*   componentMap.put(this.changeNameButton,6);
 	   componentMap.put(this.changeSurnameButton,7);
 	   componentMap.put(this.changeAgeButton,8);
 	   componentMap.put(this.changeUsernameButton,9);
 	   componentMap.put(this.changeMailButton,10);
-	   componentMap.put(this.changeAddressButton,11);
+	   componentMap.put(this.changeAddressButton,11);*/
 	   
 	   
 	   
@@ -314,6 +319,8 @@ public class UtenteGui extends JFrame{
 	   this.remFigButton.addActionListener(controller);
 	   this.sortAlfaButton.addActionListener(controller);
 	   this.sortRarButton.addActionListener(controller);
+	   this.sortIdButton.addActionListener(controller);
+	   this.scambioButton.addActionListener(controller);
 	   
 	   
    }

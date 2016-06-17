@@ -1,6 +1,7 @@
 package test;
 
 import gui.*;
+
 import mercato.*;
 import collezionabili.*;
 
@@ -24,9 +25,13 @@ public class TestGui {
 		c1.addFigurina(new Figurina(2,"test2",1000));
 		c1.addFigurina(new Figurina(3,"test3",1000));
 		
+		c1.updateCollezioneView();
+		
 		c2.addFigurina(new Figurina(4,"test4",1000));
 		c2.addFigurina(new Figurina(5,"test5",1000));
 		c2.addFigurina(new Figurina(6,"test6",1000));
+		
+		c2.updateCollezioneView();
 		
 		Scambio s=new Scambio(c1,c2);
 		

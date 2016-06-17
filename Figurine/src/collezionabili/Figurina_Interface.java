@@ -26,6 +26,7 @@ public interface Figurina_Interface {
     */
     public void sortAlfa();
     public void sortRar();
+    public void sortId();
        
     /*
         Search

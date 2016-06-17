@@ -349,6 +349,37 @@ public void sortRar() {
 	
 }
 
+//Ordina le figurine per numero Id
+
+public void sortId(){
+	
+	Figurina ftemp;
+	boolean flag;
+	
+	//Bubble sort ordine crescente
+	
+	do{
+		
+		flag=false;
+		
+		for(int i=0;i<this.getCollezione().size()-1;i++){
+			
+			if(this.getCollezione().get(i).getId()>this.getCollezione().get(i+1).getId()){
+				
+				ftemp=this.getCollezione().get(i+1);
+                this.getCollezione().set(i+1,this.getCollezione().get(i));
+                this.getCollezione().set(i,ftemp);
+                flag=true;
+			}
+			
+		}
+	} while(flag);
+	
+	
+	
+	
+}
+
 //Ritorna una figurina dato l'oggetto
 public Figurina getFigurina(Figurina f){
 	
@@ -466,6 +497,15 @@ public JPanel getUserInfoPanel(){
 public void updateCollezioneView(){
 	
 	this.gui.updateCollezione();
+}
+
+//Aggiorna la vista del feedback
+
+public void updateFeedbackView(){
+	
+	
+	this.gui.updateFeedbackvalue();
+	
 }
 
 
