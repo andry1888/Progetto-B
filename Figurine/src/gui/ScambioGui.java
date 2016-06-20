@@ -24,7 +24,7 @@ public class ScambioGui extends JFrame{
 	
 	private Utente utente1,utente2;                                                        //Utenti di riferimento
 	private ScambioController controller;
-	private FigurineController controllerFig1,controllerFig2;
+	private FigurineController controllerFig1,controllerFig2;                           //Controller interfaccia
 
 	private ArrayList<JButton> visualOfferta1;
 	private ArrayList<JButton> visualOfferta2;
@@ -63,7 +63,7 @@ public class ScambioGui extends JFrame{
     	   utente2=u2;  
     	   controller=new ScambioController(this,s,utente1,utente2);
     	   
-    	   this.initComponents();
+    	   this.initComponents(s);
            this.formatComponents();
            this.mapComponents();
            this.actionComponents();
@@ -73,17 +73,18 @@ public class ScambioGui extends JFrame{
            utente1.disableUtente();
            utente2.disableUtente();
            
+         
+           
         }
     
     
-   private void initComponents() {
+   private void initComponents(Scambio s) {
 	   
 	
 	   //Crea gli oggetti
 	  	  
-	  
-	   controllerFig1=new FigurineController(utente1);
-	   controllerFig2=new FigurineController(utente2);
+	   controllerFig1=new FigurineController(utente1,s);
+	   controllerFig2=new FigurineController(utente2,s);
 	   
 	   visualOfferta1=new ArrayList<JButton>();
 	   visualOfferta2=new ArrayList<JButton>();

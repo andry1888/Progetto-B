@@ -65,27 +65,21 @@ public class Scambio implements Carrello {
 			s=Stato.ACCETTATO;
 			this.setFeedback();
 			
-			//Preleva le figurina di Utente 1 e le deposita in Utente 2
-			for(int i=0;i<this.Utente1.getOffertaFigurine().size(); i++){
-				
-				ftemp=Utente1.getOffertaFigurine().get(i);
-				Utente2.getCollezione().add(ftemp);
-				Utente1.getOffertaFigurine().remove(i);
-				Utente1.getCollezione().remove(i);
-				
-			}
+					
+			//Esegue lo scambio
 			
-			//Preleva le figurina di Utente 2 e le deposita in Utente 1
+			//Preleva le figurina di Utente 1 e le deposita in Utente 2, rimuove le figurine da Offerta Utente 1
+		
+				
+
+				Utente2.getCollezione().addAll(Utente1.getOffertaFigurine());								
+				Utente1.getOffertaFigurine().removeAll(Utente1.getOffertaFigurine());
+				
+			//Preleva le figurina di Utente 2 e le deposita in Utente 1,Rimuove le figurine da Offerta utente 2
+	
+				Utente1.getCollezione().addAll(Utente2.getOffertaFigurine());
+			    Utente2.getOffertaFigurine().removeAll(Utente2.getOffertaFigurine());
 			
-			for(int i=0;i<Utente2.getOffertaFigurine().size();i++){
-				
-				ftemp=Utente2.getOffertaFigurine().get(i);
-				Utente1.getCollezione().add(ftemp);
-				Utente2.getOffertaFigurine().remove(i);
-				Utente2.getCollezione().remove(i);
-				
-				
-			}
 			
 			
 			
@@ -97,38 +91,28 @@ public class Scambio implements Carrello {
 	
 	
 	//Un utente aggiunge una figurina alla sua offerta
-	public boolean addFigurina(Utente u,Figurina f) {
+	public void addFigurina(Utente u,int i) {
 
-		Figurina ftemp;
-
-		//Verifica sulla possessione della figurina
-		ftemp=u.getFigurinabyId(f.getId());
-
-		if(ftemp==null) {
-                    System.out.println("figurina non presente in utente");
-                    return false;
-                }
-                else{
-		//aggiunta della figurina all'offerta
-                	
-        u.getOffertaFigurine().add(f);
-        if(s==Stato.NUOVO) {
-            s=Stato.IN_CORSO;
-        }
-		return true;
-	}}
+	      u.getOffertaFigurine().add(u.getCollezione().get(i));
+	      u.getCollezione().remove(i);
+        
+        
+	      if(s==Stato.NUOVO) s=Stato.IN_CORSO;
+        
+	}
 	
 	//Un utente rimuove una figurina dalla sua offerta
-	public boolean removeFigurina(Utente u,int i) {
-
-		if(u.getOffertaFigurine().get(i)==null) return false;		
-		else {
-			u.getOffertaFigurine().remove(i);
-			return true;
-		}
-		
 	
-	}
+	public void removeFigurina(Utente u,int i) {
+
+			u.getCollezione().add(u.getOffertaFigurine().get(i));
+			u.getOffertaFigurine().remove(i);
+			
+			 if(s==Stato.NUOVO) s=Stato.IN_CORSO;
+		        
+			 
+
+		}
 	
 	//Ritorna l'offerta corrente del compagno di scambio
 	public ArrayList<Figurina> getOffertaCompagno(Utente u){

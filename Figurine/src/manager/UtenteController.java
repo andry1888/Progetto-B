@@ -48,12 +48,7 @@ public class UtenteController implements ActionListener {
        int map;
        Figurina ftmp;
        map=gui.componentMap.get(e.getSource());
-       
-	   
-	   System.out.println(map);
-	   
-	   
-
+       	   	   	   
 		switch (map){
 		
 	

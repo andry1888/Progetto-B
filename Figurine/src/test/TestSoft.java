@@ -47,7 +47,7 @@ public class TestSoft {
                 
                 Scambio sc=new Scambio(u1,u2);
                 System.out.println("SCAMBIO PROVA STATO="+sc.getStatoScambio());               
-                sc.addFigurina(u1,u1.getCollezione().get(0));
+                sc.addFigurina(u1,0);
                 System.out.println("SCAMBIO PROVA STATO="+sc.getStatoScambio());
 
 		}

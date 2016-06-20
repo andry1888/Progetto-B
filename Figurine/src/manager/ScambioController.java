@@ -39,7 +39,6 @@ public void actionPerformed(ActionEvent e) {
    int map;
    
    map=gui.componentMap.get(e.getSource());
-   System.out.println(String.valueOf(map));
   
    
     switch (map){
@@ -126,9 +125,6 @@ public void actionPerformed(ActionEvent e) {
 	    utente1.updateFeedbackView();
 	    utente2.updateFeedbackView();
 	    
-	    //Debug
-	    utente1.getCollezione().toString();
-	    utente2.getCollezione().toString();
 	    
 	    gui.setVisible(false);
 	    break;

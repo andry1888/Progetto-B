@@ -217,30 +217,24 @@ protected boolean resetPassword(String p, String newP){
     else return false;
 }
 
+//Aggiunge figurina dati gli attributi
 
-public boolean addFigurina(String n, int r) {
+public boolean addFigurina(int id,String n, int r) {
 
-	
-
-	int id=10;	
-	Figurina ftemp=new Figurina(id,n,r);       
+		Figurina ftemp=new Figurina(id,n,r);       
 	this.getCollezione().add(ftemp);
         
 	
 	return true;
 }
 
+//Aggiugne una figurina dato l'oggetto
 public boolean addFigurina(Figurina f){
 	
-	
-	//Eseguire i controlli di database figurine
 	
 	Figurina ftemp=f;
 	
 	this.getCollezione().add(ftemp);
-        String s="figurina aggiunta a "+User+" ";
-        s += ftemp.toString();
-        System.out.println(s);
 	return true;
 }
 
