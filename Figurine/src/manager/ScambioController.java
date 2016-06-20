@@ -116,6 +116,8 @@ public void actionPerformed(ActionEvent e) {
 	
 	case 5:{
 		
+		scambio.giveFeedback(utente1,gui.getFeedbackValue2());
+		scambio.giveFeedback(utente2,gui.getFeedbackValue1());
 		scambio.concludiScambioPositivo();
 
 	    utente1.enableUtente();

@@ -10,7 +10,7 @@ public class Scambio implements Carrello {
 	
 	private Utente Utente1,Utente2;
 	private ScambioGui gui;
-	public Stato s;
+	public Stato status;
 	public int feed1,feed2;
 	public int Ids;                     //Identificativo dello scambio
 	public boolean Ok1,Ok2;
@@ -28,24 +28,25 @@ public class Scambio implements Carrello {
 		feed2=0;
 		Ok1=false;
 		Ok2=false;
-		s=Stato.NUOVO;
+	    status=status.NUOVO; 
+		
 		
 		//inserire gestione dell'ids
-		//Programmare l'inserimento e classificazione degli utenti dello scambio (info varie)
+		
 		
 	}
 	
 	//ritorna lo stato dello scambio
 	public Stato getStatoScambio(){
 		
-		return s;
+		return status;
 	}
 	
 	
 	//Metodo che inserisce e calcola i feedback lasciati, uso esclusivo di Scambio e figli
 	protected void setFeedback(){
 		
-		if(s==Stato.ACCETTATO && Ok1==true && Ok2==true){
+		if(status==status.ACCETTATO && Ok1==true && Ok2==true){
 			
 			Utente1.FeedBack+=feed1;
 			Utente2.FeedBack+=feed1;
@@ -62,7 +63,7 @@ public class Scambio implements Carrello {
 		
 		if(Ok1==true && Ok2==true){
 			
-			s=Stato.ACCETTATO;
+			status=status.ACCETTATO;
 			this.setFeedback();
 			
 					
@@ -79,25 +80,20 @@ public class Scambio implements Carrello {
 	
 				Utente1.getCollezione().addAll(Utente2.getOffertaFigurine());
 			    Utente2.getOffertaFigurine().removeAll(Utente2.getOffertaFigurine());
-			
-			
-			
-			
-		}
+			}
 		
 		
 	}
 	
 	
-	
-	//Un utente aggiunge una figurina alla sua offerta
+		//Un utente aggiunge una figurina alla sua offerta
 	public void addFigurina(Utente u,int i) {
 
 	      u.getOffertaFigurine().add(u.getCollezione().get(i));
 	      u.getCollezione().remove(i);
         
         
-	      if(s==Stato.NUOVO) s=Stato.IN_CORSO;
+	      if(status==status.NUOVO) status=status.IN_CORSO;
         
 	}
 	
@@ -108,7 +104,7 @@ public class Scambio implements Carrello {
 			u.getCollezione().add(u.getOffertaFigurine().get(i));
 			u.getOffertaFigurine().remove(i);
 			
-			 if(s==Stato.NUOVO) s=Stato.IN_CORSO;
+			 if(status==status.NUOVO) status=status.IN_CORSO;
 		        
 			 
 
@@ -139,28 +135,26 @@ public class Scambio implements Carrello {
 	}
 
 
-
-
-
 	public boolean removeCredito(Utente u,double c) {
 		// Non ammesso in uno scambio
 		
 		return false;
 	}
+	
 
 	//Lascia un feedback a scambio terminato
 	public void giveFeedback(Utente u,int feed) {
 		
-		if(u.getUser()==Utente1.getUser()) feed2=feed;
-		else feed1=feed;
+		u.FeedBack+=feed;
  
 		
 	}
 	
+	
 	//Annula lo scambio attuale
 	public void annullaScambio(){
 		
-		s=Stato.RIFIUTATO;
+		status=Stato.RIFIUTATO;
 		
 		//Reinserisce le figurine dall'offerta alla collezione, svuota l'offerta
 		

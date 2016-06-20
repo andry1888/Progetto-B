@@ -13,16 +13,19 @@ public class FigurineController implements ActionListener {
 	
 	private Utente utente;  
 	private Scambio scambio;
+	private ScambioGui gui;
 	
-	public FigurineController(Utente u,Scambio s){
+	public FigurineController(Utente u,Scambio s,ScambioGui g){
 		
 			utente=u;	
 			scambio=s;
+			gui=g;
 	
 		}
 	
 
 	public void actionPerformed(ActionEvent e) {
+		
 		JButton tmp=(JButton) e.getSource();
 		
 		if(!tmp.getForeground().equals(Color.green)){
@@ -34,6 +37,7 @@ public class FigurineController implements ActionListener {
 			tmp.setForeground(Color.black);
 		}
 			
+		gui.updateStatoScambio();
 		
 		}
 	
