@@ -161,7 +161,13 @@ public class Scambio implements Carrello {
 	public void annullaScambio(){
 		
 		s=Stato.RIFIUTATO;
+		
+		//Reinserisce le figurine dall'offerta alla collezione, svuota l'offerta
+		
+		Utente1.getCollezione().addAll(Utente1.getOffertaFigurine());
 		Utente1.getOffertaFigurine().removeAll(Utente1.getOffertaFigurine());
+		
+		Utente2.getCollezione().addAll(Utente2.getOffertaFigurine());
 		Utente2.getOffertaFigurine().removeAll(Utente2.getOffertaFigurine());
 		
 	}
