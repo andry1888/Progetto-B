@@ -3,57 +3,86 @@ package manager;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
 import gui.*;
 import utenti.*;
+import mercato.*;
 
 
 public class FigurineController implements ActionListener {
 	
-	private Utente utente;  	   
-	private String[] nomef; 
-	private int i=0;
+	private Utente utente;  
+	private Scambio scambio;
+	private ScambioGui gui;
 	
-	public FigurineController(Utente u){
+	public FigurineController(Utente u,Scambio s,ScambioGui g){
 		
 			utente=u;	
-			nomef=new String[utente.getCollezione().size()];
+			scambio=s;
+			gui=g;
 	
 		}
 	
-	
-	@Override
+
 	public void actionPerformed(ActionEvent e) {
 		
-
-		aggiungiFig(e.getActionCommand());
+		JButton tmp=(JButton) e.getSource();
 		
-		toString();
+		if(!tmp.getForeground().equals(Color.green)){
+			aggiungiFig(e.getActionCommand());
+			tmp.setForeground(Color.green);
+		}
+		else{
+			rimuoviFig(e.getActionCommand());
+			tmp.setForeground(Color.black);
+		}
+			
+		gui.updateStatoScambio();
 		
 		}
 	
+	//Le figurine vengono spostate dalla collezione all'offerta
 	
-	//aggiungo il nome della figurina all'array nomef
 	public void aggiungiFig(String nome){
 
-		while(i<utente.getCollezione().size() && !presente(nome)){
-			nomef[i]=nome;
-			i++;
-			}	
-		}
-	
-	//esce vero se è presente
-	public boolean presente(String nome){
-		boolean f=false;
-		for(int j=0;j<utente.getCollezione().size();j++){
-			if(nome.equals(nomef[j]))  f=true;
-		}
-		return f;
-	}
-	
-	public String toString(){
+		//Trova la figurina corrispondente
+			for(int i=0;i<=utente.getCollezione().size();i++){
+				
+			if(nome.equals(utente.getCollezione().get(i).toString())){
 		
-		return nomef.toString();
-	}
+		    scambio.addFigurina(utente,i);
+			break;
+			}
+			
+			}
+	//debug
+			System.out.println("Collezione utente\n");
+			System.out.println(utente.getCollezione().toString());
+			System.out.println("Offerta utente");
+			System.out.println(utente.getOffertaFigurine().toString());
+		}
+	
+	//Le figurine vengono spostate dalla offerta alla collezione
+	
+	public void rimuoviFig(String nome){
+
+		for(int i=0;i<=utente.getOffertaFigurine().size();i++){
+			
+			if(nome.equals(utente.getOffertaFigurine().get(i).toString())){
+				
+				scambio.removeFigurina(utente,i);
+				break;
+				
+			}
+	    		
+		}
+		
+		//debug
+		System.out.println("Collezione utente\n");
+		System.out.println(utente.getCollezione().toString());
+		System.out.println("Offerta utente");
+		System.out.println(utente.getOffertaFigurine().toString());
+		}
 
 	
 }
