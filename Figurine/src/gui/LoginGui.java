@@ -2,11 +2,13 @@ package gui;
 
 import utenti.*;
 import collezionabili.*;
+import manager.*;
 import mercato.*;
-
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.*;
 
@@ -20,17 +22,20 @@ public class LoginGui extends JFrame {
 	private JPasswordField passwordField;
 	private JButton accessButton;
 	private JPanel loginPanel,upperPanel,lowerPanel,middlePanel;
-	private LayoutManager lay;
+	public UtenteController userController;
+	private loginListener  listener;
 	
 	
 	
 	//Costruttore 
 	
-	public LoginGui(){
+	public LoginGui(UtenteController cont){
 		
 		super("Login");
-		this.initComponents();
+		userController=cont;
 		
+		this.initComponents();
+		this.formatComponents();
 				
 		
 	}
@@ -38,13 +43,7 @@ public class LoginGui extends JFrame {
 	//Inizializza i componenti della finestra
 	private void initComponents(){
 		
-		
-		this.setSize(640,400);
-		this.setResizable(false);
-		this.setVisible(true);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
-       //Crea gli oggetti
+      //Crea gli oggetti
 		
 		this.accessButton=new JButton("Accedi");
 		this.usernameLabel=new JLabel("Username");
@@ -55,11 +54,33 @@ public class LoginGui extends JFrame {
 		this.upperPanel=new JPanel();
 		this.lowerPanel=new JPanel();
 		this.middlePanel=new JPanel();
-		accessButton.setSize(400,200);
+
+		
+	}
+	
+	
+	//Formatta i componenti
+	
+	private void formatComponents(){
 		
 		
-		this.formatComponents();
-		this.initLayout();
+		this.setSize(640,400);
+		this.setResizable(false);
+		this.setVisible(true);
+
+		this.usernameLabel.setForeground(Color.RED);
+		this.passwordLabel.setForeground(Color.ORANGE);
+		this.loginPanel.setLayout(new BorderLayout());
+		this.upperPanel.setLayout(new GridLayout(2,1));
+		this.lowerPanel.setLayout(new FlowLayout());
+		this.middlePanel.setLayout(new GridLayout(2,1));
+		this.accessButton.setSize(400,200);
+		this.accessButton.addActionListener(listener);		
+		this.usernameField.setSize(70,20);
+		this.passwordField.setBounds(10,10,30,10);
+		this.accessButton.setSize(150,50);
+		this.accessButton.setBackground(Color.GREEN);
+		
 		
 		//Aggiunge gli oggetti
 		this.add(loginPanel);
@@ -71,57 +92,64 @@ public class LoginGui extends JFrame {
         middlePanel.add(passwordLabel);
         middlePanel.add(passwordField);
         lowerPanel.add(accessButton);
+		
+
 		this.pack();
-		this.setSize(500,150);
-
-		
-		
-
-		
-	}
-	
-	//Inizializza il layout della finestra
-	private void initLayout(){
-		
-		
-		//Raffinare in seguito
-		
-	
-		this.usernameLabel.setForeground(Color.RED);
-		this.passwordLabel.setForeground(Color.ORANGE);
-		this.loginPanel.setLayout(new BorderLayout());
-		this.upperPanel.setLayout(new GridLayout(2,1));
-		this.lowerPanel.setLayout(new FlowLayout());
-		this.middlePanel.setLayout(new GridLayout(2,1));
-		
-		
-	}
-	
-	//Formatta i compoenenti
-	
-	private void formatComponents(){
-		
-		
-		//Raffinare il codice
-		
-		this.usernameField.setSize(70,20);
-		this.passwordField.setBounds(10,10,30,10);
-		this.accessButton.setSize(150,50);
-		this.accessButton.setBackground(Color.GREEN);
 		
 	}
 	
 	
-	//Nasconde la finestra
-	public void hide(){
+	//Metodi interattivi
+	
+	public void setUserText(String s){
 		
-		
-		this.setVisible(false);
+		this.usernameField.setText(s);
 	}
 	
+	public void setPasswordText(String s){
+		
+		this.passwordField.setText(s);
+	}
+	
+	public String getUserText(){
+		
+		return this.usernameField.getText();
+	}
+	
+	public String getPasswordText(){
+		
+		return this.passwordField.getText();
+	}
 
 	
 	
 	
 
+}
+
+
+
+class loginListener implements ActionListener{
+
+     private LoginGui gui;
+	
+	
+	public loginListener(LoginGui g){
+		
+		gui=g;
+		
+	}
+	
+	
+	public void actionPerformed(ActionEvent e) {
+		
+		
+         gui.userController.login(gui.getUserText(),gui.getPasswordText());
+         gui.setVisible(false);
+		
+	}
+	
+	
+	
+	
 }

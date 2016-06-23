@@ -55,10 +55,13 @@ public class UtenteGui extends JFrame{
     private JButton    sortIdButton;
     private JButton    scambioButton;
     private JButton    compravenditaButton;
+    private JButton    loginButton;
+    private JButton    registerButton;
     private  JLabel    infoTextLabel;
     private JLabel     searchUserLabel;
     private JLabel     searchFigLabel;
     private JLabel     userListLabel;
+    
     
     private JTextField searchUserText;
     private JTextField searchFigText;
@@ -145,6 +148,8 @@ public class UtenteGui extends JFrame{
 	   sortIdButton=new JButton("Ordine Numero Id");
 	   scambioButton=new JButton("Inizia Scambio");
 	   compravenditaButton=new JButton("Inizia Compravendita");
+	   loginButton=new JButton("Login");
+	   registerButton=new JButton("Registrazione");
 	   userList=new JTextArea();
 	   
 	   changeNameButton=new JButton("Cambia");
@@ -177,7 +182,6 @@ public class UtenteGui extends JFrame{
 	   this.setSize(800,600);
 	   this.setVisible(true);
        this.setResizable(false);
-       this.setDefaultCloseOperation(EXIT_ON_CLOSE);
        this.userList.setSize(400,300);
        this.userList.setEditable(false);
        
@@ -186,7 +190,7 @@ public class UtenteGui extends JFrame{
        updateFeedbackvalue();
        
        infoTextArea.setVisible(true);
-       infoTextArea.setText("prova");
+       infoTextArea.setText("Messaggi di sistema\n");
        searchUserText.setHorizontalAlignment(JTextField.CENTER);
        searchFigText.setHorizontalAlignment(JTextField.CENTER);
        infoTextLabel.setAlignmentX(CENTER_ALIGNMENT);
@@ -210,7 +214,7 @@ public class UtenteGui extends JFrame{
 	   
 	   //Internal Panels
 	   portalOptionPanel.setLayout(new GridLayout(5,1));
-	   infoTextPanel.setLayout(new GridLayout(4,1));
+	   infoTextPanel.setLayout(new GridLayout(6,1));
 	   manageCollectionPanel.setLayout(new GridLayout(5,2));
 	   userListPanel.setLayout(new BorderLayout());
 	   
@@ -237,6 +241,8 @@ public class UtenteGui extends JFrame{
        
        infoTextPanel.add(infoTextLabel,BorderLayout.NORTH);
        infoTextPanel.add(infoTextArea,BorderLayout.CENTER);
+       infoTextPanel.add(loginButton,BorderLayout.SOUTH);
+       infoTextPanel.add(registerButton,BorderLayout.SOUTH);
        infoTextPanel.add(scambioButton,BorderLayout.SOUTH);
        infoTextPanel.add(compravenditaButton,BorderLayout.SOUTH);
          
@@ -296,6 +302,8 @@ public class UtenteGui extends JFrame{
 	   componentMap.put(this.sortRarButton,4);
 	   componentMap.put(this.sortIdButton,5);
 	   componentMap.put(this.addCreditButton,6);
+	   componentMap.put(this.loginButton,7);
+	   componentMap.put(this.registerButton,8);
 	   componentMap.put(scambioButton,12);
 	   
 	   //Inserire un JDialog per cambiare i valori dell'utente
@@ -321,6 +329,7 @@ public class UtenteGui extends JFrame{
 	   this.sortRarButton.addActionListener(controller);
 	   this.sortIdButton.addActionListener(controller);
 	   this.scambioButton.addActionListener(controller);
+	   this.loginButton.addActionListener(controller);
 	   
 	   
    }

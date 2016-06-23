@@ -20,6 +20,7 @@ public class UtenteController implements ActionListener {
 
 	private Utente utente;   //utente di riferimento
 	private UtenteGui gui;   //gui di riferimento
+	private LoginGui  login;  //Gui login
 
 	
 	
@@ -119,6 +120,7 @@ public class UtenteController implements ActionListener {
 			
 			
 		}
+				
 		
 		//Rimuove una figurina
 		
@@ -136,11 +138,26 @@ public class UtenteController implements ActionListener {
 			
 			
 		}
+
+		
+		//L'utente esegue il login
+		case 7: {
+			
+			login=new LoginGui(this);
+			login.setUserText("");
+			login.setPasswordText("");
+			
+			
+			
+		}
+		
 		
 		//Viene aperto uno scambio
 		
 		case 12:{
 			
+			
+			//....
 			break;
 			
 			
@@ -150,6 +167,14 @@ public class UtenteController implements ActionListener {
 		}
 		
      }
+	
+	
+	public String login(String user,String passw){
+		
+		return "aa";
+		
+		
+	}
 }
 	
 	

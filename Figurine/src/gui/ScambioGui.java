@@ -162,7 +162,6 @@ public class ScambioGui extends JFrame{
        this.eseguiScambioButton.setBackground(Color.GRAY);
        this.utente1Panel.setSize(400,400);
        this.utente2Panel.setSize(400,400);
-       this.setDefaultCloseOperation(EXIT_ON_CLOSE);
        this.statusLabel.setHorizontalAlignment(SwingConstants.CENTER);
        this.chat.setOpaque(true);
        this.chat.setBackground(Color.WHITE);
