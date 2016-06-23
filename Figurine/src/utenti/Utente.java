@@ -217,30 +217,24 @@ protected boolean resetPassword(String p, String newP){
     else return false;
 }
 
+//Aggiunge figurina dati gli attributi
 
-public boolean addFigurina(String n, int r) {
+public boolean addFigurina(int id,String n, int r) {
 
-	
-
-	int id=10;	
-	Figurina ftemp=new Figurina(id,n,r);       
+		Figurina ftemp=new Figurina(id,n,r);       
 	this.getCollezione().add(ftemp);
         
 	
 	return true;
 }
 
+//Aggiugne una figurina dato l'oggetto
 public boolean addFigurina(Figurina f){
 	
-	
-	//Eseguire i controlli di database figurine
 	
 	Figurina ftemp=f;
 	
 	this.getCollezione().add(ftemp);
-        String s="figurina aggiunta a "+User+" ";
-        s += ftemp.toString();
-        System.out.println(s);
 	return true;
 }
 
@@ -346,6 +340,37 @@ public void sortRar() {
 		}
 		
 	} while(flag);
+	
+}
+
+//Ordina le figurine per numero Id
+
+public void sortId(){
+	
+	Figurina ftemp;
+	boolean flag;
+	
+	//Bubble sort ordine crescente
+	
+	do{
+		
+		flag=false;
+		
+		for(int i=0;i<this.getCollezione().size()-1;i++){
+			
+			if(this.getCollezione().get(i).getId()>this.getCollezione().get(i+1).getId()){
+				
+				ftemp=this.getCollezione().get(i+1);
+                this.getCollezione().set(i+1,this.getCollezione().get(i));
+                this.getCollezione().set(i,ftemp);
+                flag=true;
+			}
+			
+		}
+	} while(flag);
+	
+	
+	
 	
 }
 
@@ -466,6 +491,15 @@ public JPanel getUserInfoPanel(){
 public void updateCollezioneView(){
 	
 	this.gui.updateCollezione();
+}
+
+//Aggiorna la vista del feedback
+
+public void updateFeedbackView(){
+	
+	
+	this.gui.updateFeedbackvalue();
+	
 }
 
 

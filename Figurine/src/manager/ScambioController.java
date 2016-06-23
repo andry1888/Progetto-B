@@ -39,7 +39,6 @@ public void actionPerformed(ActionEvent e) {
    int map;
    
    map=gui.componentMap.get(e.getSource());
-   System.out.println(String.valueOf(map));
   
    
     switch (map){
@@ -52,7 +51,8 @@ public void actionPerformed(ActionEvent e) {
 			tmp=gui.getUser1Message();
 			if(tmp.equals("")) break;
 		    gui.getChat().setText(gui.getChatText()+utente1.getUser()+": "+tmp+"\n");
-		    gui.clearUser1Message();		     
+		    gui.clearUser1Message();	
+		    gui.updateChatPane();
 		    break;
 		
 		}
@@ -68,7 +68,7 @@ public void actionPerformed(ActionEvent e) {
 			
 			scambio.Ok1=true;
 			
-			//Aggiungere lo scambio di figurine
+			gui.checkConcludiScambio();
 			
 			
 		}
@@ -85,6 +85,7 @@ public void actionPerformed(ActionEvent e) {
 		if(tmp.equals("")) break;
 		gui.getChat().setText(gui.getChatText()+utente2.getUser()+": "+tmp+"\n");
 		gui.clearUser2Message();
+		gui.updateChatPane();
 		break;
 		
 		
@@ -101,12 +102,35 @@ public void actionPerformed(ActionEvent e) {
 			
 			scambio.Ok2=true;
 			
-			//Aggiungere lo scambio di figurine
+		   gui.checkConcludiScambio();
 			
 			
 		}
 		
 		break;
+		
+	}
+	
+	
+	//Lo scambio viene concluso
+	
+	case 5:{
+		
+		scambio.giveFeedback(utente1,gui.getFeedbackValue2());
+		scambio.giveFeedback(utente2,gui.getFeedbackValue1());
+		scambio.concludiScambioPositivo();
+
+	    utente1.enableUtente();
+	    utente2.enableUtente();
+	    utente1.updateCollezioneView();
+	    utente2.updateCollezioneView();
+	    utente1.updateFeedbackView();
+	    utente2.updateFeedbackView();
+	    
+	    
+	    gui.setVisible(false);
+	    break;
+		
 		
 	}
    

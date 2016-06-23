@@ -10,7 +10,7 @@ public class Scambio implements Carrello {
 	
 	private Utente Utente1,Utente2;
 	private ScambioGui gui;
-	public Stato s;
+	public Stato status;
 	public int feed1,feed2;
 	public int Ids;                     //Identificativo dello scambio
 	public boolean Ok1,Ok2;
@@ -28,24 +28,25 @@ public class Scambio implements Carrello {
 		feed2=0;
 		Ok1=false;
 		Ok2=false;
-		s=Stato.NUOVO;
+	    status=status.NUOVO; 
+		
 		
 		//inserire gestione dell'ids
-		//Programmare l'inserimento e classificazione degli utenti dello scambio (info varie)
+		
 		
 	}
 	
 	//ritorna lo stato dello scambio
 	public Stato getStatoScambio(){
 		
-		return s;
+		return status;
 	}
 	
 	
 	//Metodo che inserisce e calcola i feedback lasciati, uso esclusivo di Scambio e figli
 	protected void setFeedback(){
 		
-		if(s==Stato.ACCETTATO && Ok1==true && Ok2==true){
+		if(status==status.ACCETTATO && Ok1==true && Ok2==true){
 			
 			Utente1.FeedBack+=feed1;
 			Utente2.FeedBack+=feed1;
@@ -56,79 +57,58 @@ public class Scambio implements Carrello {
 	
 	
 	//Metodo che porta a termine lo scambio, uso esclusivo di Scambio e figli
-	protected void concludiScambioPositivo(){
+	public void concludiScambioPositivo(){
 		
 		Figurina ftemp;
 		
 		if(Ok1==true && Ok2==true){
 			
-			s=Stato.ACCETTATO;
+			status=status.ACCETTATO;
 			this.setFeedback();
 			
-			//Preleva le figurina di Utente 1 e le deposita in Utente 2
-			for(int i=0;i<this.Utente1.getOffertaFigurine().size(); i++){
+					
+			//Esegue lo scambio
+			
+			//Preleva le figurina di Utente 1 e le deposita in Utente 2, rimuove le figurine da Offerta Utente 1
+		
 				
-				ftemp=Utente1.getOffertaFigurine().get(i);
-				Utente2.getCollezione().add(ftemp);
-				Utente1.getOffertaFigurine().remove(i);
-				Utente1.getCollezione().remove(i);
+
+				Utente2.getCollezione().addAll(Utente1.getOffertaFigurine());								
+				Utente1.getOffertaFigurine().removeAll(Utente1.getOffertaFigurine());
 				
+			//Preleva le figurina di Utente 2 e le deposita in Utente 1,Rimuove le figurine da Offerta utente 2
+	
+				Utente1.getCollezione().addAll(Utente2.getOffertaFigurine());
+			    Utente2.getOffertaFigurine().removeAll(Utente2.getOffertaFigurine());
 			}
-			
-			//Preleva le figurina di Utente 2 e le deposita in Utente 1
-			
-			for(int i=0;i<Utente2.getOffertaFigurine().size();i++){
-				
-				ftemp=Utente2.getOffertaFigurine().get(i);
-				Utente1.getCollezione().add(ftemp);
-				Utente2.getOffertaFigurine().remove(i);
-				Utente2.getCollezione().remove(i);
-				
-				
-			}
-			
-			
-			
-		}
 		
 		
 	}
 	
 	
-	
-	//Un utente aggiunge una figurina alla sua offerta
-	public boolean addFigurina(Utente u,Figurina f) {
+		//Un utente aggiunge una figurina alla sua offerta
+	public void addFigurina(Utente u,int i) {
 
-		Figurina ftemp;
-
-		//Verifica sulla possessione della figurina
-		ftemp=u.getFigurinabyId(f.getId());
-
-		if(ftemp==null) {
-                    System.out.println("figurina non presente in utente");
-                    return false;
-                }
-                else{
-		//aggiunta della figurina all'offerta
-                	
-        u.getOffertaFigurine().add(f);
-        if(s==Stato.NUOVO) {
-            s=Stato.IN_CORSO;
-        }
-		return true;
-	}}
+	      u.getOffertaFigurine().add(u.getCollezione().get(i));
+	      u.getCollezione().remove(i);
+        
+        
+	      if(status==status.NUOVO) status=status.IN_CORSO;
+        
+	}
 	
 	//Un utente rimuove una figurina dalla sua offerta
-	public boolean removeFigurina(Utente u,int i) {
-
-		if(u.getOffertaFigurine().get(i)==null) return false;		
-		else {
-			u.getOffertaFigurine().remove(i);
-			return true;
-		}
-		
 	
-	}
+	public void removeFigurina(Utente u,int i) {
+
+			u.getCollezione().add(u.getOffertaFigurine().get(i));
+			u.getOffertaFigurine().remove(i);
+			
+			 if(status==status.NUOVO) status=status.IN_CORSO;
+		        
+			 
+
+		}
 	
 	//Ritorna l'offerta corrente del compagno di scambio
 	public ArrayList<Figurina> getOffertaCompagno(Utente u){
@@ -155,29 +135,33 @@ public class Scambio implements Carrello {
 	}
 
 
-
-
-
 	public boolean removeCredito(Utente u,double c) {
 		// Non ammesso in uno scambio
 		
 		return false;
 	}
+	
 
 	//Lascia un feedback a scambio terminato
 	public void giveFeedback(Utente u,int feed) {
 		
-		if(u.getUser()==Utente1.getUser()) feed2=feed;
-		else feed1=feed;
+		u.FeedBack+=feed;
  
 		
 	}
 	
+	
 	//Annula lo scambio attuale
 	public void annullaScambio(){
 		
-		s=Stato.RIFIUTATO;
+		status=Stato.RIFIUTATO;
+		
+		//Reinserisce le figurine dall'offerta alla collezione, svuota l'offerta
+		
+		Utente1.getCollezione().addAll(Utente1.getOffertaFigurine());
 		Utente1.getOffertaFigurine().removeAll(Utente1.getOffertaFigurine());
+		
+		Utente2.getCollezione().addAll(Utente2.getOffertaFigurine());
 		Utente2.getOffertaFigurine().removeAll(Utente2.getOffertaFigurine());
 		
 	}

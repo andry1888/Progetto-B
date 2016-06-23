@@ -13,7 +13,7 @@ public interface Figurina_Interface {
     /*
         Edit collezione
     */
-    public boolean addFigurina(String n,int r);
+    public boolean addFigurina(int id,String n,int r);
     public boolean addFigurina(Figurina f);
     public boolean removeFigurinabyId(int i);
     public boolean removeFigurina(Figurina f);
@@ -26,6 +26,7 @@ public interface Figurina_Interface {
     */
     public void sortAlfa();
     public void sortRar();
+    public void sortId();
        
     /*
         Search

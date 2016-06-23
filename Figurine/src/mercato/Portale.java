@@ -149,7 +149,7 @@ public class Portale {
 	
 	//Ritorna un utente dato lo user, null se non esiste, uso esclusivo di portale
 	
-	private Utente getUtentebyUser(String u){
+	public Utente getUtentebyUser(String u){
 				
 		for(int i=0;i<this.Utenti_Online.size();i++){
 			

@@ -29,7 +29,7 @@ public class Compravendita extends Scambio {
 		if(c<0) return false;
 		if(c>u.getCredito()) return false;
 		if(c+u.getOffertaCredito()>u.getCredito()) return false;
-		if(s==Stato.NUOVO) s=Stato.IN_CORSO;
+		if(status==Stato.NUOVO) status=Stato.IN_CORSO;
 		
 		u.OffertaCredito+=c;
 		return true;
@@ -61,7 +61,7 @@ public class Compravendita extends Scambio {
 		
 	}
 	
-	protected void concludiScambioPositivo(){
+	public void concludiScambioPositivo(){
 		
 		
 	Figurina ftemp;
@@ -69,7 +69,7 @@ public class Compravendita extends Scambio {
 		
 		if(Ok1==true && Ok2==true){
 			
-			s=Stato.ACCETTATO;
+			status=Stato.ACCETTATO;
 			this.setFeedback();
 			
 			//Preleva le figurina di Utente  e le deposita in Negoziante
